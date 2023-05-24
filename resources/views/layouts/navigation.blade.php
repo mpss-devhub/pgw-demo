@@ -2,8 +2,8 @@
     <div class="container px-6 py-2 mx-auto">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
-                <a class="text-white" href="{{route('home')}}">
-                    {{config('app.name','Demo')}}
+                <a class="text-white" href="{{ route('home') }}">
+                    {{ config('app.name', 'Demo') }}
                 </a>
 
                 <!-- Mobile menu button -->
@@ -28,16 +28,15 @@
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
                 class="absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                 <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                    <a class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        :href="route('home')" :active="request() - > routeIs('home')">Home</a>
-                    <a href="#"
-                        class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Browse
-                        Topics</a>
-                    <a href="#"
-                        class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Random
-                        Item</a>
-                    <a href="#"
-                        class="px-3 py-2 mx-3 mt-2 text-gray-700 transition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Experts</a>
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        Home
+                    </x-nav-link>
+                    <x-nav-link :href="route('categories')" :active="request()->routeIs('categories')">
+                        Categories
+                    </x-nav-link>
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                        About Us
+                    </x-nav-link>
                 </div>
 
                 <div class="flex items-center mt-4 lg:mt-0">
@@ -50,7 +49,7 @@
                                     class="object-cover w-full h-full" alt="avatar">
                             </div>
 
-                            <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">   {{ __('Profile') }}</h3>
+                            <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden"> {{ __('Profile') }}</h3>
                         </button>
                         <div x-show="isProfileMenuOpen" @click.away="isProfileMenuOpen = false"
                             class="absolute right-0 z-20 w-48 mt-3 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -59,10 +58,12 @@
                                 class="block px-4 py-3 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <span class="text-gray-600 dark:text-gray-400"> {{ Auth::user()->name }}</span></a>
 
-                            <form  method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <input type="submit" class="block w-full text-start px-4 py-2 text-sm dark:text-red-500 font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700" value="{{ __('Log Out') }}">
+                                <input type="submit"
+                                    class="block w-full text-start px-4 py-2 text-sm dark:text-red-500 font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
+                                    value="{{ __('Log Out') }}">
                             </form>
                         </div>
                     </div>
