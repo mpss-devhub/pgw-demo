@@ -79,7 +79,7 @@
                                         value="{{ __('Log Out') }}">
                                 </form>
                             </div>
-                            <div x-show="isProfileMenuOpen" @click.away="isProfileMenuOpen = false"
+                            <div x-show="isProfileMenuOpen" x-cloak @click.away="isProfileMenuOpen = false"
                                 class="absolute right-0 z-20 w-48 mt-3 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800 hidden md:block">
 
                                 <a href="{{ route('profile.edit') }}"
