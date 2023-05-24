@@ -1,4 +1,4 @@
-<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-300 dark:bg-gray-800">
+<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-400 dark:bg-gray-800">
     <div class="container px-6 py-2 mx-auto">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
@@ -8,7 +8,7 @@
 
                 <!-- Mobile menu button -->
                 <div class="flex lg:hidden">
-                    <button class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
+                    <button x-show="!isMobileMenuOpen" class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
                         @click="toggleTheme" aria-label="Toggle color mode">
                         <template x-if="!dark">
                             <svg class="w-5 h-5" aria-hidden="true" fill="gray" viewBox="0 0 20 20">
