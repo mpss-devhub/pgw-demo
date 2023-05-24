@@ -14,12 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
+
 });
 
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', function () {
+    Route::get('/home', function () {
         return view('home');
     })->name('home');
 
