@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', function () {
@@ -28,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('categories');
     })->name('categories');
 
-    Route::get('/aboutus', function () {
+    Route::get('/about-us', function () {
         return view('about');
     })->name('about');
 });
