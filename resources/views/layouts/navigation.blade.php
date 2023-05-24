@@ -40,17 +40,27 @@
                 </div>
 
                 <div class="flex items-center mt-4 lg:mt-0">
-                    <div x-data="{ isProfileMenuOpen: false }" class="relative">
-                        <button type="button" @click="isProfileMenuOpen = !isProfileMenuOpen"
-                            class="flex items-center focus:outline-none relative z-10  p-2 transition-colors duration-300 transform rounded-lg"
-                            aria-label="toggle profile dropdown">
-                            <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                    class="object-cover w-full h-full" alt="avatar">
-                            </div>
+                    <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">
+                        <div class="flex flex-col">
+                            <button type="button" @click="isProfileMenuOpen = !isProfileMenuOpen"
+                                class="flex items-center focus:outline-none relative z-10  p-0 md:p-2 transition-colors duration-300 transform rounded-lg"
+                                aria-label="toggle profile dropdown">
+                                <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                        class="object-cover w-full h-full" alt="avatar">
+                                </div>
 
-                            <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden"> {{ __('Profile') }}</h3>
-                        </button>
+                                <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">{{ Auth::user()->name }}
+                                </h3>
+                            </button>
+                            <form class="md:hidden" method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <input type="submit"
+                                    class="cursor-pointer block mt-8 px-4 bg-red-500 py-2 text-sm text-white text-center rounded-md w-full font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-red-700"
+                                    value="{{ __('Log Out') }}">
+                            </form>
+                        </div>
                         <div x-show="isProfileMenuOpen" @click.away="isProfileMenuOpen = false"
                             class="absolute right-0 z-20 w-48 mt-3 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
 
