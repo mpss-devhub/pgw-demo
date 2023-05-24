@@ -7,17 +7,25 @@
                 <!-- Name -->
                 <div>
                     <x-input-label for="name" :value="__('Name')" />
-                    <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
-                        autofocus autocomplete="name" />
+                    <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')"
+                        required autofocus autocomplete="name" />
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
 
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Email')" />
-                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                        required autocomplete="username" />
+                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
+                        :value="old('email')" required autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                </div>
+
+                <!-- Address -->
+                <div class="mt-4">
+                    <x-input-label for="address" :value="'Address'" />
+                    <x-text-area id="address" class="block mt-1 w-full" type="text" name="address"
+                        :value="old('address')" required autofocus autocomplete="address" />
+                    <x-input-error :messages="$errors->get('address')" class="mt-2" />
                 </div>
 
                 <!-- Password -->
@@ -50,7 +58,8 @@
         <div class="flex items-center justify-center py-4 text-center bg-gray-50 dark:bg-gray-700">
             <span class="text-sm text-gray-600 dark:text-gray-200">Already have an account? </span>
 
-            <a href="{{route('login')}}" class="mx-2 text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">Login</a>
+            <a href="{{ route('login') }}"
+                class="mx-2 text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">Login</a>
         </div>
     </div>
 </x-guest-layout>
