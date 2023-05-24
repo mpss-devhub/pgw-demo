@@ -83,12 +83,14 @@
 
                     </div>
                 @else
-                    <x-nav-link class="mx-1" :href="route('login')">
-                        Login
-                    </x-nav-link>
-                    <x-nav-link class="mx-1" :href="route('register')">
-                        Signup
-                    </x-nav-link>
+                    <div class="flex flex-col lg:flex-row">
+                        <x-nav-link class="mx-1" :href="route('login')">
+                            Login
+                        </x-nav-link>
+                        <x-nav-link class="mx-1" :href="route('register')">
+                            Signup
+                        </x-nav-link>
+                    </div>
                 @endif
             </div>
         </div>
