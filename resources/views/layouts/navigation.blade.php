@@ -1,4 +1,4 @@
-<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-white dark:bg-gray-800">
+<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-300 dark:bg-gray-800">
     <div class="container px-6 py-2 mx-auto">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
