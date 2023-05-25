@@ -6,19 +6,7 @@
                     <a class="text-gray-950 font-bold dark:text-white" href="{{ route('home') }}">
                         {{ config('app.name', 'Demo') }}
                     </a>
-                    @if (Auth::user())
-                        <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                            <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
-                                Home
-                            </x-nav-link>
-                            <x-nav-link class="mx-1" :href="route('categories')" :active="request()->routeIs('categories')">
-                                Categories
-                            </x-nav-link>
-                            <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">
-                                About Us
-                            </x-nav-link>
-                        </div>
-                    @endif
+
 
                 </div>
                 <!-- Mobile menu button -->
@@ -39,7 +27,7 @@
                             </svg>
                         </template>
                     </button>
-                    <button x-cloak @click="isMobileMenuOpen = !isMobileMenuOpen" type="button"
+                    <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button"
                         class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
                         aria-label="toggle menu">
                         <svg x-show="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
@@ -61,6 +49,18 @@
                 class="absolute inset-x-0 z-20 w-full px-6 py-4  bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
 
                 @if (Auth::user())
+
+                    <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+                        <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
+                            Home
+                        </x-nav-link>
+                        <x-nav-link class="mx-1" :href="route('categories')" :active="request()->routeIs('categories')">
+                            Categories
+                        </x-nav-link>
+                        <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">
+                            About Us
+                        </x-nav-link>
+                    </div>
                     <div class="flex items-center mt-4 lg:mt-0">
                         <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">
 
