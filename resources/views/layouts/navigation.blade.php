@@ -1,9 +1,9 @@
-<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-400 dark:bg-gray-800">
+<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-600 dark:bg-gray-800">
     <div class="container px-6 py-2 mx-auto">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <a class="text-gray-950 font-bold dark:text-white" href="{{ route('home') }}">
+                    <a class="text-gray-100 font-bold dark:text-white" href="{{ route('home') }}">
                         {{ config('app.name', 'Demo') }}
                     </a>
 
