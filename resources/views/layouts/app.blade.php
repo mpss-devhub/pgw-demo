@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html :class="{ 'dark': dark }" x-data="data()" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -12,63 +12,39 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <!-- Inline style to hide the body -->
-    <style>
-        [x-cloak] {
-            visibility: hidden !important;
-        }
-    </style>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     <script>
-        function data() {
-            console.log("initied");
-
-            function getThemeFromLocalStorage() {
-                // if user already changed the theme, use it
-                if (window.localStorage.getItem('dark')) {
-                    return JSON.parse(window.localStorage.getItem('dark'))
-                }
-
-                // else return their preferences
-                return (
-                    !!window.matchMedia &&
-                    window.matchMedia('(prefers-color-scheme: dark)').matches
-                )
-            }
-
-            function setThemeToLocalStorage(value) {
-                window.localStorage.setItem('dark', value)
-            }
-
-            return {
-                dark: getThemeFromLocalStorage(),
-                toggleTheme() {
-                    this.dark = !this.dark
-                    setThemeToLocalStorage(this.dark)
-                    console.log("isdark:", this.dark)
-                }
+        function setDarkModePreference() {
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const darkMode = localStorage.getItem('dark');
+            if (darkMode !== null) {
+                return JSON.parse(darkMode);
+            } else {
+                return prefersDarkMode;
             }
         }
+
+        function setDarkMode(darkMode) {
+            localStorage.setItem('dark', darkMode);
+            document.documentElement.classList.toggle('dark', darkMode);
+        }
+
+        // Apply dark mode immediately
+        const darkModePreference = setDarkModePreference();
+        setDarkMode(darkModePreference);
     </script>
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased" :class="{ 'dark': dark }" x-data="{ dark: setDarkModePreference(), toggleTheme: function() { this.dark = !this.dark; localStorage.setItem('dark', this.dark);document.documentElement.classList.toggle('dark', this.dark)} }" x-init="setDarkMode(dark)">
     <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        {{-- @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif --}}
-
-        <!-- Page Content -->
-        <main>
+        <main class="px-6">
             {{ $slot }}
         </main>
     </div>

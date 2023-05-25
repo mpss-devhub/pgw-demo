@@ -30,6 +30,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('home');
     })->name('home');
 
+    Route::get('/test', function () {
+        return view('test');
+    })->name('test');
+
     Route::get('/categories', function () {
         return view('categories');
     })->name('categories');

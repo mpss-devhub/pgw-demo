@@ -2,13 +2,29 @@
     <div class="container px-6 py-2 mx-auto">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
-                <a class="text-gray-950 font-bold dark:text-white" href="{{ route('home') }}">
-                    {{ config('app.name', 'Demo') }}
-                </a>
+                <div class="flex items-center">
+                    <a class="text-gray-950 font-bold dark:text-white" href="{{ route('home') }}">
+                        {{ config('app.name', 'Demo') }}
+                    </a>
+                    @if (Auth::user())
+                        <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+                            <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
+                                Home
+                            </x-nav-link>
+                            <x-nav-link class="mx-1" :href="route('categories')" :active="request()->routeIs('categories')">
+                                Categories
+                            </x-nav-link>
+                            <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">
+                                About Us
+                            </x-nav-link>
+                        </div>
+                    @endif
 
+                </div>
                 <!-- Mobile menu button -->
                 <div class="flex lg:hidden">
-                    <button x-show="!isMobileMenuOpen" class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
+                    <button x-show="!isMobileMenuOpen"
+                        class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
                         @click="toggleTheme" aria-label="Toggle color mode">
                         <template x-if="!dark">
                             <svg class="w-5 h-5" aria-hidden="true" fill="gray" viewBox="0 0 20 20">
@@ -39,37 +55,10 @@
                 </div>
             </div>
 
+
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
                 class="absolute inset-x-0 z-20 w-full px-6 py-4  bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
-                @if (Auth::user())
-                    <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-                        <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
-                            Home
-                        </x-nav-link>
-                        <x-nav-link class="mx-1" :href="route('categories')" :active="request()->routeIs('categories')">
-                            Categories
-                        </x-nav-link>
-                        <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">
-                            About Us
-                        </x-nav-link>
-                    </div>
-                @endif
-                <button class="hidden lg:block rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
-                    @click="toggleTheme" aria-label="Toggle color mode">
-                    <template x-if="!dark">
-                        <svg class="w-6 h-6" aria-hidden="true" fill="gray" viewBox="0 0 20 20">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                    </template>
-                    <template x-if="dark">
-                        <svg class="w-6 h-6" aria-hidden="true" fill="white" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </template>
-                </button>
 
                 @if (Auth::user())
                     <div class="flex items-center mt-4 lg:mt-0">
@@ -115,14 +104,30 @@
                     </div>
                 @else
                     <div class="flex flex-col lg:flex-row">
-                        <x-nav-link class="mx-1" :href="route('login')">
+                        <x-nav-link class="" :href="route('login')">
                             Login
                         </x-nav-link>
-                        <x-nav-link class="mx-1" :href="route('register')">
+                        <x-nav-link class="me-7" :href="route('register')">
                             Signup
                         </x-nav-link>
                     </div>
                 @endif
+
+                <button class="hidden lg:block rounded-md ms-5 focus:outline-none focus:shadow-outline-purple"
+                    @click="toggleTheme" aria-label="Toggle color mode">
+                    <template x-if="!dark">
+                        <svg class="w-6 h-6" aria-hidden="true" fill="gray" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </template>
+                    <template x-if="dark">
+                        <svg class="w-6 h-6" aria-hidden="true" fill="white" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </template>
+                </button>
             </div>
         </div>
     </div>
