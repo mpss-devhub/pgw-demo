@@ -47,7 +47,7 @@
 }"
     x-init="setDarkMode(dark)">
     <div>
-        <div class="flex justify-center md:justify-end">
+        <div class="flex justify-end">
             <button class="rounded-md ms-5 mt-5 me-5 focus:outline-none focus:shadow-outline-purple" @click="toggleTheme"
                 aria-label="Toggle color mode">
                 <template x-if="!dark">
@@ -65,7 +65,7 @@
             </button>
         </div>
         <div
-            class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 p-3">
+            class="min-h-screen flex flex-col content-center justify-center pt-6 sm:pt-0 p-3">
             <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
 
                 {{ $slot }}
