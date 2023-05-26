@@ -3,12 +3,12 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
                 @foreach ($products as $product)
                     <div
                         class="max-w-xs flex flex-col justify-between overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
                         <div class="py-2">
-                            <h1 class="px-4 text-xl font-bold text-gray-800 uppercase dark:text-white">{{ $product->name }}
+                            <h1 class="px-4 text-sm font-bold text-gray-800 uppercase dark:text-white">{{ $product->name }}
                             </h1>
                             <img class="object-cover w-full h-30 lg:h-48 mt-2" src="{{ $product->image_url }}"
                                 alt="{{ $product->name }}">
