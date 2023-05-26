@@ -24,7 +24,7 @@
                         <!-- Accordion Content 1 -->
                         <div x-show="open" class="p-2">
                             <!-- Scrollable Checkbox List -->
-                            <div class="max-h-48 overflow-y-auto">
+                            <div class="max-h-40 overflow-y-auto">
                                 <div class="">
                                     @foreach ($categories as $category)
                                         <label class="block">
@@ -57,7 +57,7 @@
                         <!-- Accordion Content 1 -->
                         <div x-show="open" class="p-2">
                             <!-- Scrollable Checkbox List -->
-                            <div class="max-h-48 overflow-y-auto">
+                            <div class="max-h-40 overflow-y-auto">
                                 <div class="">
                                     @foreach ($brands as $brand)
                                         <label class="block">
