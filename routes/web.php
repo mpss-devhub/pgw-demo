@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,7 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/home',[ProductController::class,'index'])->name('home');
 
     Route::get('/test', function () {
         return view('test');
