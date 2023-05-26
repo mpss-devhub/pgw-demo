@@ -49,8 +49,7 @@
                 class="absolute inset-x-0 z-20 w-full px-6 py-4  bg-gray-600 dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
 
                 @if (Auth::user())
-
-                    <div class="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:mx-8">
                         <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
                             Home
                         </x-nav-link>
@@ -64,7 +63,7 @@
                     <div class="flex items-center mt-4 lg:mt-0">
                         <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">
 
-                            <div class="flex flex-col">
+                            <div class="flex flex-col mt-5 lg:mt-0">
                                 <button type="button" @click="isProfileMenuOpen = !isProfileMenuOpen"
                                     class="flex items-center focus:outline-none relative z-10  p-0 md:p-2 transition-colors duration-300 transform rounded-lg"
                                     aria-label="toggle profile dropdown">
@@ -73,7 +72,8 @@
                                             class="object-cover w-full h-full" alt="avatar">
                                     </div>
 
-                                    <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">{{ Auth::user()->name }}
+                                    <h3 class="mx-2 text-white dark:text-gray-200 lg:hidden">
+                                        {{ Auth::user()->name }}
                                     </h3>
                                 </button>
                                 <form class="md:hidden" method="POST" action="{{ route('logout') }}">
@@ -89,7 +89,7 @@
 
                                 <a href="{{ route('profile.edit') }}"
                                     class="block px-4 py-3 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="text-gray-600 dark:text-gray-400"> {{ Auth::user()->name }}</span></a>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ Auth::user()->name }}</span></a>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
