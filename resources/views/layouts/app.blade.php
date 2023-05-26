@@ -44,7 +44,7 @@
     <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
         @include('layouts.navigation')
 
-        <main class="px-6">
+        <main class="px-2 lg:px-12">
             {{ $slot }}
         </main>
     </div>

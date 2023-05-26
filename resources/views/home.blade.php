@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <div class="flex">
-        <div class="w-1/4 py-12">
+        <div class="w-1/4 py-12 hidden lg:block">
             <div class="w-full">
                 <!-- Accordion Container -->
                 <div x-data="{ open: false }" class="space-y-2">
