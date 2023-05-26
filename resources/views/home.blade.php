@@ -5,11 +5,11 @@
             <form method="GET" action="{{route('home')}}" class="w-full"  x-cloak>
                 <!-- Accordion Container -->
 
-                <div x-data="{ open: false }" class="space-y-2">
+                <div x-data="{ open: false }" class="space-y-1">
                     <!-- Accordion Item 1 -->
-                    <div class="bg-gray-300 hover:bg-gray-400 rounded-lg">
+                    <div class="bg-gray-300 hover:bg-gray-400 rounded-sm">
                         <!-- Accordion Header 1 -->
-                        <div @click="open = !open" class="p-2 cursor-pointer">
+                        <div @click="open = !open" class="p-1 px-2 cursor-pointer">
                             <div class="flex items-center justify-between">
                                 <h3 class="text-sm font-medium">Categories</h3>
                                 <svg :class="{ 'transform rotate-180': open, 'transform rotate-0': !open }"
@@ -38,11 +38,11 @@
                     </div>
 
                 </div>
-                <div x-data="{ open: false }" class="space-y-2 mt-2">
+                <div x-data="{ open: false }" class="space-y-1 mt-2">
                     <!-- Accordion Item 1 -->
-                    <div class="bg-gray-300 hover:bg-gray-400 rounded-lg">
+                    <div class="bg-gray-300 hover:bg-gray-400 rounded-sm">
                         <!-- Accordion Header 1 -->
-                        <div @click="open = !open" class="p-2 cursor-pointer">
+                        <div @click="open = !open" class="p-1 px-2 cursor-pointer">
                             <div class="flex items-center justify-between">
                                 <h3 class="text-sm font-medium">Brands</h3>
                                 <svg :class="{ 'transform rotate-180': open, 'transform rotate-0': !open }"
@@ -72,7 +72,7 @@
 
                 </div>
                 <div class="flex justify-end mt-4">
-                    <x-primary-button>
+                    <x-primary-button class="rounded-sm py-1">
                       <input type="submit" value="Filter"/>
                     </x-primary-button>
                 </div>
@@ -86,7 +86,7 @@
                         class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
                         @foreach ($products as $product)
                             <div
-                                class="max-w-xs flex flex-col justify-between overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                                class="max-w-xs flex flex-col justify-between overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 transition-colors duration-300">
                                 <div class="py-2">
                                     <h1 class="px-4 text-sm font-bold text-gray-800 uppercase dark:text-white">
                                         {{ $product->name }}
