@@ -2,11 +2,12 @@
 
     <div class="flex">
         <div class="w-1/4 py-12 hidden lg:block">
-            <div class="w-full"  x-cloak>
+            <form method="GET" action="{{route('home')}}" class="w-full"  x-cloak>
                 <!-- Accordion Container -->
+
                 <div x-data="{ open: false }" class="space-y-2">
                     <!-- Accordion Item 1 -->
-                    <div class="bg-gray-300 rounded-lg">
+                    <div class="bg-gray-300 hover:bg-gray-400 rounded-lg">
                         <!-- Accordion Header 1 -->
                         <div @click="open = !open" class="p-2 cursor-pointer">
                             <div class="flex items-center justify-between">
@@ -27,7 +28,7 @@
                                 <div class="">
                                     @foreach ($categories as $category)
                                         <label class="block">
-                                            <input type="checkbox" class="form-checkbox h-3 w-3 text-indigo-600" />
+                                            <input type="checkbox" value="{{$category->id}}" name="category[]" class="form-checkbox h-3 w-3 text-indigo-600" />
                                             <span class="ml-2">{{ $category->name }}</span>
                                         </label>
                                     @endforeach
@@ -39,7 +40,7 @@
                 </div>
                 <div x-data="{ open: false }" class="space-y-2 mt-2">
                     <!-- Accordion Item 1 -->
-                    <div class="bg-gray-300 rounded-lg">
+                    <div class="bg-gray-300 hover:bg-gray-400 rounded-lg">
                         <!-- Accordion Header 1 -->
                         <div @click="open = !open" class="p-2 cursor-pointer">
                             <div class="flex items-center justify-between">
@@ -72,10 +73,10 @@
                 </div>
                 <div class="flex justify-end mt-4">
                     <x-primary-button>
-                      Filter
+                      <input type="submit" value="Filter"/>
                     </x-primary-button>
                 </div>
-            </div>
+            </form>
 
         </div>
         <div>
