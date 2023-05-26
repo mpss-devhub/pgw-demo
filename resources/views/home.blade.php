@@ -28,7 +28,7 @@
                                 <div class="">
                                     @foreach ($categories as $category)
                                         <label class="block">
-                                            <input type="checkbox" value="{{$category->id}}" name="category[]" class="form-checkbox h-3 w-3 text-indigo-600" />
+                                            <input type="checkbox" value="{{$category->id}}" name="category[]" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ms-1" />
                                             <span class="ml-2">{{ $category->name }}</span>
                                         </label>
                                     @endforeach
@@ -61,7 +61,7 @@
                                 <div class="">
                                     @foreach ($brands as $brand)
                                         <label class="block">
-                                            <input type="checkbox" class="form-checkbox h-3 w-3 text-indigo-600" />
+                                            <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ms-1" />
                                             <span class="ml-2">{{ $brand->name }}</span>
                                         </label>
                                     @endforeach
