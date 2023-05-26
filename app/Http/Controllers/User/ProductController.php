@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class ProductController extends Controller
         //
         $products = Product::paginate(10);
         $categories = Category::all();
+        $brands = Brand::all();
 
-        return view('home', compact('products','categories'));
+        return view('home', compact('products','categories','brands'));
     }
 
     /**
