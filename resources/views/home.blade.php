@@ -24,7 +24,7 @@
                         <div x-show="open" class="p-2">
                             <!-- Scrollable Checkbox List -->
                             <div class="max-h-48 overflow-y-auto">
-                                <div class="space-y-2">
+                                <div class="">
                                     @foreach ($categories as $category)
                                         <label class="block">
                                             <input type="checkbox" class="form-checkbox h-3 w-3 text-indigo-600" />
@@ -57,7 +57,7 @@
                         <div x-show="open" class="p-2">
                             <!-- Scrollable Checkbox List -->
                             <div class="max-h-48 overflow-y-auto">
-                                <div class="space-y-2">
+                                <div class="">
                                     @foreach ($brands as $brand)
                                         <label class="block">
                                             <input type="checkbox" class="form-checkbox h-3 w-3 text-indigo-600" />
