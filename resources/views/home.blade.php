@@ -2,7 +2,13 @@
 
     <div class="flex">
         <div class="w-1/4 py-12 hidden lg:block">
-            <x-products.filter :brands="$brands" :categories="$categories" :categoriesParam="$categoriesParam" :brandsParam="$brandsParam"/>
+            <x-products.filter
+                :brands="$brands"
+                :categories="$categories"
+                :categoriesParam="$categoriesParam"
+                :brandsParam="$brandsParam"
+                :openedTabs="$openedFilterTabs"
+            />
         </div>
         <div>
             <div class="py-12">

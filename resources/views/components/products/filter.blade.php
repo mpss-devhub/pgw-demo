@@ -1,9 +1,11 @@
-@props(['categories','brands','categoriesParam','brandsParam'])
+@props(['categories','brands','categoriesParam','brandsParam','openedTabs'])
 
 <div
-    x-data="{ openedTabs: new Set(['categories','brands']),selectedCategories: {{ json_encode($categoriesParam) }},selectedBrands:{{json_encode($brandsParam)}} }"
+    x-data="{ openedTabs: new Set({{ json_encode($openedTabs) }}),selectedCategories: {{ json_encode($categoriesParam) }},selectedBrands:{{json_encode($brandsParam)}} }"
 >
-    <form  method="GET" action="{{route('home')}}" class="w-full"  x-cloak>
+    <form
+
+        method="GET" action="{{route('home')}}" class="w-full"  x-cloak>
         <!-- Accordion Container -->
         <div class="space-y-1">
             <div class="bg-gray-300 hover:bg-gray-400 rounded-sm">
@@ -27,7 +29,7 @@
                         <div class="">
                             @foreach ($categories as $category)
                                 <label class="block">
-                                    <input type="checkbox" x-model="selectedCategories.includes('{{$category->name}}')" @click="toggleSelection(selectedCategories, '{{$category->name}}')"  class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ms-1" />
+                                    <input type="checkbox" {{in_array($category->name,$categoriesParam)?'checked':''}} @click="toggleSelection(selectedCategories, '{{$category->name}}')"  class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ms-1" />
                                     <span class="ml-2">{{ $category->name }}</span>
                                 </label>
                             @endforeach
@@ -60,7 +62,7 @@
                         <div class="">
                             @foreach ($brands as $brand)
                                 <label class="block">
-                                    <input type="checkbox" x-model="selectedBrands.includes('{{$brand->name}}')" @click="toggleSelection(selectedBrands, '{{$brand->name}}')" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ms-1" />
+                                    <input type="checkbox"  {{in_array($brand->name,$brandsParam)?'checked':''}} @click="toggleSelection(selectedBrands, '{{$brand->name}}')" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ms-1" />
                                     <span class="ml-2">{{ $brand->name }}</span>
                                 </label>
                             @endforeach

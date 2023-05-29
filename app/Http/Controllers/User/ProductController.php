@@ -17,23 +17,29 @@ class ProductController extends Controller
     {
         $categoriesParam = [];
         $brandsParam = [];
+        $openedFilterTabs = [];
 
         if(isset($request->categories)){
             $decodedFilterCategories = urldecode(urldecode($request->categories));
             $categoriesParam = explode('|', $decodedFilterCategories);
+            if(count($categoriesParam)>0){
+                array_push($openedFilterTabs, 'categories');
+            }
         }
         if(isset($request->brands)){
             $decodedFilterBrands = urldecode(urldecode($request->brands));
             $brandsParam = explode('|', $decodedFilterBrands);
+            if(count($brandsParam)>0){
+                array_push($openedFilterTabs, 'brands');
+            }
         }
 
 
         $products = Product::paginate(10);
         $categories = Category::all();
         $brands = Brand::all();
-        $queryParams = $request->query();
 
-        return view('home', compact('products','categories','brands','categoriesParam','brandsParam'));
+        return view('home', compact('products','categories','brands','categoriesParam','brandsParam','openedFilterTabs'));
     }
 
     /**
