@@ -16,7 +16,7 @@
                 @endforeach
                 <div class="flex justify-between px-2 py-1">
                     <span class="font-bold">Total</span>
-                    <span>$30000</span>
+                    <span>${{$cartProducts->sum('price')}}</span>
                 </div>
                 <hr class="border-b border-gray-600 mb-2 mt-3">
                 <div class="flex justify-end">
