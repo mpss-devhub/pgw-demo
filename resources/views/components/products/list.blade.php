@@ -4,7 +4,7 @@
     class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
     @foreach ($products as $product)
         <div
-            class="max-w-xs flex flex-col justify-between overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 transition-colors duration-300">
+            class="max-w-xs flex flex-col justify-between overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 dark:hover:bg-green-600 transition-colors duration-300">
             <div class="py-2">
                 <h1 class="px-2 text-sm font-bold text-gray-800 uppercase dark:text-white">
                     {{ $product->name }}
