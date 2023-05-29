@@ -9,7 +9,7 @@
                 <h1 class="px-2 text-sm font-bold text-gray-800 uppercase dark:text-white">
                     {{ $product->name }}
                 </h1>
-                <a class="dark:hover:text-blue-700 dark:text-white px-2 text-sm" href="{{route('home').'?brands='.$product->brand->name}}">{{$product->brand->name}}</a>
+                <a class="dark:hover:text-blue-700 hover:text-blue-700 dark:text-white px-2 text-sm" href="{{route('home').'?brands='.$product->brand->name}}">{{$product->brand->name}}</a>
 
                 <img class="object-cover w-full h-30 lg:h-48 mt-2" src="{{ $product->image_url }}"
                      alt="{{ $product->name }}">
@@ -20,7 +20,7 @@
 {{--                    {{ $product->description }}</p>--}}
                 <div class="flex gap-1 mb-2 text-white px-2">
                     @foreach($product->categories as $category)
-                        <p class="text-xs px-2 whitespace-nowrap bg-blue-800 rounded-md">
+                        <p class="text-xs px-2 whitespace-nowrap hover:bg-blue-500 dark:hover:bg-blue-950  bg-blue-400 dark:bg-blue-800 rounded-md">
                             <a  href="{{route('home').'?categories='.$category->name}}">
                             {{$category->name}}
                             </a>
