@@ -10,7 +10,7 @@
 
                 </div>
                 <!-- Mobile menu button -->
-                <div class="flex lg:hidden">
+                <div class="flex lg:hidden" x-cloak>
                     <button x-show="!isMobileMenuOpen"
                         class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
                         @click="toggleTheme" aria-label="Toggle color mode">

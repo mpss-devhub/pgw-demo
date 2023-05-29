@@ -16,7 +16,7 @@
             </div>
         @else
             <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="max-w-7xl sm:pl-6 lg:pl-8">
                     <x-products.list :products="$products"/>
                 </div>
             </div>

@@ -18,7 +18,7 @@
             <div>
 {{--                <p class="px-4 py-2 mt-1 text-sm text-gray-600 dark:text-gray-400">--}}
 {{--                    {{ $product->description }}</p>--}}
-                <div class="flex gap-1 mb-2 text-white px-2">
+                <div class="flex flex-wrap gap-1 mb-2 text-white px-1">
                     @foreach($product->categories as $category)
                         <p class="text-xs px-2 whitespace-nowrap hover:bg-blue-500 dark:hover:bg-blue-950  bg-blue-400 dark:bg-blue-800 rounded-md">
                             <a  href="{{route('home').'?categories='.$category->name}}">
@@ -28,10 +28,10 @@
                     @endforeach
                 </div>
                 <div
-                    class="flex items-center flex-col lg:flex-row justify-between px-4 py-2 bg-gray-900">
-                    <h1 class="text-lg font-bold text-white">${{ $product->price }}</h1>
+                    class="flex  items-center flex-col lg:flex-row justify-between px-4 py-2 bg-gray-900">
+                    <h1 class="text-lg font-bold text-white mb-1 lg:mb-0">${{ $product->price }}</h1>
                     <button
-                        class="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Add
+                        class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Add
                         to cart</button>
                 </div>
             </div>
