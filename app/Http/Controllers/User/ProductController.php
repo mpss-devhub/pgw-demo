@@ -15,12 +15,25 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        $categoriesParam = [];
+        $brandsParam = [];
+
+        if(isset($request->categories)){
+            $decodedFilterCategories = urldecode(urldecode($request->categories));
+            $categoriesParam = explode('|', $decodedFilterCategories);
+        }
+        if(isset($request->brands)){
+            $decodedFilterBrands = urldecode(urldecode($request->brands));
+            $brandsParam = explode('|', $decodedFilterBrands);
+        }
+
+
         $products = Product::paginate(10);
         $categories = Category::all();
         $brands = Brand::all();
+        $queryParams = $request->query();
 
-        return view('home', compact('products','categories','brands'));
+        return view('home', compact('products','categories','brands','categoriesParam','brandsParam'));
     }
 
     /**
