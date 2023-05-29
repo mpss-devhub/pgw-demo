@@ -32,7 +32,33 @@
             document.documentElement.classList.toggle('dark', darkMode);
         }
 
-        // Apply dark mode immediately
+        function toggleSelection(array,item) {
+            const index = array.indexOf(item);
+            if (index === -1) {
+            array.push(item);
+            } else {
+                array.splice(index, 1);
+            }
+        }
+
+        function submitFilterForm(event,categories,brands){
+            event.preventDefault();
+
+            console.log(categories, brands);
+
+            const joinedCategories = categories.map(category => encodeURIComponent(category)).join("|");
+            const joinedBrands = brands.map(brand => encodeURIComponent(brand)).join("|");
+            const currentSiteUrl = window.location.href.split('?')[0];
+            console.log(joinedCategories);
+
+            const encodedUrl = `${currentSiteUrl}?categories=${joinedCategories==='[]'?'':joinedCategories}&brands=${joinedBrands==='[]'?'':joinedBrands}`;
+            const url = encodeURI(encodedUrl);
+
+            window.location.href = url;
+        }
+
+
+    // Apply dark mode immediately
         const darkModePreference = setDarkModePreference();
         setDarkMode(darkModePreference);
     </script>
