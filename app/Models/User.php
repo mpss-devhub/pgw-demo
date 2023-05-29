@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Controllers\User\ProductController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,6 +47,6 @@ class User extends Authenticatable  implements MustVerifyEmail
     ];
 
     public function cart(){
-        return $this->hasMany(Cart::class);
+        return $this->belongsToMany(Product::class);
     }
 }

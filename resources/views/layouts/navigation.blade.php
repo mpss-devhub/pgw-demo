@@ -50,15 +50,15 @@
 
                 @if (Auth::user())
                     <div class="flex flex-col lg:flex-row lg:items-center lg:mx-8">
-                        {{-- <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
+                         <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
                             Home
                         </x-nav-link>
-                        <x-nav-link class="mx-1" :href="route('categories')" :active="request()->routeIs('categories')">
-                            Categories
+                        <x-nav-link class="mx-1" :href="route('cart')" :active="request()->routeIs('cart')">
+                            Cart
                         </x-nav-link>
-                        <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">
-                            About Us
-                        </x-nav-link> --}}
+{{--                        <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">--}}
+{{--                            About Us--}}
+{{--                        </x-nav-link> --}}
                     </div>
                     <div class="flex items-center lg:mt-0">
                         <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">

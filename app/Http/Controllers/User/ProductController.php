@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddToCartRequest;
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -47,6 +50,22 @@ class ProductController extends Controller
         $brands = Brand::all();
 
         return view('home', compact('products','categories','brands','categoriesParam','brandsParam','openedFilterTabs'));
+    }
+
+    public function addToCart(AddToCartRequest $request)
+    {
+        //
+        $product = Product::findOrFail($request->product_id);
+        $product->users()->sync([Auth::user()->id]);
+
+        $cartProducts = Auth::user()->cart;
+
+        return view('cart',compact('cartProducts'));
+    }
+    public function cart()
+    {
+        $cartProducts = Auth::user()->cart;
+        return view('cart',compact('cartProducts'));
     }
 
     /**

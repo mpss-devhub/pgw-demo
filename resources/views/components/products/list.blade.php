@@ -1,6 +1,5 @@
 @props(['products'])
 
-<x-products.cart/>
 <div
     class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
     @foreach ($products as $product)
@@ -31,10 +30,13 @@
                 <div
                     class="flex  items-center flex-col lg:flex-row justify-between px-4 py-2 bg-gray-900">
                     <h1 class="text-lg font-bold text-white mb-1 lg:mb-0">${{ $product->price }}</h1>
-                    <button
-                        @click="cart.push({{json_encode($product)}})"
-                        class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Add
-                        to cart</button>
+                    <form method="post" action="{{route('cart')}}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        <input type="submit"
+                               value="Add Cart"
+                               class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none"/>
+                    </form>
                 </div>
             </div>
         </div>
