@@ -15,6 +15,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $productQuery = Product::query();
         $categoriesParam = [];
         $brandsParam = [];
         $openedFilterTabs = [];
@@ -23,6 +24,9 @@ class ProductController extends Controller
             $decodedFilterCategories = urldecode(urldecode($request->categories));
             $categoriesParam = explode('|', $decodedFilterCategories);
             if(count($categoriesParam)>0){
+                $productQuery = $productQuery->whereHas('categories', function ($query) use ($categoriesParam) {
+                    $query->whereIn('name', $categoriesParam);
+                });
                 array_push($openedFilterTabs, 'categories');
             }
         }
@@ -30,12 +34,15 @@ class ProductController extends Controller
             $decodedFilterBrands = urldecode(urldecode($request->brands));
             $brandsParam = explode('|', $decodedFilterBrands);
             if(count($brandsParam)>0){
+                $productQuery = $productQuery->whereHas('brand', function ($query) use ($brandsParam) {
+                    $query->whereIn('name', $brandsParam);
+                });
                 array_push($openedFilterTabs, 'brands');
             }
         }
 
 
-        $products = Product::paginate(10);
+        $products = $productQuery->with(['brand','categories'])->paginate(10);
         $categories = Category::all();
         $brands = Brand::all();
 
