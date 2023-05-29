@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row" x-data="{cart:[]}">
         <div class="lg:w-1/4 py-4 lg:py-12">
             <x-products.filter
                 :brands="$brands"
