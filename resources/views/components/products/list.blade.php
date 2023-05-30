@@ -28,14 +28,14 @@
                     @endforeach
                 </div>
                 <div
-                    class="flex  items-center flex-col lg:flex-row justify-between px-4 py-2 bg-gray-900">
+                    class="flex  items-center flex-col lg:flex-row justify-between px-4 py-2 bg-gray-600 dark:bg-gray-900">
                     <h1 class="text-lg font-bold text-white mb-1 lg:mb-0">${{ $product->price }}</h1>
                     <form method="post" action="{{route('cart.add')}}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <input type="submit"
                                value="Add Cart"
-                               class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none"/>
+                               class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-gray-700 text-white rounded hover:bg-gray-800 focus:bg-gray-400 focus:outline-none"/>
                     </form>
                 </div>
             </div>

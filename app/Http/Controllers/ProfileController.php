@@ -16,8 +16,15 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $cartProducts = Auth::user()->cart->groupBy('id');
+        $cartTotalPrice = $cartProducts->sum(function ($group) {
+            return $group->sum('price');
+        });
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'cartProducts'=>$cartProducts,
+            'cartTotalPrice'=>$cartTotalPrice
         ]);
     }
 

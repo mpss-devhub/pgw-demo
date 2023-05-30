@@ -82,9 +82,9 @@
                             <div x-show="isProfileMenuOpen" x-cloak @click.away="isProfileMenuOpen = false"
                                 class="absolute right-0 w-48 mt-3 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800 hidden lg:block">
 
-                                <a href="{{ route('profile.edit') }}"
+                                <span
                                     class="block px-4 py-3 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="text-gray-600 dark:text-gray-400">{{ Auth::user()->name }}</span></a>
+                                    <span class="text-gray-600 dark:text-gray-400">{{ Auth::user()->name }}</span></span>
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
