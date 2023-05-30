@@ -47,6 +47,7 @@ class ProductController extends Controller
 
         $products = $productQuery->with(['brand','categories'])->paginate(10);
         $cartProducts = Auth::user()->cart->groupBy('id');
+
         $cartTotalPrice = $cartProducts->sum(function ($group) {
             return $group->sum('price');
         });
@@ -65,7 +66,7 @@ class ProductController extends Controller
     {
         //
         $product = Product::findOrFail($request->product_id);
-        $product->users()->attach([Auth::user()->id]);
+        $product->users()->attach(Auth::user()->id, ['created_at' => now(), 'updated_at' => now()]);
         $cartItemsCount = Auth::user()->cart->count();
 
         return redirect()->back()->with('isCartShown',$cartItemsCount>0);

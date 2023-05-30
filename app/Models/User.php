@@ -45,6 +45,6 @@ class User extends Authenticatable  implements MustVerifyEmail
     ];
 
     public function cart(){
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot(['created_at'])->orderBy('pivot_created_at','desc');;
     }
 }
