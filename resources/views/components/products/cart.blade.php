@@ -31,14 +31,19 @@
                                                     <h3>
                                                         <a href="#">{{$product->first()->name}}</a>
                                                     </h3>
-                                                    <p class="ml-4">${{$product->first()->price}}</p>
+                                                    <p class="ml-4">${{$product->sum('price')}}</p>
                                                 </div>
                                             </div>
                                             <div class="flex flex-1 items-end justify-between text-sm">
                                                 <p class="text-gray-500">Qty {{$product->count()}}</p>
 
                                                 <div class="flex">
-                                                    <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                                    <form method="POST" action="{{route('cart.remove')}}">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{$product->first()->id}}">
+                                                        <input type="submit" class="font-medium text-indigo-600 hover:text-indigo-500" value="Remove"/>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>

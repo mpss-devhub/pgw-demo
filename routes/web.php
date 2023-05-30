@@ -28,7 +28,9 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home',[ProductController::class,'index'])->name('home');
-    Route::post('/cart',[ProductController::class,'addToCart'])->name('cart');
+    Route::post('/cart',[ProductController::class,'addToCart'])->name('cart.add');
+    Route::delete('/cart',[ProductController::class,'removeFromCart'])->name('cart.remove');
+
 
     Route::get('/about', function () {
         return view('about');

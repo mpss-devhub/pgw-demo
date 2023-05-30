@@ -11,7 +11,7 @@
                 </div>
                 <!-- Mobile menu button -->
                 <div class="flex lg:hidden" x-cloak>
-                    <button @click="isCartShown=true" class="mx-1 relative" href="{{ route('cart') }}">
+                    <button @click="isCartShown=true" class="mx-1 relative">
                         <i class="fa fa-cart-shopping text-white"></i>
                         <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
                                 {{Auth::user()->cart->count()}}
@@ -109,7 +109,7 @@
                     </div>
                 @endif
 
-                    <button @click="isCartShown=true" class="mx-1 relative" href="{{ route('cart') }}">
+                    <button @click="isCartShown=true" class="mx-1 relative">
                         <i class="fa fa-cart-shopping text-white"></i>
                         <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
                                 {{Auth::user()->cart->count()}}

@@ -70,15 +70,13 @@ class ProductController extends Controller
 
         return redirect()->back()->with('isCartShown',true);
     }
-    public function removeFromCartApi(AddToCartRequest $request)
+    public function removeFromCart(AddToCartRequest $request)
     {
         //
         $product = Product::findOrFail($request->product_id);
-        $product->users()->attach([Auth::user()->id]);
+        $product->users()->detach([Auth::user()->id]);
 
-        $cartProducts = Auth::user()->cart()->withPivot('id')->get();
-
-        return redirect()->back()->with('success','Shoe removed from the cart.');
+        return redirect()->back()->with('isCartShown',true);
     }
     public function cart()
     {
