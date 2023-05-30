@@ -19,7 +19,7 @@
                     @endif
 
                     <button x-show="!isMobileMenuOpen"
-                        class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
+                        class="lg:hidden rounded-md mx-2 lg:mx-5 focus:outline-none focus:shadow-outline-purple"
                         @click="toggleTheme" aria-label="Toggle color mode">
                         <template x-if="!dark">
                             <svg class="w-5 h-5" aria-hidden="true" fill="gray" viewBox="0 0 20 20">
@@ -55,6 +55,12 @@
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
                 class="absolute inset-x-0 w-full px-6 py-4  bg-gray-600 dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                 @if (Auth::user())
+                    <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="mx-1 relative">
+                        <i class="fa fa-cart-shopping text-white"></i>
+                        <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
+                                {{Auth::user()->cart->count()}}
+                            </span>
+                    </button>
                     <div class="flex items-center lg:mt-0">
                         <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">
 
@@ -98,12 +104,7 @@
 
                     </div>
 
-                    <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="mx-1 relative">
-                        <i class="fa fa-cart-shopping text-white"></i>
-                        <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
-                                {{Auth::user()->cart->count()}}
-                            </span>
-                    </button>
+
                 @else
                     <div class="flex flex-col lg:flex-row">
                         <x-nav-link class="" :href="route('login')">
