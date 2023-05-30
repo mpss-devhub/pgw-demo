@@ -42,7 +42,7 @@
                                                         @method('DELETE')
                                                         @csrf
                                                         <input type="hidden" name="product_id" value="{{$product->first()->id}}">
-                                                        <input type="submit" class="font-medium text-indigo-600 hover:text-indigo-500" value="Remove"/>
+                                                        <input type="submit" class="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer" value="Remove"/>
                                                     </form>
                                                 </div>
                                             </div>
