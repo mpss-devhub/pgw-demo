@@ -53,10 +53,14 @@
                          <x-nav-link class="mx-1" :href="route('home')" :active="request()->routeIs('home')">
                             Home
                         </x-nav-link>
-                        <x-nav-link class="mx-1" :href="route('cart')" :active="request()->routeIs('cart')">
-                            Cart
-                        </x-nav-link>
-{{--                        <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">--}}
+                        <a class="mx-1 relative" href="{{ route('cart') }}">
+                            <i class="fa fa-cart-shopping text-white"></i>
+                            <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
+                                {{Auth::user()->cart->count()}}
+                            </span>
+                        </a>
+
+                        {{--                        <x-nav-link class="mx-1" :href="route('about')" :active="request()->routeIs('about')">--}}
 {{--                            About Us--}}
 {{--                        </x-nav-link> --}}
                     </div>
