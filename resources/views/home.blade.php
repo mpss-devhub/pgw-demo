@@ -25,7 +25,7 @@
                 </div>
             @endif
         </div>
-        <div x-show="isCartShown" x-cloak class="fixed inset-0 overflow-hidden">
+        <div x-show="isCartShown"  x-transition:enter="transition transform ease-out duration-300" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition transform ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" x-cloak class="fixed inset-0 overflow-hidden">
             <x-products.cart :cartProducts="$cartProducts" :total="$cartTotalPrice"></x-products.cart>
         </div>
     </div>
