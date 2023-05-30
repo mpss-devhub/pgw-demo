@@ -1,4 +1,4 @@
-<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-600 dark:bg-gray-800">
+<nav x-data="{ isMobileMenuOpen: false }" class="relative bg-gray-600 dark:bg-gray-800 z-40">
     <div class="container px-6 py-2 mx-auto">
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
@@ -6,17 +6,18 @@
                     <a class="text-gray-100 font-bold dark:text-white" href="{{ route('home') }}">
                         {{ config('app.name', 'Demo') }}
                     </a>
-
-
                 </div>
                 <!-- Mobile menu button -->
                 <div class="flex lg:hidden" x-cloak>
-                    <button @click="isCartShown=true" class="mx-1 relative">
-                        <i class="fa fa-cart-shopping text-white"></i>
-                        <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
+                    @if (Auth::user())
+                        <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="mx-1 relative">
+                            <i class="fa fa-cart-shopping text-white"></i>
+                            <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
                                 {{Auth::user()->cart->count()}}
                             </span>
-                    </button>
+                        </button>
+                    @endif
+
                     <button x-show="!isMobileMenuOpen"
                         class="lg:hidden rounded-md mx-5 focus:outline-none focus:shadow-outline-purple"
                         @click="toggleTheme" aria-label="Toggle color mode">
@@ -52,16 +53,14 @@
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                class="absolute inset-x-0 z-10 w-full px-6 py-4  bg-gray-600 dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
-
+                class="absolute inset-x-0 w-full px-6 py-4  bg-gray-600 dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                 @if (Auth::user())
-
                     <div class="flex items-center lg:mt-0">
                         <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">
 
                             <div class="flex flex-col mt-5 lg:mt-0">
                                 <button type="button" @click="isProfileMenuOpen = !isProfileMenuOpen"
-                                    class="flex items-center focus:outline-none relative z-10  p-0 md:p-2 transition-colors duration-300 transform rounded-lg"
+                                    class="flex items-center focus:outline-none relative p-0 md:p-2 transition-colors duration-300 transform rounded-lg"
                                     aria-label="toggle profile dropdown">
                                     <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                                         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
@@ -81,7 +80,7 @@
                                 </form>
                             </div>
                             <div x-show="isProfileMenuOpen" x-cloak @click.away="isProfileMenuOpen = false"
-                                class="absolute right-0 z-10 w-48 mt-3 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800 hidden lg:block">
+                                class="absolute right-0 w-48 mt-3 overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800 hidden lg:block">
 
                                 <a href="{{ route('profile.edit') }}"
                                     class="block px-4 py-3 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -98,6 +97,13 @@
                         </div>
 
                     </div>
+
+                    <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="mx-1 relative">
+                        <i class="fa fa-cart-shopping text-white"></i>
+                        <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
+                                {{Auth::user()->cart->count()}}
+                            </span>
+                    </button>
                 @else
                     <div class="flex flex-col lg:flex-row">
                         <x-nav-link class="" :href="route('login')">
@@ -109,12 +115,6 @@
                     </div>
                 @endif
 
-                    <button @click="isCartShown=true" class="mx-1 relative">
-                        <i class="fa fa-cart-shopping text-white"></i>
-                        <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
-                                {{Auth::user()->cart->count()}}
-                            </span>
-                    </button>
                 <button class="hidden lg:block rounded-md ms-5 focus:outline-none focus:shadow-outline-purple"
                     @click="toggleTheme" aria-label="Toggle color mode">
                     <template x-if="!dark">
