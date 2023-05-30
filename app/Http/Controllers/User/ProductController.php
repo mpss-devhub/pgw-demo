@@ -46,21 +46,39 @@ class ProductController extends Controller
 
 
         $products = $productQuery->with(['brand','categories'])->paginate(10);
+        $cartProducts = Auth::user()->cart->groupBy('id');
+        $cartTotalPrice = $cartProducts->sum(function ($group) {
+            return $group->sum('price');
+        });
+
         $categories = Category::all();
         $brands = Brand::all();
 
-        return view('home', compact('products','categories','brands','categoriesParam','brandsParam','openedFilterTabs'));
+        return view('home', compact(
+                'products', 'categories',
+                'brands','categoriesParam','brandsParam',
+                'openedFilterTabs','cartProducts', 'cartTotalPrice',
+        ));
     }
 
     public function addToCart(AddToCartRequest $request)
     {
         //
         $product = Product::findOrFail($request->product_id);
-        $product->users()->sync([Auth::user()->id]);
+        $product->users()->attach([Auth::user()->id]);
 
-        $cartProducts = Auth::user()->cart;
 
-        return view('cart',compact('cartProducts'));
+        return redirect()->back()->with('isCartShown',true);
+    }
+    public function removeFromCartApi(AddToCartRequest $request)
+    {
+        //
+        $product = Product::findOrFail($request->product_id);
+        $product->users()->attach([Auth::user()->id]);
+
+        $cartProducts = Auth::user()->cart()->withPivot('id')->get();
+
+        return redirect()->back()->with('success','Shoe removed from the cart.');
     }
     public function cart()
     {

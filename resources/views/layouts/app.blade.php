@@ -66,14 +66,13 @@
 
 </head>
 
-<body class="font-sans antialiased" :class="{ 'dark': dark }" x-data="{ dark: setDarkModePreference(), toggleTheme: function() { this.dark = !this.dark; localStorage.setItem('dark', this.dark);document.documentElement.classList.toggle('dark', this.dark)} }" x-init="setDarkMode(dark)">
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
-        @include('layouts.navigation')
-
-        <main class="px-2 lg:px-12">
-            {{ $slot }}
-        </main>
-    </div>
+<body class="font-sans antialiased" :class="{ 'dark': dark}" x-data="{ dark: setDarkModePreference(), toggleTheme: function() { this.dark = !this.dark; localStorage.setItem('dark', this.dark);document.documentElement.classList.toggle('dark', this.dark)},isCartShown:false }" x-init="setDarkMode(dark)">
+            <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
+                @include('layouts.navigation')
+                <main class="px-2 lg:px-12">
+                    {{ $slot }}
+                </main>
+            </div>
 </body>
 
 </html>

@@ -28,8 +28,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home',[ProductController::class,'index'])->name('home');
-    Route::get('/cart',[ProductController::class,'cart'])->name('cart');
     Route::post('/cart',[ProductController::class,'addToCart'])->name('cart');
+
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 });
 
 Route::middleware('auth')->group(function () {
