@@ -66,9 +66,9 @@ class ProductController extends Controller
         //
         $product = Product::findOrFail($request->product_id);
         $product->users()->attach([Auth::user()->id]);
+        $cartItemsCount = Auth::user()->cart->count();
 
-
-        return redirect()->back()->with('isCartShown',true);
+        return redirect()->back()->with('isCartShown',$cartItemsCount>0);
     }
     public function removeFromCart(AddToCartRequest $request)
     {
@@ -76,7 +76,9 @@ class ProductController extends Controller
         $product = Product::findOrFail($request->product_id);
         $product->users()->detach([Auth::user()->id]);
 
-        return redirect()->back()->with('isCartShown',true);
+        $cartItemsCount = Auth::user()->cart->count();
+
+        return redirect()->back()->with('isCartShown',$cartItemsCount>0);
     }
     public function cart()
     {
