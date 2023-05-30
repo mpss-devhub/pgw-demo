@@ -19,7 +19,7 @@
                     <div class="mt-8">
                         <div class="flow-root">
                             <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                @foreach($cartProducts as $product)
+                                @forelse($cartProducts as $product)
                                     <li class="flex py-6">
                                         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                             <img src="{{$product->first()->image_url}}" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
@@ -48,7 +48,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                @endforeach
+                                @empty
+                                    <li>
+                                        <div class="p-2 bg-gray-200 mt-10 rounded-md">
+                                            No shoes were found in the cart.
+                                        </div>
+                                    </li>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
