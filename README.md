@@ -1,4 +1,4 @@
-## MPSS Payment Demo ( Redirect )
+## Octoverse Payment Demo ( Redirect )
 
 This is a simple ecommerce site which sells shoes of different brands.Users can add shoes to shopping cart and pay with Octoverse Payment.
 The project is written in
