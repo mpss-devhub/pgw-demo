@@ -75,10 +75,10 @@
     </form>
     <div class="flex justify-end gap-3 mt-4">
         <x-secondary-button class="rounded-sm py-0">
-            <input type="button" @click="selectedCategories=[];selectedBrands=[]; window.location.href=window.location.href.split('?')[0];" value="Clear"/>
+            <input class="cursor-pointer" type="button" @click="selectedCategories=[];selectedBrands=[]; window.location.href=window.location.href.split('?')[0];" value="Clear"/>
         </x-secondary-button>
         <x-primary-button class="rounded-sm py-0">
-            <input type="button" @click="submitFilterForm($event,selectedCategories,selectedBrands)" value="Filter"/>
+            <input class="cursor-pointer" type="button" @click="submitFilterForm($event,selectedCategories,selectedBrands)" value="Filter"/>
         </x-primary-button>
     </div>
 </div>
