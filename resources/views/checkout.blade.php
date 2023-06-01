@@ -3,7 +3,7 @@
        @foreach($paymentCategoriesWithPayments as $category)
            <div class="p-2">
                <h2>{{$category['paymentType']}}</h2>
-               <div class="p-1">
+               <div class="p-1 grid grid-cols-3 my-3">
                    @foreach($category['payments'] as $payment)
                        <div>
                            <span>{{$payment['paymentName']}}</span>
