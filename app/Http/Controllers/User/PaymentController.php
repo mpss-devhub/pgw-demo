@@ -11,7 +11,8 @@ class PaymentController extends Controller
     use PaymentService;
 
     function directCheckout(){
-        $body = (string) $this->getPaymentToken()->getBody();
-        dd($body);
+       $paymentCategoriesWithPayments = $this->getAvailablePayments();
+
+       return view('checkout',compact('paymentCategoriesWithPayments'));
     }
 }
