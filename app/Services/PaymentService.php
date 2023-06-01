@@ -59,4 +59,8 @@ trait PaymentService{
     public function decodePaymentToken($encodedJWT){
       return   JWT::decode($encodedJWT, new Key(config('octoverse.merchant_secret_key'), 'HS256'));
     }
+
+    public function getUniqueInvoiceId(){
+        return uniqid(config('octoverse.invoice_prefix'));
+    }
 }
