@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Services\PaymentService;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -11,7 +12,14 @@ class PaymentController extends Controller
     use PaymentService;
 
     function directCheckout(){
-       $paymentCategoriesWithPayments = $this->getAvailablePayments();
+        $cartProducts = Auth::user()->cart->groupBy('id');
+
+        $cartTotalPrice = $cartProducts->sum(function ($group) {
+            return $group->sum('price');
+        });
+
+
+       $paymentCategoriesWithPayments = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
 
        return view('checkout',compact('paymentCategoriesWithPayments'));
     }
