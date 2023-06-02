@@ -1,63 +1,6 @@
 <x-app-layout>
    <div x-data="{selectedPayment:null}">
-       <div tabindex="-1" aria-hidden="true"  :class="{ 'hidden': !selectedPayment, 'block': !selectedPayment }" class="bg-gray-800 flex justify-center items-center bg-opacity-70 fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  h-full">
-           <div class="relative w-full max-w-xl max-h-full">
-               <!-- Modal content -->
-               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                   <!-- Modal header -->
-                   <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                       <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                           Pay with <span x-text="selectedPayment.paymentName"></span>
-                       </h3>
-                       <button @click="selectedPayment=null" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                           <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                           <span class="sr-only">Close modal</span>
-                       </button>
-                   </div>
-                   <!-- Modal body -->
-                   <form method="post" action="{{route('payment.pay')}}">
-                       @csrf
-                       <input type="hidden" name="paymentCode" :value="selectedPayment.paymentCode"/>
-                       <input type="hidden" name="paymentId" value="{{$paymentId}}"/>
-                       <div class="p-6 space-y-6">
-                           <div class="flex justify-center">
-                               <img :src="selectedPayment.logo" width="100" height="100" class="rounded-md"/>
-                           </div>
-                           <div class="flex flex-col gap-2">
-                               <template x-for="[key, value] in Object.entries(selectedPayment.input)">
-                                   <div class="mb-4">
-                                       <label class="block text-gray-700 text-sm font-bold mb-2" x-text="value.label"></label>
-                                       <input :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" x-bind:value="value.value" x-bind:type="value.type" :placeholder="'Enter ' + key">
-                                   </div>
-                               </template>
-                           </div>
-                       </div>
-                       <!-- Modal footer -->
-                       <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                           <button  @click="selectedPayment=null" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
-                           <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Continue"/>
-                       </div>
-                   </form>
-
-               </div>
-           </div>
-       </div>
        <div class="flex gap-12">
-           <div class="w-2/3">
-               @foreach($paymentCategoriesWithPayments as $category)
-                   <div class="p-2">
-                       <p class="text-lg font-bold text-gray-800">{{$category['paymentType']}}</p>
-                       <div class="p-1 grid grid-cols-6 my-3 gap-2 bg-gray-300 rounded-md p-3">
-                           @foreach($category['payments'] as $payment)
-                               <div class="rounded-md dark:text-white" @click="selectedPayment={{json_encode($payment)}}">
-                                   <img width="80" height="80" src="{{$payment['logo']}}"/>
-                                   <span class="font-bold text-sm">{{$payment['paymentName']}}</span>
-                               </div>
-                           @endforeach
-                       </div>
-                   </div>
-               @endforeach
-           </div>
            <div class="mt-2 w-1/3">
                <p class="text-lg font-bold text-gray-800 mb-3">Your order</p>
 
@@ -95,6 +38,72 @@
                    <div>${{$cartTotalPrice}}</div>
                </div>
            </div>
+           <div class="w-1/2">
+               <p class="text-lg font-bold text-gray-800 mt-2 mb-3">Fill in payment information</p>
+               <div class=" bg-gray-200 p-1 rounded-md"  x-show="!selectedPayment"
+                    x-transition:enter-start="opacity-0 transform scale-90"
+                    x-transition:enter-end="opacity-100 transform scale-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 transform scale-100"
+                    x-transition:leave-end="opacity-0 transform scale-90"
+                    class="bg-blue-500 text-white p-4"
+               >
+                   <p class="text-lg font-bold text-gray-800 mt-2  mx-2">Step <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-500 text-white">1</span></p>
+                   @foreach($paymentCategoriesWithPayments as $category)
+                       <div class="p-2 mx-3">
+                           <p class="text-sm font-bold">{{$category['paymentType']}}</p>
+                           <div class="grid grid-cols-3 px-1 gap-2 rounded-md p-1">
+                               @foreach($category['payments'] as $payment)
+                                   <div  x-data="{paymentCode:'{{$payment['paymentCode']}}'}"
+                                         :class="{'bg-gray-700':selectedPayment.paymentCode===paymentCode}" class="border border-solid border-gray-400 justify-between items-center gap-1 flex  rounded-md dark:text-white" @click="selectedPayment={{json_encode($payment)}}">
+                                       <div class="flex justify-start items-center gap-1">
+                                           <img class="rounded-md  w-8 h-8 object-cover"  src="{{$payment['logo']}}"/>
+                                           <span class="font-medium text-sm" :class="{'text-white':selectedPayment.paymentCode===paymentCode}">{{$payment['paymentName']}}</span>
+                                       </div>
+
+                                   </div>
+                               @endforeach
+                           </div>
+                       </div>
+                   @endforeach
+               </div>
+               <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md"
+                    x-show="selectedPayment"
+                    x-transition:enter-start="opacity-0 transform scale-90"
+                    x-transition:enter-end="opacity-100 transform scale-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 transform scale-100"
+                    x-transition:leave-end="opacity-0 transform scale-90">
+                   <p class="text-lg font-bold text-gray-800 mt-2  mx-2 flex justify-between">
+                       <span>
+                           Step <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-500 text-white">2</span>
+                       </span>
+                   </p>
+                   <div class="p-2">
+                       <form method="post" action="{{route('payment.webpay')}}">
+                           @csrf
+                           <input type="hidden" name="paymentCode" :value="selectedPayment.paymentCode"/>
+                           <input type="hidden" name="paymentId" value="{{$paymentId}}"/>
+                           <div class="p-2 space-y-6">
+                               <div class="flex flex-col gap-2">
+                                   <template x-for="[key, value] in Object.entries(selectedPayment.input)">
+                                       <div class="mb-4" :class="{'hidden':value.required==='false'}">
+                                           <label class="block text-gray-700 text-sm font-bold mb-2" x-text="value.label"></label>
+                                           <input :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" x-bind:value="value.value" x-bind:type="value.type" :placeholder="'Enter ' + key">
+                                       </div>
+                                   </template>
+                               </div>
+                           </div>
+                       </form>
+                   </div>
+               </div>
+               <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                   <button  @click="selectedPayment=null" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                   <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Continue"/>
+               </div>
+           </div>
        </div>
+
+
    </div>
 </x-app-layout>

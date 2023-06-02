@@ -56,6 +56,26 @@
 
             window.location.href = url;
         }
+        function getQrImage($phoneNumber,$paymentId){
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            fetch('api/non-web-pay', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({
+
+                })
+            })
+                .then(response => {
+                    // Handle the response
+                })
+                .catch(error => {
+                    // Handle the error
+                });
+
+        }
 
 
     // Apply dark mode immediately

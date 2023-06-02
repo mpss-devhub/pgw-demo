@@ -27,10 +27,19 @@ class PaymentController extends Controller
        $paymentId=Payment::latest()->first()->id;
 
 
+
        return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts','paymentId'));
     }
 
-    function doPay(Request $request){
-        $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
+    function doWebPay(Request $request){
+        $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
+        return redirect()->away($response["data"]["redirectUrl"]);
+    }
+    function doOtherPay(Request $request){
+        $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
+        return response()->json([
+            "message"=>"Success",
+            "data"=>$response["data"]["qrImg"]
+        ]);
     }
 }

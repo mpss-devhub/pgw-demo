@@ -114,7 +114,7 @@ trait PaymentService{
             "paymentCode"=>$paymentCode,
             "payData"=>$jwtPayload
         ]);
-        dd($response->json());
+        return $response->json();
    }
 
 
