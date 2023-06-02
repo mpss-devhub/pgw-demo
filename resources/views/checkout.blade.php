@@ -1,7 +1,7 @@
 <x-app-layout>
    <div x-data="{selectedPayment:null}">
-       <div tabindex="-1" aria-hidden="true"  :class="{ 'hidden': !selectedPayment, 'block': !selectedPayment }" class="bg-gray-800 flex justify-center items-center bg-opacity-70 fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-           <div class="relative w-full max-w-2xl max-h-full">
+       <div tabindex="-1" aria-hidden="true"  :class="{ 'hidden': !selectedPayment, 'block': !selectedPayment }" class="bg-gray-800 flex justify-center items-center bg-opacity-70 fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0  h-full">
+           <div class="relative w-full max-w-xl max-h-full">
                <!-- Modal content -->
                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                    <!-- Modal header -->
@@ -16,10 +16,16 @@
                    </div>
                    <!-- Modal body -->
                    <div class="p-6 space-y-6">
+                       <div class="flex justify-center">
+                           <img :src="selectedPayment.logo" width="100" height="100" class="rounded-md"/>
+                       </div>
                        <div class="flex flex-col gap-2">
-                           <div x-for="input in selectedPayment['input']">
-                               <span x-text="input"></span>
-                           </div>
+                           <template x-for="[key, value] in Object.entries(selectedPayment.input)">
+                               <div class="mb-4">
+                                   <label class="block text-gray-700 text-sm font-bold mb-2" x-text="value.label"></label>
+                                   <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" x-bind:value="value.value" x-bind:type="value.type" :placeholder="'Enter ' + key">
+                               </div>
+                           </template>
                        </div>
                    </div>
                    <!-- Modal footer -->
