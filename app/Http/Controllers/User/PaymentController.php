@@ -21,6 +21,10 @@ class PaymentController extends Controller
 
        $paymentCategoriesWithPayments = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
 
+       if(!$paymentCategoriesWithPayments){
+           return redirect()->back();
+       }
+
        return view('checkout',compact('paymentCategoriesWithPayments'));
     }
 }

@@ -65,14 +65,18 @@ trait PaymentService{
 
     public function createPaymentAndGetPaymentList($totalAmount,array $productIds){
 
-        $payment = $this->createPayment($totalAmount,$productIds);
-        $tokens = $this->getTokens([
-            "invoiceNo"=>$payment->invoice_id,
-            "amount"=>$payment->amount,
-            "currencyCode"=>$payment->currency_code
-        ]);
+        try {
+            $payment = $this->createPayment($totalAmount,$productIds);
+            $tokens = $this->getTokens([
+                "invoiceNo"=>$payment->invoice_id,
+                "amount"=>$payment->amount,
+                "currencyCode"=>$payment->currency_code
+            ]);
 
-        return $this->getAvailablePayments($tokens,$payment);
+            return $this->getAvailablePayments($tokens,$payment);
+        }catch (\Exception $e){
+            return false;
+        }
     }
 
     public function createPayment($totalAmount,array $productIds){

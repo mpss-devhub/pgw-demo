@@ -13,5 +13,5 @@ return [
 
     'merchant_data_key' => env('OCTOVERSE_MERCHANT_DATA_KEY'),
 
-    'invoice_prefix'=>env('SHOE_DEMO_INV_')
+    'invoice_prefix'=>env('OCTOVERSE_INVOICE_PREFIX')
 ];
