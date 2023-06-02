@@ -14,9 +14,7 @@ class PaymentController extends Controller
     function directCheckout(){
         $cartProducts = Auth::user()->cart->groupBy('id');
 
-        $cartTotalPrice = $cartProducts->sum(function ($group) {
-            return $group->sum('price');
-        });
+        $cartTotalPrice = Auth::user()->cart->sum('price');
 
 
        $paymentCategoriesWithPayments = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
