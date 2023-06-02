@@ -25,6 +25,6 @@ class PaymentController extends Controller
            return redirect()->back();
        }
 
-       return view('checkout',compact('paymentCategoriesWithPayments'));
+       return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts'));
     }
 }
