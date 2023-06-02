@@ -104,7 +104,7 @@ trait PaymentService{
         $payment = Payment::find($paymentId);
 
 
-        $jwtPayload = $this->encryptPayData($attributes);
+        $jwtPayload = $this->encryptAES(json_encode($attributes),config('octoverse.merchant_data_key'));
 
 
         $response = Http::withHeaders([
@@ -117,12 +117,15 @@ trait PaymentService{
         dd($response->json());
    }
 
-   function encryptPayData($data){
-       $plainText = json_encode($data);
 
-       $key = config('octoverse.merchant_data_key');
+    function encryptAES($plainText, $key)
+    {
+        $cipher = "AES-128-ECB";
+        $options = OPENSSL_RAW_DATA;
+        $encryptedText = openssl_encrypt($plainText, $cipher, $key, $options);
 
-       return Crypt::encrypt($plainText, $key);
-   }
+        return rtrim(base64_encode($encryptedText));
+    }
+
 
 }
