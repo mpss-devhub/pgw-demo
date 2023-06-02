@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Payment;
 use App\Services\PaymentService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -22,8 +24,13 @@ class PaymentController extends Controller
        if(!$paymentCategoriesWithPayments){
            return redirect()->back();
        }
+       $paymentId=Payment::latest()->first()->id;
 
 
-       return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts'));
+       return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts','paymentId'));
+    }
+
+    function doPay(Request $request){
+        $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode','name','email']));
     }
 }

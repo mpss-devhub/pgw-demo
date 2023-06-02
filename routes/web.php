@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/cart',[ProductController::class,'removeFromCart'])->name('cart.remove');
 
     Route::get('/payment/direct-checkout',[PaymentController::class,'directCheckout'])->name('payment.direct-checkout');
+    Route::post('/payment/pay',[PaymentController::class,'doPay'])->name('payment.pay');
 
 });
 

@@ -19,7 +19,18 @@ trait PaymentService{
     }
 
     function getTokens(array $paymentData){
-        $payData = $this->getEncodedJWTPayload($paymentData);
+        $payload = [
+            'merchantID' => config('octoverse.merchant_id'),
+            'frontendUrl' => 'https://someurl.com/api',
+            'backendUrl' => 'https://someurl.com/api',
+            'userDefination1'=>'one',
+            'userDefination2'=>'two',
+            'userDefination3'=>'three'
+        ];
+        $payload=array_merge($payload,$paymentData);
+
+
+        $payData = $this->getEncodedJWTPayload($payload);
         $paymentTokenData = $this->getPaymentFromApi($payData)->json()['data'];
         $paymentToken = $this->decodePaymentToken($paymentTokenData);
         return $paymentToken;
@@ -39,17 +50,8 @@ trait PaymentService{
 
         return $response->json()['data']['paymentList'];
     }
-    function getEncodedJWTPayload($paymentData):string{
+    function getEncodedJWTPayload($payload):string{
 
-        $payload = [
-            'merchantID' => config('octoverse.merchant_id'),
-            'frontendUrl' => 'https://someurl.com/api',
-            'backendUrl' => 'https://someurl.com/api',
-            'userDefination1'=>'one',
-            'userDefination2'=>'two',
-            'userDefination3'=>'three'
-        ];
-        $payload=array_merge($payload,$paymentData);
 
 
         return JWT::encode($payload, config('octoverse.merchant_secret_key'),'HS256');
@@ -72,6 +74,9 @@ trait PaymentService{
                 "amount"=>$payment->amount,
                 "currencyCode"=>$payment->currency_code
             ]);
+            $payment->payment_token = $tokens->paymentToken;
+            $payment->access_token = $tokens->accessToken;
+            $payment->save();
 
             return $this->getAvailablePayments($tokens,$payment);
         }catch (\Exception $e){
@@ -89,4 +94,25 @@ trait PaymentService{
 
         return $payment;
     }
+
+    public function payWithSelectedPayment($paymentId,$paymentCode,array $attributes){
+        $baseUrl =  config('octoverse.base_url');
+        $resourceUrl = 'dopay';
+        $url = $baseUrl.$resourceUrl;
+
+        $payment = Payment::find($paymentId);
+
+        $jwtPayload = $this->getEncodedJWTPayload($attributes);
+
+
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer $payment->access_token"
+        ])->post($url,[
+            "paymentToken"=> $payment->payment_token,
+            "paymentCode"=>$paymentCode,
+            "payData"=>$jwtPayload
+        ]);
+        dd($response->json());
+   }
+
 }

@@ -15,24 +15,30 @@
                        </button>
                    </div>
                    <!-- Modal body -->
-                   <div class="p-6 space-y-6">
-                       <div class="flex justify-center">
-                           <img :src="selectedPayment.logo" width="100" height="100" class="rounded-md"/>
+                   <form method="post" action="{{route('payment.pay')}}">
+                       @csrf
+                       <input type="hidden" name="paymentCode" :value="selectedPayment.paymentCode"/>
+                       <input type="hidden" name="paymentId" value="{{$paymentId}}"/>
+                       <div class="p-6 space-y-6">
+                           <div class="flex justify-center">
+                               <img :src="selectedPayment.logo" width="100" height="100" class="rounded-md"/>
+                           </div>
+                           <div class="flex flex-col gap-2">
+                               <template x-for="[key, value] in Object.entries(selectedPayment.input)">
+                                   <div class="mb-4">
+                                       <label class="block text-gray-700 text-sm font-bold mb-2" x-text="value.label"></label>
+                                       <input :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" x-bind:value="value.value" x-bind:type="value.type" :placeholder="'Enter ' + key">
+                                   </div>
+                               </template>
+                           </div>
                        </div>
-                       <div class="flex flex-col gap-2">
-                           <template x-for="[key, value] in Object.entries(selectedPayment.input)">
-                               <div class="mb-4">
-                                   <label class="block text-gray-700 text-sm font-bold mb-2" x-text="value.label"></label>
-                                   <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" x-bind:value="value.value" x-bind:type="value.type" :placeholder="'Enter ' + key">
-                               </div>
-                           </template>
+                       <!-- Modal footer -->
+                       <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                           <button  @click="selectedPayment=null" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                           <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Continue"/>
                        </div>
-                   </div>
-                   <!-- Modal footer -->
-                   <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                       <button  @click="selectedPayment=null" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
-                       <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continue</button>
-                   </div>
+                   </form>
+
                </div>
            </div>
        </div>
