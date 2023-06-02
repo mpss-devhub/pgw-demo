@@ -1,5 +1,5 @@
 <x-app-layout>
-   <div x-data="{selectedPayment:null}">
+   <div x-data="{selectedPayment:null,isSelectedPaymentWeb:false}">
        <div class="flex gap-12">
            <div class="mt-2 w-1/3">
                <p class="text-lg font-bold text-gray-800 mb-3">Your order</p>
@@ -55,7 +55,9 @@
                            <div class="grid grid-cols-3 px-1 gap-2 rounded-md p-1">
                                @foreach($category['payments'] as $payment)
                                    <div  x-data="{paymentCode:'{{$payment['paymentCode']}}'}"
-                                         :class="{'bg-gray-700':selectedPayment.paymentCode===paymentCode}" class="border border-solid border-gray-400 justify-between items-center gap-1 flex  rounded-md dark:text-white" @click="selectedPayment={{json_encode($payment)}}">
+                                         :class="{'bg-gray-700':selectedPayment.paymentCode===paymentCode}"
+                                         class="border border-solid border-gray-400 justify-between items-center gap-1 flex  rounded-md dark:text-white"
+                                         @click="selectedPayment={{json_encode($payment)}};">
                                        <div class="flex justify-start items-center gap-1">
                                            <img class="rounded-md  w-8 h-8 object-cover"  src="{{$payment['logo']}}"/>
                                            <span class="font-medium text-sm" :class="{'text-white':selectedPayment.paymentCode===paymentCode}">{{$payment['paymentName']}}</span>
@@ -80,7 +82,7 @@
                        </span>
                    </p>
                    <div class="p-2">
-                       <form method="post" action="{{route('payment.webpay')}}">
+                       <form id="webPayForm" method="post" action="{{route('payment.webpay')}}">
                            @csrf
                            <input type="hidden" name="paymentCode" :value="selectedPayment.paymentCode"/>
                            <input type="hidden" name="paymentId" value="{{$paymentId}}"/>
@@ -99,7 +101,7 @@
                </div>
                <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                    <button  @click="selectedPayment=null" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
-                   <input type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Continue"/>
+                   <button @click="onContinueClicked(false,'09440813572',{{$paymentId}},selectedPayment.paymentCode)" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continue</button>
                </div>
            </div>
        </div>

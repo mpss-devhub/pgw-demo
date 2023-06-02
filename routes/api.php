@@ -18,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware('auth:sanctum')->post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
+//Route::middleware('auth:sanctum')->post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
 
+Route::post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');

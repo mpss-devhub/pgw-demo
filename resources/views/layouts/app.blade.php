@@ -56,16 +56,33 @@
 
             window.location.href = url;
         }
-        function getQrImage($phoneNumber,$paymentId){
+
+        function onContinueClicked(isWebPay=false,phoneNumber,paymentId,paymentCode){
+            if(isWebPay){
+                submitWebPayForm()
+                return;
+            }else{
+                getQrImage(phoneNumber,paymentId,paymentCode)
+            }
+        }
+
+        function submitWebPayForm(){
+            const webPayForm = document.getElementById('webPayForm');
+            webPayForm.submit();
+        }
+
+        function getQrImage(phoneNumber,paymentId,paymentCode){
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fetch('api/non-web-pay', {
+            fetch('/api/non-web-pay', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': csrfToken
                 },
                 body: JSON.stringify({
-
+                    paymentId:paymentId,
+                    paymentCode:paymentCode,
+                    phoneNumber:phoneNumber
                 })
             })
                 .then(response => {

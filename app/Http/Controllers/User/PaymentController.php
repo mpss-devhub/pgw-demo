@@ -27,7 +27,6 @@ class PaymentController extends Controller
        $paymentId=Payment::latest()->first()->id;
 
 
-
        return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts','paymentId'));
     }
 
