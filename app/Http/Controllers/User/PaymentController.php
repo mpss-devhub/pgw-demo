@@ -31,6 +31,6 @@ class PaymentController extends Controller
     }
 
     function doPay(Request $request){
-        $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode','name','email']));
+        $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\Payment;
 use Firebase\JWT\JWT;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Firebase\JWT\Key;
 
@@ -102,7 +103,8 @@ trait PaymentService{
 
         $payment = Payment::find($paymentId);
 
-        $jwtPayload = $this->getEncodedJWTPayload($attributes);
+
+        $jwtPayload = $this->encryptPayData($attributes);
 
 
         $response = Http::withHeaders([
@@ -113,6 +115,14 @@ trait PaymentService{
             "payData"=>$jwtPayload
         ]);
         dd($response->json());
+   }
+
+   function encryptPayData($data){
+       $plainText = json_encode($data);
+
+       $key = config('octoverse.merchant_data_key');
+
+       return Crypt::encrypt($plainText, $key);
    }
 
 }
