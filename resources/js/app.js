@@ -24,7 +24,14 @@ Alpine.start();
 const app = createApp({});
 
 import ChooseAndPayComponent from './components/ChooseAndPayComponent.vue';
+import ShowQRComponent from './components/ShowQRComponent.vue';
+import ShowAvailablePaymentsComponent from './components/ShowAvailablePaymentsComponent.vue';
+import ShowPaymentInfoComponent from './components/ShowPaymentInfoComponent.vue';
+
 app.component('choose-and-pay-component', ChooseAndPayComponent);
+app.component('show-qr-component', ShowQRComponent);
+app.component('show-available-payments-component', ShowAvailablePaymentsComponent);
+app.component('show-payment-info-component', ShowPaymentInfoComponent);
 
 /**
  * The following block of code may be used to automatically register your
