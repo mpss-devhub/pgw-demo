@@ -71,9 +71,9 @@
             webPayForm.submit();
         }
 
-        function getQrImage(phoneNumber,paymentId,paymentCode){
+        async function getQrImage(phoneNumber,paymentId,paymentCode){
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            fetch('/api/non-web-pay', {
+            const response = await fetch('/api/non-web-pay', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,13 +85,7 @@
                     phoneNumber:phoneNumber
                 })
             })
-                .then(response => {
-                    // Handle the response
-                })
-                .catch(error => {
-                    // Handle the error
-                });
-
+            return response.json();
         }
 
 

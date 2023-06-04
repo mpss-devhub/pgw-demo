@@ -5,13 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Services\PaymentService;
+use F9Web\ApiResponseHelpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
     //
-    use PaymentService;
+    use PaymentService,ApiResponseHelpers;
 
     function directCheckout(){
         $cartProducts = Auth::user()->cart->groupBy('id');
@@ -35,10 +36,7 @@ class PaymentController extends Controller
         return redirect()->away($response["data"]["redirectUrl"]);
     }
     function doOtherPay(Request $request){
-        $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
-        return response()->json([
-            "message"=>"Success",
-            "data"=>$response["data"]["qrImg"]
-        ]);
+        $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,["phoneNo"=>$request->phoneNumber]);
+        return $this->respondWithSuccess(["type"=>"QR","data"=>$response["data"]["qrImg"]]);
     }
 }
