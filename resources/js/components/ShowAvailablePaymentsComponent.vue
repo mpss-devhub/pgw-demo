@@ -6,7 +6,8 @@
             <div class="grid grid-cols-3 px-1 gap-2 rounded-md p-1">
                 <div
                     v-for="payment in category.payments"
-                    class="border border-solid border-gray-400 justify-between items-center gap-1 flex  rounded-md dark:text-white"
+                    :class="{'bg-blue-500 text-white':(selectedPayment && selectedPayment.paymentCode===payment.paymentCode)}"
+                    class="border cursor-pointer border-solid border-gray-400 justify-between items-center gap-1 flex  rounded-md dark:text-white"
                     @click="onPaymentClicked(payment,category)">
                     <div class="flex justify-start items-center gap-1">
                         <img class="rounded-md  w-8 h-8 object-cover"  :src="payment.logo"/>
