@@ -9,19 +9,23 @@
             <form>
                 <div class="p-2false space-y-6">
                     <div class="flex flex-col gap-2">
-                        <template v-for="input in selectedPayment.input">
-                            <div class="mb-4" :class="{'hidden':input.required==='false'}">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">{{input.label}}</label>
-                                <input :name="input.label" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" :value="input.value" :type="input.type" :placeholder="`Enter ${input.label}`">
+                        <template v-for="(value, key) in selectedPayment.input">
+                            <div class="mb-4" v-if="value.required==='true'">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">{{value.label}}</label>
+                                <input v-model="inputModels[`${key}`]" :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  :type="value.type" :placeholder="`Enter ${value.label}`">
                             </div>
                         </template>
                     </div>
                 </div>
             </form>
         </div>
+        <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <button @click="onContinueClicked" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Continue</button>
+        </div>
     </div>
 </template>
 <script setup>
+import {ref} from "vue";
 
 const props = defineProps({
     selectedPayment:{
@@ -29,4 +33,11 @@ const props = defineProps({
         required:true
     }
 })
+const inputModels = ref({})
+const emit = defineEmits(["onContinueClicked"])
+
+function onContinueClicked(){
+    emit('onContinueClicked',inputModels.value)
+}
+
 </script>

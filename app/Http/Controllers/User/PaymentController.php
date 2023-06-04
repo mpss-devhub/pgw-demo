@@ -28,6 +28,7 @@ class PaymentController extends Controller
        $paymentId=Payment::latest()->first()->id;
 
 
+
        return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts','paymentId'));
     }
 
@@ -36,7 +37,7 @@ class PaymentController extends Controller
         return redirect()->away($response["data"]["redirectUrl"]);
     }
     function doOtherPay(Request $request){
-        $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,["phoneNo"=>$request->phoneNumber]);
-        return $this->respondWithSuccess(["type"=>"QR","data"=>$response["data"]["qrImg"]]);
+        $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,["phoneNo"=>$request->phoneNo]);
+        return $this->respondWithSuccess(["type"=>"QR","data"=> $response["data"]["qrImg"] ?? $response["data"]]);
     }
 }
