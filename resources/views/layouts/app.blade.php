@@ -41,53 +41,6 @@
             }
         }
 
-        function submitFilterForm(event,categories,brands){
-            event.preventDefault();
-
-            console.log(categories, brands);
-
-            const joinedCategories = categories.map(category => encodeURIComponent(category)).join("|");
-            const joinedBrands = brands.map(brand => encodeURIComponent(brand)).join("|");
-            const currentSiteUrl = window.location.href.split('?')[0];
-            console.log(joinedCategories);
-
-            const encodedUrl = `${currentSiteUrl}?categories=${joinedCategories==='[]'?'':joinedCategories}&brands=${joinedBrands==='[]'?'':joinedBrands}`;
-            const url = encodeURI(encodedUrl);
-
-            window.location.href = url;
-        }
-
-        function onContinueClicked(isWebPay=false,phoneNumber,paymentId,paymentCode){
-            if(isWebPay){
-                submitWebPayForm()
-                return;
-            }else{
-                getQrImage(phoneNumber,paymentId,paymentCode)
-            }
-        }
-
-        function submitWebPayForm(){
-            const webPayForm = document.getElementById('webPayForm');
-            webPayForm.submit();
-        }
-
-        async function getQrImage(phoneNumber,paymentId,paymentCode){
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            const response = await fetch('/api/non-web-pay', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({
-                    paymentId:paymentId,
-                    paymentCode:paymentCode,
-                    phoneNumber:phoneNumber
-                })
-            })
-            return response.json();
-        }
-
 
     // Apply dark mode immediately
         const darkModePreference = setDarkModePreference();
