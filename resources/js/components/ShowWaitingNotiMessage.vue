@@ -7,9 +7,9 @@
                            Step <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-500 text-white">3</span>
                        </span>
                 </p>
-                <div class="p-2 flex gap-8 flex-col justify-center items-center">
+                <div class="p-2 mt-10 flex gap-8 flex-col justify-center items-center">
                         <div class="font-bold">Please wait</div>
-                    <span>{{message}}</span>
+                    <span class="p-5 bg-gray-300 rounded-md text-black">{{message}}</span>
                 </div>
             </div>
         </div>
