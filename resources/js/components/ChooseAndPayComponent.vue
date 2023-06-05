@@ -18,7 +18,9 @@
 
             <show-q-r-component
                 v-if="isLastStep && qrImage"
-                :qr-image-url="qrImage">
+                :payment-id="paymentId"
+                :qr-image-url="qrImage"
+            >
             </show-q-r-component>
             <show-waiting-message-component
                 v-if="isLastStep && inAppPayMessage"
