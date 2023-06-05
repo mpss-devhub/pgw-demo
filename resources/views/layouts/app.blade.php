@@ -17,6 +17,21 @@
 
 
     <script>
+        function submitFilterForm(event,categories,brands){
+            event.preventDefault();
+
+            console.log(categories, brands);
+
+            const joinedCategories = categories.map(category => encodeURIComponent(category)).join("|");
+            const joinedBrands = brands.map(brand => encodeURIComponent(brand)).join("|");
+            const currentSiteUrl = window.location.href.split('?')[0];
+            console.log(joinedCategories);
+
+            const encodedUrl = `${currentSiteUrl}?categories=${joinedCategories==='[]'?'':joinedCategories}&brands=${joinedBrands==='[]'?'':joinedBrands}`;
+            const url = encodeURI(encodedUrl);
+
+            window.location.href = url;
+        }
         function setDarkModePreference() {
             const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const darkMode = localStorage.getItem('dark');
