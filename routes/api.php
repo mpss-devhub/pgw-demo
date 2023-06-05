@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Route::middleware('auth:sanctum')->post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
 
 Route::post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
+Route::get('/payments/{payment}/status', [PaymentController::class,'poolPaymentStatus'])->name('non-web-pay.status');
