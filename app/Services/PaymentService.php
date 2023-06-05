@@ -22,8 +22,8 @@ trait PaymentService{
     function getTokens(array $paymentData){
         $payload = [
             'merchantID' => config('octoverse.merchant_id'),
-            'frontendUrl' => 'https://someurl.com/api',
-            'backendUrl' => 'https://someurl.com/api',
+            'frontendUrl' => config('octoverse.frontend_callback'),
+            'backendUrl' => route('octoverse.backend.callback'),
             'userDefination1'=>'one',
             'userDefination2'=>'two',
             'userDefination3'=>'three'
@@ -35,6 +35,31 @@ trait PaymentService{
         $paymentTokenData = $this->getPaymentFromApi($payData)->json()['data'];
         $paymentToken = $this->decodePaymentToken($paymentTokenData);
         return $paymentToken;
+    }
+
+    function getRedirectUrl($totalAmount,$productIds)
+    {
+        $payment = $this->createPayment($totalAmount,$productIds);
+
+        $payload = [
+            'merchantID' => config('octoverse.merchant_id'),
+            'frontendUrl' => config('octoverse.frontend_callback'),
+            'backendUrl' => route('octoverse.backend.callback'),
+            'userDefination1'=>'one',
+            'userDefination2'=>'two',
+            'userDefination3'=>'three'
+        ];
+        $payload=array_merge($payload,[
+            "invoiceNo"=>$payment->invoice_id,
+            "amount"=>$totalAmount,
+            "currencyCode"=>"MMK"
+        ]);
+
+
+        $payData = $this->getEncodedJWTPayload($payload);
+        $paymentTokenData = $this->getPaymentFromApi($payData)->json()['data'];
+        $paymentToken = $this->decodePaymentToken($paymentTokenData);
+        return $paymentToken->paymenturl;
     }
 
     function getAvailablePayments($tokens,$payment):array{
@@ -126,6 +151,20 @@ trait PaymentService{
 
         return rtrim(base64_encode($encryptedText));
     }
+    function decryptAES($encryptedText, $key)
+    {
+        $cipher = "AES-128-ECB";
+        $options = OPENSSL_RAW_DATA;
+        $decodedText = base64_decode($encryptedText);
+        return openssl_decrypt($decodedText, $cipher, $key, $options);
+    }
 
+
+    function storePaymentStatus($response){
+        $responseData = $this->decryptAES($response->data,config('octoverse.merchant_data_key'));
+//        $invoiceNumber = $responseData["invoiceNo"];
+//        Payment::where('invoice_id',$invoiceNumber)->update(['status'=>$responseData['SUCCESS']]);
+        return $responseData;
+    }
 
 }

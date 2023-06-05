@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MPSSBackendCallback;
 use App\Models\Payment;
 use App\Services\PaymentService;
 use F9Web\ApiResponseHelpers;
@@ -31,6 +32,12 @@ class PaymentController extends Controller
 
        return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts','paymentId'));
     }
+    function redirectCheckout(){
+
+        $cartTotalPrice = Auth::user()->cart->sum('price');
+
+        return redirect()->away($this->getRedirectUrl($cartTotalPrice, Auth::user()->cart->pluck('id')->all()));
+    }
 
     function doWebPay(Request $request){
         $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
@@ -58,5 +65,10 @@ class PaymentController extends Controller
             }
 
             return response()->json(['status' => 'timeout']);
+    }
+
+    function storeGatewayPaymentStatusCallback(MPSSBackendCallback $request)
+    {
+        return response()->json(["message"=>$this->storePaymentStatus($request)]);
     }
 }

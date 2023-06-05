@@ -13,5 +13,9 @@ return [
 
     'merchant_data_key' => env('OCTOVERSE_MERCHANT_DATA_KEY'),
 
-    'invoice_prefix'=>env('OCTOVERSE_INVOICE_PREFIX')
+    'invoice_prefix'=>env('OCTOVERSE_INVOICE_PREFIX'),
+
+    'frontend_callback'=>env('OCTOVERSE_FRONT_END_CALLBACK_URL'),
+
+    'backend_callback'=>env('OCTOVERSE_BACK_END_CALLBACK_URL')
 ];
