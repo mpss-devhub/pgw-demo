@@ -12,6 +12,7 @@
             <show-payment-info-component
                 v-if="selectedPayment && !isLastStep"
                 :selected-payment="selectedPayment"
+                :is-payment-requesting="isPaymentRequesting"
                 @on-continue-clicked="onContinueClicked"
             />
 
@@ -37,6 +38,7 @@ const selectedPaymentCategory = ref(null)
 const isLastStep = ref(false)
 const qrImage = ref("")
 const inAppPayMessage = ref("")
+const isPaymentRequesting = ref(false)
 
 
 const props = defineProps({
@@ -80,6 +82,8 @@ async function onContinueClicked(userFilledData){
     }
 }
 async function submitInAppPayRequest(formData){
+    isPaymentRequesting.value = true
+
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const response = await fetch('/api/non-web-pay', {
         method: 'POST',
@@ -89,10 +93,11 @@ async function submitInAppPayRequest(formData){
         },
         body: JSON.stringify(formData)
     })
+    isPaymentRequesting.value = false;
     return response.json();
 }
 function submitWebPayRequest(userFilledData){
-
+    isPaymentRequesting.value = true
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = '/payment/webpay';
@@ -125,12 +130,14 @@ function submitWebPayRequest(userFilledData){
     }
 
     document.body.appendChild(form);
+    isPaymentRequesting.value = false;
 
     form.submit();
 
 }
 
 async function submitQRPayRequest(formData){
+    isPaymentRequesting.value = true
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const response = await fetch('/api/non-web-pay', {
         method: 'POST',
@@ -140,6 +147,7 @@ async function submitQRPayRequest(formData){
         },
         body: JSON.stringify(formData)
     })
+    isPaymentRequesting.value = false
     return response.json();
 }
 </script>
