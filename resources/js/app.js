@@ -26,13 +26,14 @@ const app = createApp({});
 import ChooseAndPayComponent from './components/ChooseAndPayComponent.vue';
 import ShowQRComponent from './components/ShowQRComponent.vue';
 import ShowWaitingNotiMessage from './components/ShowWaitingNotiMessage.vue';
-
+import PaymentStatusComponent from './components/PaymentStatusComponent.vue';
 import ShowAvailablePaymentsComponent from './components/ShowAvailablePaymentsComponent.vue';
 import ShowPaymentInfoComponent from './components/ShowPaymentInfoComponent.vue';
 
 app.component('choose-and-pay-component', ChooseAndPayComponent);
 app.component('show-qr-component', ShowQRComponent);
 app.component('show-waiting-message-component', ShowWaitingNotiMessage);
+app.component('payment-status-message-component', PaymentStatusComponent);
 
 app.component('show-available-payments-component', ShowAvailablePaymentsComponent);
 app.component('show-payment-info-component', ShowPaymentInfoComponent);

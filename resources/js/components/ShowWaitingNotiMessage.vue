@@ -11,6 +11,9 @@
                         <div class="font-bold">Please wait</div>
                     <span class="p-5 bg-gray-300 rounded-md text-black">{{message}}</span>
                 </div>
+                <payment-status-message-component
+                    :payment-id="paymentId">
+                </payment-status-message-component>
             </div>
         </div>
     </div>
@@ -19,6 +22,10 @@
 
 const props = defineProps({
     message:{
+        type:String,
+        required:true
+    },
+    paymentId:{
         type:String,
         required:true
     }
