@@ -78,6 +78,6 @@ class PaymentController extends Controller
     }
     function storeRedirectCallbackStatus(MPSSBackendCallback $request)
     {
-        return response()->json(["message"=>$this->storeRedirectPaymentStatus($request)]);
+        return response()->json(["message"=>$this->storeRedirectPaymentStatus($request->all())]);
     }
 }

@@ -164,11 +164,14 @@ trait PaymentService{
         return $responseData;
     }
     function storeRedirectPaymentStatus($responseData){
-        $callbackPaymentData = json_decode($this->decryptAES($responseData,config('octoverse.redirect_merchant_data_key')));
-//        $payment = Payment::where('invoice_id',$callbackPaymentData->invoiceNo)->get()->first();
-//        $payment->update([
-//            "status"=>$callbackPaymentData->status
-//        ]);
-        return $callbackPaymentData;
+        $callbackPaymentData = json_decode($this->decryptAES($responseData["data"],config('octoverse.redirect_merchant_data_key')));
+        $payment = Payment::where('invoice_id',$callbackPaymentData->invoiceNo)->get()->first();
+
+        if(!$payment) return null;
+
+        $payment->update([
+            "status"=>$callbackPaymentData->status
+        ]);
+        return $payment;
     }
 }
