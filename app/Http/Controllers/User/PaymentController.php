@@ -52,11 +52,11 @@ class PaymentController extends Controller
     {
         $payment = null;
 
-        if(!isset($request->respCode) || (isset($request->respCode) && $request->respCode!=="0000")){
+        if(!isset($request->respCode) || !isset($request->invoiceNo) || (isset($request->respCode) && $request->respCode!=="0000")){
             return view('payment-status',compact('payment'));
         }
 
-        $payment = $this->storeRedirectPaymentStatus($request->respMsg);
+        $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
 
         return view('payment-status',compact('payment'));
     }
