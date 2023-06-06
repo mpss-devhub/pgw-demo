@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <payment-status-message-component
-                    @on-payment-result-konwn="onPaymentResult"
+                    @on-payment-result-known="onPaymentResult"
                     :payment-id="paymentId">
                 </payment-status-message-component>
             </div>
