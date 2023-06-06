@@ -8,7 +8,7 @@
                         <span class="text-xl font-bold">Payment successful</span>
                     </div>
 
-                    <div class="w-1/3  mt-5">
+                    <div class="mt-5">
                         <div class="flex justify-between">
                             <div>Invoice Number</div>
                             <div>{{payment.invoice_id}}</div>
@@ -32,12 +32,20 @@
                     <span class="text-xl font-bold">Payment fail</span>
                 </div>
 
-                <div class="w-1/3  mt-5 flex justify-center bg-red-200 rounded-md px-3 py-10">
+                <div class="mt-5 flex justify-center bg-red-200 rounded-md px-3 py-10">
                     <span>
                         Something went wrong with payment transaction.
                     </span>
                 </div>
             </div>
+        </div>
+        <div v-if="isWaitingDone" class="flex justify-end gap-2">
+            <button  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Continue Shopping
+            </button>
+            <button v-if="!isPaymentSuccess"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Retry
+            </button>
         </div>
     </div>
 </template>
