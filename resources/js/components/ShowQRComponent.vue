@@ -22,6 +22,8 @@
     </div>
 </template>
 <script setup>
+import {ref} from "vue";
+
 const isPaymentResultKnown = ref(false)
 
 const props = defineProps({
