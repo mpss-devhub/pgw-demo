@@ -66,12 +66,23 @@
                         <p>${{$total}}</p>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                    <div class="mt-6">
-                        <a href="{{route('payment.direct-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Direct Checkout</a>
-                    </div>
-                    <div class="mt-6">
-                        <a href="{{route('payment.redirect-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Redirect Checkout</a>
-                    </div>
+
+                    @if(count($cartProducts)>0)
+                        <div class="mt-6">
+                            <a  href="{{route('payment.direct-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Direct Checkout</a>
+                        </div>
+                        <div class="mt-6">
+                            <a href="{{route('payment.redirect-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Redirect Checkout</a>
+                        </div>
+                    @else
+                        <div class="mt-6">
+                            <button disabled  class="cursor-not-allowed w-full flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700">Direct Checkout</button>
+                        </div>
+                        <div class="mt-6">
+                            <button disabled class=" cursor-not-allowed w-full flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700">Redirect Checkout</button>
+                        </div>
+                    @endif
+
                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                             or
