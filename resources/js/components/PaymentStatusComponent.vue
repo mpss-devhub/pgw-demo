@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-8 flex gap-8 flex-col justify-center items-center" v-if="isPaymentSuccess && isWaitingDone">
+        <div class="p-2 flex gap-8 flex-col justify-center items-center" v-if="isPaymentSuccess && isWaitingDone">
             <div class="font-bold text-green-500">
                 <div class="flex flex-col gap-2 w-full items-center">
                     <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="p-8 flex gap-8 flex-col justify-center items-center" v-if="isWaitingDone && isPaymentSuccess!==null && !isPaymentSuccess">
+        <div class="p-2 flex gap-8 flex-col justify-center items-center" v-if="isWaitingDone && isPaymentSuccess!==null && !isPaymentSuccess">
             <div class="flex flex-col gap-2 w-full items-center">
                 <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
                     <span class="flex justify-center items-center w-10 h-10 bg-red-800 rounded-full text-white"><i class="fa fa-exclamation-circle fa-lg"></i></span>
@@ -39,13 +39,13 @@
                 </div>
             </div>
         </div>
-        <div v-if="isWaitingDone" class="flex justify-end gap-2">
-            <button  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <div v-if="isWaitingDone" class="flex justify-end gap-2 p-2">
+            <a href="/home"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Continue Shopping
-            </button>
-            <button v-if="!isPaymentSuccess"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            </a>
+            <a href="/payment/direct-checkout"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Retry
-            </button>
+            </a>
         </div>
     </div>
 </template>
