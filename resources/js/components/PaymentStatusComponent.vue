@@ -3,7 +3,7 @@
         <div class="p-8 flex gap-8 flex-col justify-center items-center" v-if="isPaymentSuccess && isWaitingDone">
             <div class="font-bold text-green-500">
                 <div class="flex flex-col gap-2 w-full items-center">
-                    <div class="w-2/3 flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
+                    <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
                         <span class="flex justify-center items-center w-10 h-10 bg-green-800 rounded-full text-white"><i class="fa fa-check fa-lg"></i></span>
                         <span class="text-xl font-bold">Payment successful</span>
                     </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="p-8 flex gap-8 flex-col justify-center items-center" v-if="isWaitingDone && isPaymentSuccess!==null && !isPaymentSuccess">
             <div class="flex flex-col gap-2 w-full items-center">
-                <div class="w-2/3 flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
+                <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
                     <span class="flex justify-center items-center w-10 h-10 bg-red-800 rounded-full text-white"><i class="fa fa-exclamation-circle fa-lg"></i></span>
                     <span class="text-xl font-bold">Payment fail</span>
                 </div>
