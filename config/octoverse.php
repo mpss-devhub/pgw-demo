@@ -17,7 +17,7 @@ return [
 
     'redirect_merchant_secret_key' => env('OCTOVERSE_REDIRECT_MERCHANT_SECRET_KEY'),
 
-    'redirect_merchant_data_key' => env('OCTOVERSE_RDIRECT_MERCHANT_DATA_KEY'),
+    'redirect_merchant_data_key' => env('OCTOVERSE_REDIRECT_MERCHANT_DATA_KEY'),
 
     'invoice_prefix'=>env('OCTOVERSE_INVOICE_PREFIX')
 ];
