@@ -108,7 +108,8 @@ trait PaymentService{
         $payment=Payment::create([
             "amount"=>$totalAmount,
             "invoice_id"=>$this->getUniqueInvoiceId(),
-            "currency_code"=>"MMK"
+            "currency_code"=>"MMK",
+            "user_id"=>auth()->user()->id
         ]);
         $payment->products()->attach($productIds);
 
@@ -168,7 +169,7 @@ trait PaymentService{
         ]);
 
         if($payment->status==="SUCCESS"){
-            auth()->user()->cart()->detach();
+            $payment->user()->cart()->detach();
         }
         return $payment;
     }
@@ -183,9 +184,9 @@ trait PaymentService{
         ]);
 
         if($payment->status==="SUCCESS"){
-            auth()->user()->cart()->detach();
+            $payment->user()->cart()->detach();
         }
-        
+
         return $payment;
     }
 }

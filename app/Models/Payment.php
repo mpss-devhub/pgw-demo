@@ -13,10 +13,15 @@ class Payment extends Model
         'invoice_id',
         'status',
         'amount',
-        'currency_code'
+        'currency_code',
+        'user_id'
     ];
 
     public function products(){
         return $this->belongsToMany(Product::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
