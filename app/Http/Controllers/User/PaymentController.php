@@ -62,22 +62,14 @@ class PaymentController extends Controller
     }
 
     function poolPaymentStatus(Payment $payment){
-//            $timeout = 50; //
-//            $endTime = time() + $timeout;
-//
-//
-//            while (time() < $endTime) {
-//                $payment = Payment::find($payment->id);
-//
-//
-//                if ($payment->status === "SUCCESS") {
-//                    return response()->json(['status' => 'success']);
-//                }
-//
-//                usleep(500000);
-//            }
+             $payment = Payment::find($payment->id);
 
-            return response()->json(['status' => 'timeout']);
+
+             if ($payment->status === "SUCCESS") {
+                    return response()->json(['status' => 'success']);
+             }
+
+            return response()->json(['status' => 'waiting']);
     }
 
     function storeDirectCallbackStatus(MPSSBackendCallback $request)
