@@ -49,20 +49,20 @@ class PaymentController extends Controller
     }
 
     function poolPaymentStatus(Payment $payment){
-            $timeout = 50; //
-            $endTime = time() + $timeout;
-
-
-            while (time() < $endTime) {
-                $payment = Payment::find($payment->id);
-
-
-                if ($payment->status === "SUCCESS") {
-                    return response()->json(['status' => 'success']);
-                }
-
-                usleep(500000);
-            }
+//            $timeout = 50; //
+//            $endTime = time() + $timeout;
+//
+//
+//            while (time() < $endTime) {
+//                $payment = Payment::find($payment->id);
+//
+//
+//                if ($payment->status === "SUCCESS") {
+//                    return response()->json(['status' => 'success']);
+//                }
+//
+//                usleep(500000);
+//            }
 
             return response()->json(['status' => 'timeout']);
     }

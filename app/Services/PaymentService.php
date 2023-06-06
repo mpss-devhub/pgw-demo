@@ -14,15 +14,13 @@ trait PaymentService{
         $resourceUrl = 'auth/token';
         $url = $baseUrl.$resourceUrl;
 
-        $response = Http::post($url, ["payData"=>$payData]);
-
-        return $response;
+        return Http::post($url, ["payData"=>$payData]);
     }
 
     function getTokens(array $paymentData){
         $payload = [
-            'merchantID' => config('octoverse.merchant_id'),
-            'frontendUrl' => config('octoverse.frontend_callback'),
+            'merchantID' => config('octoverse.direct_merchant_id'),
+            'frontendUrl' => "https://frontend.call",
             'backendUrl' => route('octoverse.backend.callback'),
             'userDefination1'=>'one',
             'userDefination2'=>'two',
@@ -31,9 +29,9 @@ trait PaymentService{
         $payload=array_merge($payload,$paymentData);
 
 
-        $payData = $this->getEncodedJWTPayload($payload);
+        $payData = $this->getEncodedJWTPayload($payload,config('octoverse.direct_merchant_secret_key'));
         $paymentTokenData = $this->getPaymentFromApi($payData)->json()['data'];
-        $paymentToken = $this->decodePaymentToken($paymentTokenData);
+        $paymentToken = $this->decodePaymentToken($paymentTokenData,config('octoverse.direct_merchant_secret_key'));
         return $paymentToken;
     }
 
@@ -42,8 +40,8 @@ trait PaymentService{
         $payment = $this->createPayment($totalAmount,$productIds);
 
         $payload = [
-            'merchantID' => config('octoverse.merchant_id'),
-            'frontendUrl' => config('octoverse.frontend_callback'),
+            'merchantID' => config('octoverse.redirect_merchant_id'),
+            'frontendUrl' =>"https://call.back",
             'backendUrl' => route('octoverse.backend.callback'),
             'userDefination1'=>'one',
             'userDefination2'=>'two',
@@ -55,10 +53,9 @@ trait PaymentService{
             "currencyCode"=>"MMK"
         ]);
 
-
-        $payData = $this->getEncodedJWTPayload($payload);
+        $payData = $this->getEncodedJWTPayload($payload,config('octoverse.redirect_merchant_secret_key'));
         $paymentTokenData = $this->getPaymentFromApi($payData)->json()['data'];
-        $paymentToken = $this->decodePaymentToken($paymentTokenData);
+        $paymentToken = $this->decodePaymentToken($paymentTokenData,config('octoverse.redirect_merchant_secret_key'));
         return $paymentToken->paymenturl;
     }
 
@@ -76,15 +73,12 @@ trait PaymentService{
 
         return $response->json()['data']['paymentList'];
     }
-    function getEncodedJWTPayload($payload):string{
-
-
-
-        return JWT::encode($payload, config('octoverse.merchant_secret_key'),'HS256');
+    function getEncodedJWTPayload($payload,$secret):string{
+        return JWT::encode($payload, $secret,'HS256');
     }
 
-    public function decodePaymentToken($encodedJWT){
-      return   JWT::decode($encodedJWT, new Key(config('octoverse.merchant_secret_key'), 'HS256'));
+    public function decodePaymentToken($encodedJWT,$secret){
+      return   JWT::decode($encodedJWT, new Key($secret, 'HS256'));
     }
 
     public function getUniqueInvoiceId(){
@@ -129,7 +123,10 @@ trait PaymentService{
         $payment = Payment::find($paymentId);
 
 
-        $jwtPayload = $this->encryptAES(json_encode($attributes),config('octoverse.merchant_data_key'));
+        $jwtPayload = $this->encryptAES(
+            json_encode($attributes),
+            config('octoverse.direct_merchant_data_key')
+        );
 
 
         $response = Http::withHeaders([
@@ -161,7 +158,7 @@ trait PaymentService{
 
 
     function storePaymentStatus($response){
-        $responseData = $this->decryptAES($response->data,config('octoverse.merchant_data_key'));
+        $responseData = $this->decryptAES($response->data,config('octoverse.redirect_merchant_data_key'));
 //        $invoiceNumber = $responseData["invoiceNo"];
 //        Payment::where('invoice_id',$invoiceNumber)->update(['status'=>$responseData['SUCCESS']]);
         return $responseData;

@@ -7,15 +7,17 @@ return [
 
     'base_url' => env('OCTOVERSE_BASE_URL'),
 
-    'merchant_id' => env('OCTOVERSE_MERCHANT_ID'),
+    'direct_merchant_id' => env('OCTOVERSE_DIRECT_MERCHANT_ID'),
 
-    'merchant_secret_key' => env('OCTOVERSE_MERCHANT_SECRET_KEY'),
+    'direct_merchant_secret_key' => env('OCTOVERSE_DIRECT_MERCHANT_SECRET_KEY'),
 
-    'merchant_data_key' => env('OCTOVERSE_MERCHANT_DATA_KEY'),
+    'direct_merchant_data_key' => env('OCTOVERSE_DIRECT_MERCHANT_DATA_KEY'),
 
-    'invoice_prefix'=>env('OCTOVERSE_INVOICE_PREFIX'),
+    'redirect_merchant_id' => env('OCTOVERSE_REDIRECT_MERCHANT_ID'),
 
-    'frontend_callback'=>env('OCTOVERSE_FRONT_END_CALLBACK_URL'),
+    'redirect_merchant_secret_key' => env('OCTOVERSE_REDIRECT_MERCHANT_SECRET_KEY'),
 
-    'backend_callback'=>env('OCTOVERSE_BACK_END_CALLBACK_URL')
+    'redirect_merchant_data_key' => env('OCTOVERSE_RDIRECT_MERCHANT_DATA_KEY'),
+
+    'invoice_prefix'=>env('OCTOVERSE_INVOICE_PREFIX')
 ];
