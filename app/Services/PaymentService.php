@@ -20,7 +20,7 @@ trait PaymentService{
     function getTokens(array $paymentData){
         $payload = [
             'merchantID' => config('octoverse.direct_merchant_id'),
-            'frontendUrl' => "https://frontend.call",
+            'frontendUrl' =>route('payment.showstatus'),
             'backendUrl' => route('octoverse.backend.direct-callback'),
             'userDefination1'=>'one',
             'userDefination2'=>'two',
