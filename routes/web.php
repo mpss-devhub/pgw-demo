@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/payment/redirect-checkout',[PaymentController::class,'redirectCheckout'])->name('payment.redirect-checkout');
 
     Route::post('/payment/webpay',[PaymentController::class,'doWebPay'])->name('payment.webpay');
+    Route::get('/payment-status',[PaymentController::class,'showPaymentStatus'])->name('payment.showstatus');
 
 });
 

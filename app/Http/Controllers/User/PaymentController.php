@@ -48,6 +48,19 @@ class PaymentController extends Controller
         return $this->respondWithSuccess(["type"=>"QR","data"=> $response["data"]["qrImg"] ?? $response["data"]]);
     }
 
+    function showPaymentStatus(Request $request)
+    {
+        $payment = null;
+
+        if(!isset($request->respCode) || (isset($request->respCode) && $request->respCode!=="0000")){
+            return view('payment-status',compact('payment'));
+        }
+
+        $payment = $this->storeRedirectPaymentStatus($request->respMsg);
+
+        return view('payment-status',compact('payment'));
+    }
+
     function poolPaymentStatus(Payment $payment){
 //            $timeout = 50; //
 //            $endTime = time() + $timeout;
