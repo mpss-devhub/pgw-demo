@@ -3,6 +3,9 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    optimizeDeps: {
+        include: ['@fortawesome/fontawesome-free'],
+    },
     plugins: [
         laravel({
             input: [
@@ -23,6 +26,13 @@ export default defineConfig({
     resolve: {
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import '@fortawesome/fontawesome-free/css/all.css';`,
+            },
         },
     },
 });
