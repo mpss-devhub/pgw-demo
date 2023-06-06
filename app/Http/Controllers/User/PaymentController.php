@@ -67,8 +67,12 @@ class PaymentController extends Controller
             return response()->json(['status' => 'timeout']);
     }
 
-    function storeGatewayPaymentStatusCallback(MPSSBackendCallback $request)
+    function storeDirectCallbackStatus(MPSSBackendCallback $request)
     {
-        return response()->json(["message"=>$this->storePaymentStatus($request)]);
+        return response()->json(["message"=>$this->storeDirectPaymentStatus($request)]);
+    }
+    function storeRedirectCallbackStatus(MPSSBackendCallback $request)
+    {
+        return response()->json(["message"=>$this->storeRedirectPaymentStatus($request)]);
     }
 }

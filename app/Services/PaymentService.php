@@ -21,7 +21,7 @@ trait PaymentService{
         $payload = [
             'merchantID' => config('octoverse.direct_merchant_id'),
             'frontendUrl' => "https://frontend.call",
-            'backendUrl' => route('octoverse.backend.callback'),
+            'backendUrl' => route('octoverse.backend.direct-callback'),
             'userDefination1'=>'one',
             'userDefination2'=>'two',
             'userDefination3'=>'three'
@@ -42,7 +42,7 @@ trait PaymentService{
         $payload = [
             'merchantID' => config('octoverse.redirect_merchant_id'),
             'frontendUrl' =>"https://call.back",
-            'backendUrl' => route('octoverse.backend.callback'),
+            'backendUrl' => route('octoverse.backend.redirect-callback'),
             'userDefination1'=>'one',
             'userDefination2'=>'two',
             'userDefination3'=>'three'
@@ -157,11 +157,16 @@ trait PaymentService{
     }
 
 
-    function storePaymentStatus($response){
+    function storeDirectPaymentStatus($response){
+        $responseData = $this->decryptAES($response->data,config('octoverse.direct_merchant_data_key'));
+//        $invoiceNumber = $responseData["invoiceNo"];
+//        Payment::where('invoice_id',$invoiceNumber)->update(['status'=>$responseData['SUCCESS']]);
+        return $responseData;
+    }
+    function storeRedirectPaymentStatus($response){
         $responseData = $this->decryptAES($response->data,config('octoverse.redirect_merchant_data_key'));
 //        $invoiceNumber = $responseData["invoiceNo"];
 //        Payment::where('invoice_id',$invoiceNumber)->update(['status'=>$responseData['SUCCESS']]);
         return $responseData;
     }
-
 }
