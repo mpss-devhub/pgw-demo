@@ -65,7 +65,10 @@ class PaymentController extends Controller
              $payment = Payment::find($payment->id);
 
              if ($payment->status === "SUCCESS") {
-                    return response()->json(['status' => 'success']);
+                    return response()->json([
+                        'status' => 'success',
+                        'data'=>$payment
+                    ]);
              }
             if ($payment->status === "FAIL") {
                 return response()->json(['status' => 'failed']);
