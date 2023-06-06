@@ -166,6 +166,10 @@ trait PaymentService{
         $payment->update([
             "status"=>$callbackPaymentData->status
         ]);
+
+        if($payment->status==="SUCCESS"){
+            auth()->user()->cart()->detach();
+        }
         return $payment;
     }
     function storeRedirectPaymentStatus($responseData){
@@ -177,6 +181,11 @@ trait PaymentService{
         $payment->update([
             "status"=>$callbackPaymentData->status
         ]);
+
+        if($payment->status==="SUCCESS"){
+            auth()->user()->cart()->detach();
+        }
+        
         return $payment;
     }
 }
