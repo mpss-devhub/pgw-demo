@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex  justify-center items-center w-full h-full mt-20">
+    <div class="flex flex-col  justify-center items-center w-full h-full mt-20">
         @if(isset($payment))
             <div class="flex flex-col gap-2 w-full items-center">
                 <div class="w-2/3 flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
@@ -36,5 +36,8 @@
                 </div>
             </div>
         @endif
+        <x-primary-button class="mt-10">
+            <a  class="px-10" href="{{route('home')}}">Continue Shopping</a>
+        </x-primary-button>
     </div>
 </x-app-layout>

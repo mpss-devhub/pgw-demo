@@ -55,7 +55,7 @@
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
                 class="absolute inset-x-0 w-full px-6 py-4  bg-gray-600 dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                 @if (Auth::user())
-                    @if(!Route::is('payment.direct-checkout'))
+                    @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
                         <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="mx-1 relative">
                             <i class="fa fa-cart-shopping text-white"></i>
                             <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
