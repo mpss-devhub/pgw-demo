@@ -169,7 +169,7 @@ trait PaymentService{
         ]);
 
         if($payment->status==="SUCCESS"){
-            $payment->user()->cart()->detach();
+            $payment->user->cart()->detach();
         }
         return $payment;
     }
@@ -184,7 +184,7 @@ trait PaymentService{
         ]);
 
         if($payment->status==="SUCCESS"){
-            $payment->user()->cart()->detach();
+            $payment->user->cart()->detach();
         }
 
         return $payment;
