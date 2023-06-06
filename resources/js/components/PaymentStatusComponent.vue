@@ -19,6 +19,13 @@ const props = defineProps({
     }
 })
 const isPaymentSuccess = ref(null)
+
+const pollingInterval = 1000; // 1 second
+const totalDuration = 3 * 60 * 1000; // 3 minutes in milliseconds
+let startTime = Date.now();
+const isWaitingDone = ref(false)
+
+
 onMounted(async () => {
     await pollIfPaymentSuccess()
 })
@@ -33,12 +40,21 @@ async  function pollIfPaymentSuccess(){
     })
 
     const responseData = await response.json();
-    console.log(responseData)
+
+    const elapsedTime = Date.now() - startTime;
+    if (elapsedTime < totalDuration && !isWaitingDone.value) {
+        // Continue polling after a certain delay
+        setTimeout(async () => await pollIfPaymentSuccess(), pollingInterval);
+    } else {
+        console.log('Polling completed.');
+    }
 
     if(responseData.status==="success"){
         isPaymentSuccess.value = true
-    }else{
+        isWaitingDone.value = true
+    }else if(responseData.status==="failed"){
         isPaymentSuccess.value = false
+        isWaitingDone.value = true
     }
 }
 </script>

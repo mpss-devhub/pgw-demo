@@ -61,13 +61,15 @@ class PaymentController extends Controller
         return view('payment-status',compact('payment'));
     }
 
-    function poolPaymentStatus(Payment $payment){
+    function checkPaymentStatus(Payment $payment){
              $payment = Payment::find($payment->id);
-
 
              if ($payment->status === "SUCCESS") {
                     return response()->json(['status' => 'success']);
              }
+            if ($payment->status === "FAIL") {
+                return response()->json(['status' => 'failed']);
+            }
 
             return response()->json(['status' => 'waiting']);
     }
