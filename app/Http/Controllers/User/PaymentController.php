@@ -30,7 +30,14 @@ class PaymentController extends Controller
 
 
 
-       return view('checkout',compact('paymentCategoriesWithPayments','cartTotalPrice','cartProducts','paymentId'));
+       return view(
+           'checkout',
+           compact(
+               'paymentCategoriesWithPayments',
+               'cartTotalPrice',
+               'cartProducts',
+               'paymentId'
+           ));
     }
     function redirectCheckout(){
 
