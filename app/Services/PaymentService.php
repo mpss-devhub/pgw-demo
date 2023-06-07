@@ -98,7 +98,14 @@ trait PaymentService{
             $payment->access_token = $tokens->accessToken;
             $payment->save();
 
-            return $this->getAvailablePayments($tokens,$payment);
+            $paymentAndAvailableCategories =new  \stdClass();
+            $paymentAndAvailableCategories->payment = $payment;
+            $paymentAndAvailableCategories->categories = $this->getAvailablePayments($tokens,$payment);
+
+            if(!$paymentAndAvailableCategories->categories){
+                return false;
+            }
+            return $paymentAndAvailableCategories;
         }catch (\Exception $e){
             return false;
         }

@@ -4,13 +4,13 @@
             <payment-steps-component :current-step="currentStep"></payment-steps-component>
 
             <show-available-payments-component
-                v-if="currentStep===1 && !selectedPayment"
+                v-if="currentStep===1 && !selectedPayment && paymentCategoriesWithPayments && paymentId"
                 :payment-categories-with-payments="paymentCategoriesWithPayments"
                 @on-payment-chosen="onPaymentClicked"
             ></show-available-payments-component>
 
             <show-payment-info-component
-                v-if="currentStep===2 && selectedPayment"
+                v-if="currentStep===2 && selectedPayment  && paymentCategoriesWithPayments && paymentId"
                 :payment-id="paymentId"
                 :selected-payment="selectedPayment"
                 :selected-payment-category="selectedPaymentCategory"
@@ -19,14 +19,14 @@
             />
 
             <show-qr-component
-                v-if="currentStep===3 && qrImage"
+                v-if="currentStep===3 && qrImage  && paymentCategoriesWithPayments && paymentId"
                 :qr-image-url="qrImage"
                 :payment-id="paymentId"
             >
             </show-qr-component>
 
             <show-waiting-message-component
-                v-if="currentStep===3 && inAppPayMessage"
+                v-if="currentStep===3 && inAppPayMessage  && paymentCategoriesWithPayments && paymentId"
                 :payment-id="paymentId"
                 :message="inAppPayMessage"
             >
@@ -42,7 +42,7 @@
     </div>
 </template>
 <script setup>
-import {ref} from "vue"
+import {onMounted, ref} from "vue"
 
 const currentStep  =  ref(1)
 const selectedPayment = ref(null);
@@ -63,11 +63,18 @@ const inAppPayMessage = ref("")
 const props = defineProps({
     paymentCategoriesWithPayments:{
         type:Array,
-        required:true
+        required:false,
+        default:null
     },
     paymentId:{
         type:String,
-        required:true
+        required:false,
+        default:null
+    },
+    successfulPayment:{
+        type:Object,
+        required:false,
+        default:null
     }
 })
 
@@ -122,5 +129,12 @@ async  function pollIfPaymentSuccess(){
         currentStep.value = 4
     }
 }
+
+onMounted(()=>{
+    if(!props.paymentId || !props.paymentCategoriesWithPayments){
+        currentStep.value = 4
+        successfulPayment.value = props.successfulPayment
+    }
+})
 
 </script>

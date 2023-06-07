@@ -7,11 +7,19 @@
                :cart-total-price="$cartTotalPrice"
            >
            </x-checkout-cart>
-           <choose-and-pay-component
-               class="w-1/2"
-               :payment-id="{{$paymentId}}"
-               :payment-categories-with-payments="{{json_encode($paymentCategoriesWithPayments)}}"
-           ></choose-and-pay-component>
+           @if(isset($payment))
+               <choose-and-pay-component
+                   class="w-1/2"
+                   :successful-payment="{{$payment}}"
+               ></choose-and-pay-component>
+           @else
+               <choose-and-pay-component
+                   class="w-1/2"
+                   :payment-id="{{$paymentId}}"
+                   :payment-categories-with-payments="{{json_encode($paymentCategoriesWithPayments)}}"
+               ></choose-and-pay-component>
+           @endif
+
        </div>
 
    </div>

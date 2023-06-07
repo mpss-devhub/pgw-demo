@@ -21,13 +21,13 @@ class PaymentController extends Controller
         $cartTotalPrice = Auth::user()->cart->sum('price');
 
 
-       $paymentCategoriesWithPayments = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
+       $paymentAndCategories = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
 
-       if(!$paymentCategoriesWithPayments){
+       if(!$paymentAndCategories){
            return redirect()->back();
        }
-       $paymentId=auth()->user()->payments()->latest()->first()->id;
-
+       $paymentId= $paymentAndCategories->payment->id;
+       $paymentCategoriesWithPayments = $paymentAndCategories->categories;
 
        return view(
            'checkout',
@@ -69,13 +69,26 @@ class PaymentController extends Controller
     {
         $payment = null;
 
+        $cartProducts = Auth::user()->cart->groupBy('id');
+
+        $cartTotalPrice = Auth::user()->cart->sum('price');
+
         if(!isset($request->respCode) || !isset($request->invoiceNo) || (isset($request->respCode) && $request->respCode!=="0000")){
             return view('payment-status',compact('payment'));
         }
 
         $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
 
-        return view('payment-status',compact('payment'));
+        $paymentCategoriesWithPayments = null;
+
+        return view(
+            'checkout',
+            compact(
+                'paymentCategoriesWithPayments',
+                'cartTotalPrice',
+                'cartProducts',
+                'payment'
+            ));
     }
 
     function checkPaymentStatus(Payment $payment){
