@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-2 flex gap-8 flex-col justify-center items-center" v-if="successfulPayment">
+        <div class="p-2 flex gap-8  flex-col justify-center items-center" v-if="successfulPayment">
             <div class="font-bold text-green-500">
                 <div class="flex flex-col gap-2 w-full items-center">
                     <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
@@ -8,7 +8,7 @@
                         <span class="text-xl font-bold">Payment successful</span>
                     </div>
 
-                    <div class="mt-5 text-sm">
+                    <div class="mt-5 text-sm bg-red-200 w-full">
                         <div class="flex justify-between">
                             <div>Invoice Number</div>
                             <div>{{successfulPayment.invoice_id}}</div>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end gap-2 p-2 mt-5">
+        <div class="flex justify-center gap-2 p-2 mt-8">
             <a href="/home"  class="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 cursor-pointer">
                 Continue Shopping
             </a>
