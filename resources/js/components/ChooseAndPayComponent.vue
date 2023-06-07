@@ -14,6 +14,7 @@
                 :payment-id="paymentId"
                 :selected-payment="selectedPayment"
                 :selected-payment-category="selectedPaymentCategory"
+                @on-back-clicked="onInfoFormBackClicked"
                 @on-pay-request-done="onPayRequestDone"
             />
 
@@ -27,7 +28,8 @@
             <show-waiting-message-component
                 v-if="currentStep===3 && inAppPayMessage"
                 :payment-id="paymentId"
-                :message="inAppPayMessage">
+                :message="inAppPayMessage"
+            >
             </show-waiting-message-component>
 
             <payment-status-message-component
@@ -74,8 +76,11 @@ function onPaymentClicked(payment,category){
     selectedPayment.value = payment
     selectedPaymentCategory.value = category
 }
-
-
+function onInfoFormBackClicked(){
+    currentStep.value = 1;
+    selectedPayment.value = null;
+    selectedPaymentCategory.value = null;
+}
 async function onPayRequestDone({type,data}){
     currentStep.value = 3
     if(type==="QR"){

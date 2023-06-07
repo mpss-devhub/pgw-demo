@@ -1,27 +1,30 @@
 <template>
-    <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md">
-
-        <div class="p-2 px-5">
-            <form>
-                <div class="p-2false space-y-6">
-                    <div class="flex flex-col gap-2">
-                        <div class="px-2 py-1" v-if="errorMessage">
-                            {{errorMessage}}
-                        </div>
-                        <template v-for="(value, key) in selectedPayment.input">
-                            <div class="mb-4" v-if="value.required==='true'">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">{{value.label}}</label>
-                                <input v-model="inputModels[`${key}`]" :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  :type="value.type" :placeholder="`Enter ${value.label}`">
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </form>
+    <div>
+        <div class="px-6 py-1 text-red-500 rounded-md border border-red-300" v-if="errorMessage">
+            <i class="fa fa-circle-exclamation"></i> {{errorMessage}}
         </div>
-        <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-            <button @click="onContinueClicked" :class="{'bg-blue-500 cursor-not-allowed':isPaymentRequesting}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                {{isPaymentRequesting?"Processing..":"Continue"}}
-            </button>
+        <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md">
+            <div class="p-2 px-5">
+                <form>
+                    <div class="p-2false space-y-6">
+                        <div class="flex flex-col gap-2">
+                            <template v-for="(value, key) in selectedPayment.input">
+                                <div class="mb-4" v-if="value.required==='true'">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2">{{value.label}}</label>
+                                    <input v-model="inputModels[`${key}`]" :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  :type="value.type" :placeholder="`Enter ${value.label}`">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button  @click="onBackClick" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+
+                <button @click="onContinueClicked" :class="{'bg-blue-500 cursor-not-allowed':isPaymentRequesting}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    {{isPaymentRequesting?"Processing..":"Continue"}}
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -49,7 +52,7 @@ const props = defineProps({
 })
 const isPaymentRequesting = ref(false)
 const inputModels = ref({})
-const emit = defineEmits(["onPayRequestDone"])
+const emit = defineEmits(["onPayRequestDone","onBackClicked"])
 const type = ref(null)
 const responseData = ref(null)
 const errorMessage = ref(null)
@@ -157,6 +160,10 @@ async function submitQRPayRequest(formData){
     })
     isPaymentRequesting.value = false
     return response.json();
+}
+
+function onBackClick(){
+    emit("onBackClicked")
 }
 
 </script>
