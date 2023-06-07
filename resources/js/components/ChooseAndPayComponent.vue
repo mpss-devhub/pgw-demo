@@ -42,7 +42,7 @@
 <script setup>
 import {ref} from "vue"
 
-const currentStep  =  ref(4)
+const currentStep  =  ref(1)
 const selectedPayment = ref(null);
 const selectedPaymentCategory = ref(null)
 
