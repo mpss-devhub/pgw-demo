@@ -30,6 +30,11 @@
                 :message="inAppPayMessage">
             </show-waiting-message-component>
 
+            <payment-status-message-component
+                v-if="currentStep===3"
+                @on-payment-result-known="onPaymentResult"
+                :payment-id="paymentId">
+            </payment-status-message-component>
 
         </div>
     </div>
@@ -43,10 +48,6 @@ const selectedPaymentCategory = ref(null)
 
 const qrImage = ref("")
 const inAppPayMessage = ref("")
-
-
-const isPaymentRequesting = ref(false)
-
 
 const props = defineProps({
     paymentCategoriesWithPayments:{
@@ -75,7 +76,9 @@ async function onPayRequestDone({type,data}){
         inAppPayMessage.value = data
     }
 }
-
+function onPaymentResult(isSuccess){
+    currentStep.value = 4
+}
 
 
 </script>

@@ -96,11 +96,11 @@ async  function pollIfPaymentSuccess(){
         isPaymentSuccess.value = true
         isWaitingDone.value = true
         payment.value = responseData.data
-        emit('onPaymentResultKnown')
+        emit('onPaymentResultKnown',isPaymentSuccess.value)
     }else if(responseData.status==="failed"){
         isPaymentSuccess.value = false
         isWaitingDone.value = true
-        emit('onPaymentResultKnown')
+        emit('onPaymentResultKnown',isPaymentSuccess.value)
     }
 }
 </script>
