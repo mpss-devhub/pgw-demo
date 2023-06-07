@@ -8,16 +8,16 @@
                         <span class="text-xl font-bold">Payment successful</span>
                     </div>
 
-                    <div class="mt-5 text-sm bg-red-200 w-full">
-                        <div class="flex justify-between">
+                    <div class="mt-5 text-sm  w-full">
+                        <div class="flex justify-between gap-10">
                             <div>Invoice Number</div>
                             <div>{{successfulPayment.invoice_id}}</div>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between gap-10">
                             <div>Amount</div>
                             <div>{{successfulPayment.amount}}</div>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between gap-10">
                             <div>Paid at</div>
                             <div>{{successfulPayment.created_at}}</div>
                         </div>
