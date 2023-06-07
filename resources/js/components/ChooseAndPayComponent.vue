@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <p class="text-lg font-bold text-gray-800 mt-2 mb-3">Fill in payment information</p>
+            <payment-steps-component :current-step="currentStep"></payment-steps-component>
 
             <show-available-payments-component
                 v-if="!selectedPayment"
@@ -10,21 +10,22 @@
             ></show-available-payments-component>
 
             <show-payment-info-component
-                v-if="selectedPayment && !isLastStep"
+                v-if="currentStep===2 && selectedPayment"
+                :payment-id="paymentId"
                 :selected-payment="selectedPayment"
-                :is-payment-requesting="isPaymentRequesting"
-                @on-continue-clicked="onContinueClicked"
+                :selected-payment-category="selectedPaymentCategory"
+                @on-pay-request-done="onPayRequestDone"
             />
 
-            <show-q-r-component
-                v-if="isLastStep && qrImage"
+            <show-qr-component
+                v-if="currentStep===3 && qrImage"
                 :qr-image-url="qrImage"
                 :payment-id="paymentId"
             >
-            </show-q-r-component>
+            </show-qr-component>
 
             <show-waiting-message-component
-                v-if="isLastStep && inAppPayMessage"
+                v-if="currentStep===3 && inAppPayMessage"
                 :payment-id="paymentId"
                 :message="inAppPayMessage">
             </show-waiting-message-component>
@@ -34,15 +35,16 @@
     </div>
 </template>
 <script setup>
-import {ref} from "vue";
-import ShowQRComponent from "./ShowQRComponent.vue";
+import {ref} from "vue"
 
+const currentStep  =  ref(1)
 const selectedPayment = ref(null);
 const selectedPaymentCategory = ref(null)
 
-const isLastStep = ref(false)
 const qrImage = ref("")
 const inAppPayMessage = ref("")
+
+
 const isPaymentRequesting = ref(false)
 
 
@@ -58,101 +60,22 @@ const props = defineProps({
 })
 
 function onPaymentClicked(payment,category){
+    currentStep.value = 2
     selectedPayment.value = payment
     selectedPaymentCategory.value = category
 }
 
 
-async function onContinueClicked(userFilledData){
-    const credentialData = {
-        paymentId:props.paymentId,
-        paymentCode:selectedPayment.value.paymentCode
+async function onPayRequestDone({type,data}){
+    currentStep.value = 3
+    if(type==="QR"){
+        qrImage.value = data
     }
-    const formData = { ...userFilledData,...credentialData }
-
-    if(selectedPaymentCategory.value.paymentType==="Web Pay" || selectedPaymentCategory.value.paymentType==="Local Card" ){
-        submitWebPayRequest(userFilledData)
-        isLastStep.value = true
-        return;
-    }else if(selectedPaymentCategory.value.paymentType==="QR Scan"){
-        const response = await submitQRPayRequest(formData)
-        qrImage.value = response.data;
-        isLastStep.value = true
-        return;
-    }else{
-        const response = await submitInAppPayRequest(formData)
-        inAppPayMessage.value = response.data;
-        isLastStep.value = true
-        return;
+    if(type==="NOTI"){
+        inAppPayMessage.value = data
     }
 }
-async function submitInAppPayRequest(formData){
-    isPaymentRequesting.value = true
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const response = await fetch('/api/non-web-pay', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify(formData)
-    })
-    isPaymentRequesting.value = false;
-    return response.json();
-}
-function submitWebPayRequest(userFilledData){
-    isPaymentRequesting.value = true
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = '/payment/webpay';
 
-    const paymentId = document.createElement('input');
-    paymentId.type = 'text';
-    paymentId.name = 'paymentId';
-    paymentId.value = props.paymentId
-    form.appendChild(paymentId);
 
-    const paymentCode = document.createElement('input');
-    paymentCode.type = 'text';
-    paymentCode.name = 'paymentCode';
-    paymentCode.value = selectedPayment.value.paymentCode
-    form.appendChild(paymentCode);
-
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const xsrfToke = document.createElement('input');
-    xsrfToke.type = 'hidden';
-    xsrfToke.name = '_token';
-    xsrfToke.value = csrfToken
-    form.appendChild(xsrfToke);
-
-    for (let key in userFilledData) {
-        const userInput = document.createElement('input');
-        userInput.type = 'text';
-        userInput.name = key;
-        userInput.value = userFilledData[key];
-        form.appendChild(userInput);
-    }
-
-    document.body.appendChild(form);
-    isPaymentRequesting.value = false;
-
-    form.submit();
-
-}
-
-async function submitQRPayRequest(formData){
-    isPaymentRequesting.value = true
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const response = await fetch('/api/non-web-pay', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify(formData)
-    })
-    isPaymentRequesting.value = false
-    return response.json();
-}
 </script>

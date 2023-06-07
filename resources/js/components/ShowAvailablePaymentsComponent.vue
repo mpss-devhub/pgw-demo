@@ -1,13 +1,5 @@
 <template>
     <div class="bg-gray-200 p-1 rounded-md">
-        <p class="text-lg font-bold text-gray-800 mt-2  mx-2 flex justify-between mb-2 px-3">
-            <span>
-                            Step <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-500 text-white">1</span>
-            </span>
-            <span>
-                Select payment
-            </span>
-        </p>
         <div v-for="category in paymentCategoriesWithPayments" class="p-2 mx-3">
             <p class="text-sm font-bold">{{category.paymentType}}</p>
             <div class="grid grid-cols-3 px-1 gap-2 rounded-md p-1">

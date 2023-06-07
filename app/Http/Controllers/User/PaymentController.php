@@ -45,7 +45,18 @@ class PaymentController extends Controller
     }
     function doOtherPay(Request $request){
         $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,["phoneNo"=>$request->phoneNo]);
-        return $this->respondWithSuccess(["type"=>"QR","data"=> $response["data"]["qrImg"] ?? $response["data"]]);
+        if($response["respCode"]==="0000"){
+            return $this->respondWithSuccess(
+                [
+                    "status"=>$response["respCode"],
+                    "data"=> $response["data"]["qrImg"] ?? $response["data"]
+                ]
+            );
+        }
+        return $this->respondWithSuccess([
+            "status"=>$response["respCode"],
+            "message"=> $response["respMsg"]
+        ]);
     }
 
     function showPaymentStatus(Request $request)

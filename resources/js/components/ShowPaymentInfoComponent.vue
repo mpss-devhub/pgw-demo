@@ -1,17 +1,13 @@
 <template>
     <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md">
-        <p class="text-lg font-bold text-gray-800 mt-2  mx-2 flex justify-between mb-2 px-3">
-            <span>
-                            Step <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-gray-500 text-white">2</span>
-            </span>
-            <span>
-                Fill in required information
-            </span>
-        </p>
+
         <div class="p-2 px-5">
             <form>
                 <div class="p-2false space-y-6">
                     <div class="flex flex-col gap-2">
+                        <div class="px-2 py-1" v-if="errorMessage">
+                            {{errorMessage}}
+                        </div>
                         <template v-for="(value, key) in selectedPayment.input">
                             <div class="mb-4" v-if="value.required==='true'">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">{{value.label}}</label>
@@ -41,14 +37,126 @@ const props = defineProps({
         type:Boolean,
         required:true,
         default:false
+    },
+    paymentId:{
+        type:String,
+        required:true
+    },
+    selectedPaymentCategory:{
+        type:Object,
+        required:true
     }
 })
-
+const isPaymentRequesting = ref(false)
 const inputModels = ref({})
-const emit = defineEmits(["onContinueClicked"])
+const emit = defineEmits(["onPayRequestDone"])
+const type = ref(null)
+const responseData = ref(null)
+const errorMessage = ref(null)
 
-function onContinueClicked(){
-    emit('onContinueClicked',inputModels.value)
+
+async function onContinueClicked() {
+    const credentialData = {
+        paymentId: props.paymentId,
+        paymentCode: props.selectedPayment.paymentCode
+    }
+    const enteredFormValues = inputModels.value
+
+    const formData = {...enteredFormValues, ...credentialData}
+
+    if (props.selectedPaymentCategory.paymentType === "Web Pay" || props.selectedPaymentCategory.paymentType === "Local Card") {
+        submitWebPayRequest(userFilledData)
+    } else if (props.selectedPaymentCategory.paymentType === "QR Scan") {
+        type.value = "QR"
+        const response = await submitQRPayRequest(formData)
+        if(response.status==="0000")
+            responseData.value = response.data;
+        else{
+            errorMessage.value = response.message
+        }
+    } else {
+        type.value = "NOTI"
+        const response = await submitInAppPayRequest(formData)
+        if(response.status==="0000")
+            responseData.value = response.data;
+        else{
+            errorMessage.value = response.message
+        }
+    }
+    if(type.value && responseData.value){
+        emit('onPayRequestDone',{type:type.value,data:responseData.value})
+    }
+}
+
+
+async function submitInAppPayRequest(formData){
+    isPaymentRequesting.value = true
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const response = await fetch('/api/non-web-pay', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify(formData)
+    })
+    isPaymentRequesting.value = false;
+    return response.json();
+}
+function submitWebPayRequest(userFilledData){
+    isPaymentRequesting.value = true
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/payment/webpay';
+
+    const paymentId = document.createElement('input');
+    paymentId.type = 'text';
+    paymentId.name = 'paymentId';
+    paymentId.value = props.paymentId
+    form.appendChild(paymentId);
+
+    const paymentCode = document.createElement('input');
+    paymentCode.type = 'text';
+    paymentCode.name = 'paymentCode';
+    paymentCode.value = selectedPayment.value.paymentCode
+    form.appendChild(paymentCode);
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const xsrfToke = document.createElement('input');
+    xsrfToke.type = 'hidden';
+    xsrfToke.name = '_token';
+    xsrfToke.value = csrfToken
+    form.appendChild(xsrfToke);
+
+    for (let key in userFilledData) {
+        const userInput = document.createElement('input');
+        userInput.type = 'text';
+        userInput.name = key;
+        userInput.value = userFilledData[key];
+        form.appendChild(userInput);
+    }
+
+    document.body.appendChild(form);
+    isPaymentRequesting.value = false;
+
+    form.submit();
+
+}
+
+async function submitQRPayRequest(formData){
+    isPaymentRequesting.value = true
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    const response = await fetch('/api/non-web-pay', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify(formData)
+    })
+    isPaymentRequesting.value = false
+    return response.json();
 }
 
 </script>
