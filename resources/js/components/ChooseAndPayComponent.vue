@@ -4,7 +4,7 @@
             <payment-steps-component :current-step="currentStep"></payment-steps-component>
 
             <show-available-payments-component
-                v-if="!selectedPayment"
+                v-if="currentStep===1 && !selectedPayment"
                 :payment-categories-with-payments="paymentCategoriesWithPayments"
                 @on-payment-chosen="onPaymentClicked"
             ></show-available-payments-component>
@@ -31,8 +31,8 @@
             </show-waiting-message-component>
 
             <payment-status-message-component
-                v-if="currentStep===3"
-                @on-payment-result-known="onPaymentResult"
+                v-if="currentStep===4"
+                :successful-payment="successfulPayment"
                 :payment-id="paymentId">
             </payment-status-message-component>
 
@@ -42,9 +42,18 @@
 <script setup>
 import {ref} from "vue"
 
-const currentStep  =  ref(1)
+const currentStep  =  ref(4)
 const selectedPayment = ref(null);
 const selectedPaymentCategory = ref(null)
+
+
+const isPaymentSuccess = ref(null)
+
+const pollingInterval = 1000; // 1 second
+const totalDuration = 3 * 60 * 1000; // 3 minutes in milliseconds
+const startTime = Date.now();
+const isWaitingDone = ref(false)
+const successfulPayment = ref(null)
 
 const qrImage = ref("")
 const inAppPayMessage = ref("")
@@ -75,10 +84,38 @@ async function onPayRequestDone({type,data}){
     if(type==="NOTI"){
         inAppPayMessage.value = data
     }
-}
-function onPaymentResult(isSuccess){
-    currentStep.value = 4
+    await pollIfPaymentSuccess()
 }
 
+async  function pollIfPaymentSuccess(){
+    const url = `/api/payments/${props.paymentId}/status`
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    const responseData = await response.json();
+
+    const elapsedTime = Date.now() - startTime;
+    if (elapsedTime < totalDuration && !isWaitingDone.value) {
+        // Continue polling after a certain delay
+        setTimeout(async () => await pollIfPaymentSuccess(), pollingInterval);
+    } else {
+        console.log('Polling completed.');
+    }
+
+    if(responseData.status==="success"){
+        isPaymentSuccess.value = true
+        isWaitingDone.value = true
+        successfulPayment.value = responseData.data
+        currentStep.value = 4
+    }else if(responseData.status==="failed"){
+        isPaymentSuccess.value = false
+        isWaitingDone.value = true
+        currentStep.value = 4
+    }
+}
 
 </script>
