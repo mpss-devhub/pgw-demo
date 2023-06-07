@@ -1,5 +1,4 @@
 @props(['cartProducts','cartTotalPrice'])
-
 <div>
         <p class="text-lg font-bold text-gray-800 mb-3">Your order</p>
 

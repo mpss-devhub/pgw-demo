@@ -26,8 +26,7 @@ class PaymentController extends Controller
        if(!$paymentCategoriesWithPayments){
            return redirect()->back();
        }
-       $paymentId=Payment::latest()->first()->id;
-
+       $paymentId=auth()->user()->payments()->latest()->first()->id;
 
 
        return view(
