@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-end gap-2 p-2">
+        <div class="flex justify-end gap-2 p-2 mt-5">
             <a href="/home"  class="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 cursor-pointer">
                 Continue Shopping
             </a>
