@@ -8,7 +8,7 @@
                         <span class="text-xl font-bold">Payment successful</span>
                     </div>
 
-                    <div class="mt-5">
+                    <div class="mt-5 text-sm">
                         <div class="flex justify-between">
                             <div>Invoice Number</div>
                             <div>{{successfulPayment.invoice_id}}</div>
@@ -43,7 +43,7 @@
             <a href="/home"  class="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 cursor-pointer">
                 Continue Shopping
             </a>
-            <a href="/payment/direct-checkout"  class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+            <a  v-if="!successfulPayment" href="/payment/direct-checkout"  class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                 Retry
             </a>
         </div>
