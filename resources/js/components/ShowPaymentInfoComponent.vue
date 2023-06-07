@@ -68,7 +68,7 @@ async function onContinueClicked() {
     const formData = {...enteredFormValues, ...credentialData}
 
     if (props.selectedPaymentCategory.paymentType === "Web Pay" || props.selectedPaymentCategory.paymentType === "Local Card") {
-        submitWebPayRequest(userFilledData)
+        submitWebPayRequest(enteredFormValues)
     } else if (props.selectedPaymentCategory.paymentType === "QR Scan") {
         type.value = "QR"
         const response = await submitQRPayRequest(formData)
@@ -122,7 +122,7 @@ function submitWebPayRequest(userFilledData){
     const paymentCode = document.createElement('input');
     paymentCode.type = 'text';
     paymentCode.name = 'paymentCode';
-    paymentCode.value = selectedPayment.value.paymentCode
+    paymentCode.value = props.selectedPayment.paymentCode
     form.appendChild(paymentCode);
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
