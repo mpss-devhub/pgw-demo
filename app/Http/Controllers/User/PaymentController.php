@@ -47,7 +47,11 @@ class PaymentController extends Controller
 
     function doWebPay(Request $request){
         $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,$request->except(['_token','paymentId','paymentCode']));
-        return redirect()->away($response["data"]["redirectUrl"]);
+        if(isset($response["data"]["redirectUrl"])) {
+            return redirect()->away($response["data"]["redirectUrl"]);
+        }
+        return redirect()->back();
+
     }
     function doOtherPay(Request $request){
         $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,["phoneNo"=>$request->phoneNo]);
