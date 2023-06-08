@@ -29,13 +29,14 @@
             <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button  @click="onBackClick" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
 
-                <buttonisPaymentRequesting
+                <button
+
                         @click="onContinueClicked"
                         :disabled="isContinueButtonDisabled"
                         :class="{'bg-gray-500  hover:bg-gray-800 cursor-not-allowed':isContinueButtonDisabled,'cursor-pointer':!isContinueButtonDisabled}"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     {{isPaymentRequesting?"Processing..":"Continue"}}
-                </buttonisPaymentRequesting>
+                </button>
             </div>
         </div>
     </div>
@@ -121,15 +122,14 @@ async function onContinueClicked() {
 async function submitInAppPayRequest(formData){
     isPaymentRequesting.value = true
 
-    const response = await fetch('/api/non-web-pay', {
-        method: 'POST',
+    const response = await axios.post('/api/non-web-pay', formData, {
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        }
     })
+
     isPaymentRequesting.value = false;
-    return response.json();
+    return response.data;
 }
 function submitWebPayRequest(userFilledData){
     isPaymentRequesting.value = true
@@ -173,15 +173,13 @@ function submitWebPayRequest(userFilledData){
 
 async function submitQRPayRequest(formData){
     isPaymentRequesting.value = true
-    const response = await fetch('/api/non-web-pay', {
-        method: 'POST',
+    const response = await axios.post('/api/non-web-pay', formData, {
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        }
     })
     isPaymentRequesting.value = false
-    return response.json();
+    return response.data;
 }
 
 function onBackClick(){

@@ -101,10 +101,10 @@ async function onPayRequestDone({type,data}){
 
 async  function pollIfPaymentSuccess(){
     const url = `/api/payments/${props.paymentId}/status`
-    const response = await fetch(url, {
-        method: 'GET',
+
+    const response = await axios.get(url, null, {
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         }
     })
 

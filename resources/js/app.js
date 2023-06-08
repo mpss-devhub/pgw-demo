@@ -7,6 +7,8 @@
 import './bootstrap';
 import { createApp } from 'vue';
 import Alpine from 'alpinejs';
+import axios from 'axios';
+
 
 /** ini alpine
  */
@@ -14,6 +16,21 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 
 Alpine.start();
+
+/** ini axios
+ */
+
+window.axios = axios;
+
+// Set the CSRF token
+const token = document.head.querySelector('meta[name="csrf-token"]');
+
+window.axios.defaults.withCredentials = true;
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+    console.error('CSRF token not found');
+}
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
