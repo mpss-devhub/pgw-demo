@@ -31,7 +31,7 @@
                                                     <h3>
                                                         <a href="#">{{$product->first()->name}}</a>
                                                     </h3>
-                                                    <p class="ml-4">${{$product->sum('price')}}</p>
+                                                    <p class="ml-4">{{$product->sum('price')}} MMK</p>
                                                 </div>
                                             </div>
                                             <div class="flex flex-1 items-end justify-between text-sm">
@@ -63,7 +63,7 @@
                 <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <div class="flex justify-between text-base font-medium text-gray-900 dark:text-gray-300">
                         <p>Subtotal</p>
-                        <p>${{$total}}</p>
+                        <p>{{$total}} MMK</p>
                     </div>
                     <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 
