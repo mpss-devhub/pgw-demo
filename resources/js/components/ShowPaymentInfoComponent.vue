@@ -6,13 +6,21 @@
         <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md">
             <div class="p-2 px-5">
                 <form>
-                    <div class="p-2false space-y-6">
-                        <div class="flex flex-col gap-2">
+                    <div class="p-2 false space-y-6">
+                        <div class="flex flex-col gap-1">
                             <template v-for="(value, key) in selectedPayment.input">
-                                <div class="mb-4" v-if="value.required==='true'">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2">{{value.label}}</label>
-                                    <input v-model="inputModels[`${key}`]" :name="key" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  :type="value.type" :placeholder="`Enter ${value.label}`">
-                                </div>
+                                <label class="block text-gray-700 text-sm font-bold mb-1">{{value.label}}<span class="text-red-500">{{value.required==='true'?'*':''}}</span></label>
+                                <input
+                                        v-model="inputModels[`${key}`]"
+                                        :name="key"
+                                        :type="value.type"
+                                        :placeholder="`Enter ${value.label}`"
+
+                                        @input="onInputFieldChange(key)"
+                                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    >
+                                <span class="text-red-500 text-sm mb-5">{{errors[key]?errors[key]:''}}</span>
+
                             </template>
                         </div>
                     </div>
@@ -21,15 +29,19 @@
             <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button  @click="onBackClick" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
 
-                <button @click="onContinueClicked" :class="{'bg-blue-500 cursor-not-allowed':isPaymentRequesting}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <buttonisPaymentRequesting
+                        @click="onContinueClicked"
+                        :disabled="Object.keys(errors).length > 0 || isRequiredFieldsBlank"
+                        :class="{'bg-gray-500 cursor-not-allowed':isPaymentRequesting || Object.keys(errors).length > 0 || isRequiredFieldsBlank}"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     {{isPaymentRequesting?"Processing..":"Continue"}}
-                </button>
+                </buttonisPaymentRequesting>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import {ref} from "vue";
+import {computed, ref} from "vue";
 
 const props = defineProps({
     selectedPayment:{
@@ -52,11 +64,22 @@ const props = defineProps({
 })
 const isPaymentRequesting = ref(false)
 const inputModels = ref({})
+const errors = ref({})
 const emit = defineEmits(["onPayRequestDone","onBackClicked"])
 const type = ref(null)
 const responseData = ref(null)
 const errorMessage = ref(null)
+const isRequiredFieldsBlank = computed(()=>{
+    if(Object.keys(inputModels.value).length === 0) return true
 
+
+    for(let key in inputModels.value){
+        const input = props.selectedPayment.input[key]
+        if(input.required==="true" && inputModels.value[key]==="") return true
+    }
+
+    return false
+})
 
 async function onContinueClicked() {
     const credentialData = {
@@ -164,6 +187,49 @@ async function submitQRPayRequest(formData){
 
 function onBackClick(){
     emit("onBackClicked")
+}
+
+function onInputFieldChange(key){
+
+    const validations = props.selectedPayment.input[key].validations
+
+    validations.forEach(validation=>{
+        if(inputModels.value[key]==="" || inputModels.value[key]===null) return
+
+        if(validation.type==="reg" && validation.params){
+            const regex = new RegExp(validation.params[0]);
+            if(!regex.test(inputModels.value[key])){
+                errors.value[key] = validation.params[1]
+                console.log("eerror")
+            }else{
+                console.log("no error")
+
+                delete errors.value[key]
+            }
+        }
+        if(validation.type==="min" && validation.params){
+
+            if(inputModels.value[key].length<validation.params[0]){
+                errors.value[key] = validation.params[1]
+                console.log("eerror")
+            }else{
+                console.log("no error")
+
+                delete errors.value[key]
+            }
+        }
+        if(validation.type==="max" && validation.params){
+
+            if(inputModels.value[key].length>validation.params[0]){
+                errors.value[key] = validation.params[1]
+                console.log("eerror")
+            }else{
+                console.log("no error")
+
+                delete errors.value[key]
+            }
+        }
+    })
 }
 
 </script>
