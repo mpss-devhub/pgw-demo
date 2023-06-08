@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
     Route::get('/payments/{payment}/status', [PaymentController::class,'checkPaymentStatus'])->name('non-web-pay.status');
-    Route::post('/callbacks/direct-payment-status', [PaymentController::class,'storeDirectCallbackStatus'])->name('octoverse.backend.direct-callback');
-    Route::post('/callbacks/redirect-payment-status', [PaymentController::class,'storeRedirectCallbackStatus'])->name('octoverse.backend.redirect-callback');
 });
+Route::post('/callbacks/direct-payment-status', [PaymentController::class,'storeDirectCallbackStatus'])->name('octoverse.backend.direct-callback');
+Route::post('/callbacks/redirect-payment-status', [PaymentController::class,'storeRedirectCallbackStatus'])->name('octoverse.backend.redirect-callback');
 
