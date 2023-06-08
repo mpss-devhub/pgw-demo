@@ -1,6 +1,6 @@
 @props(['cartProducts','cartTotalPrice'])
-<div>
-        <p class="text-lg font-bold text-gray-800 mb-3">Your order</p>
+<div class="mt-5">
+        <p class="text-lg font-bold text-gray-800 mb-3 dark:text-gray-100">Your order</p>
 
         <ul role="list" class="divide-y divide-gray-200 rounded-md bg-gray-300 p-2 dark:bg-gray-800">
             @forelse($cartProducts as $product)

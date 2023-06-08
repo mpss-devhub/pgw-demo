@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <div class="p-1 rounded-md px-20">
+            <div class="p-1 rounded-md lg:px-20">
                 <div>
                     <div class="p-8 flex gap-3 flex-col justify-center items-center dark:text-gray-200">
                         <div class="font-bold text-xl">Confirm payment</div>
