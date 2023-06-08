@@ -121,12 +121,10 @@ async function onContinueClicked() {
 async function submitInAppPayRequest(formData){
     isPaymentRequesting.value = true
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const response = await fetch('/api/non-web-pay', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
     })
@@ -175,12 +173,10 @@ function submitWebPayRequest(userFilledData){
 
 async function submitQRPayRequest(formData){
     isPaymentRequesting.value = true
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const response = await fetch('/api/non-web-pay', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
     })

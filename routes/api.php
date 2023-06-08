@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//Route::middleware('auth:sanctum')->post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
 
-Route::post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
-Route::get('/payments/{payment}/status', [PaymentController::class,'checkPaymentStatus'])->name('non-web-pay.status');
-Route::post('/callbacks/direct-payment-status', [PaymentController::class,'storeDirectCallbackStatus'])->name('octoverse.backend.direct-callback');
-Route::post('/callbacks/redirect-payment-status', [PaymentController::class,'storeRedirectCallbackStatus'])->name('octoverse.backend.redirect-callback');
+Route::middleware('auth:sanctum')->group(function() {
+    Route::post('/non-web-pay', [PaymentController::class,'doOtherPay'])->name('non-web-pay.getqr');
+    Route::get('/payments/{payment}/status', [PaymentController::class,'checkPaymentStatus'])->name('non-web-pay.status');
+    Route::post('/callbacks/direct-payment-status', [PaymentController::class,'storeDirectCallbackStatus'])->name('octoverse.backend.direct-callback');
+    Route::post('/callbacks/redirect-payment-status', [PaymentController::class,'storeRedirectCallbackStatus'])->name('octoverse.backend.redirect-callback');
+});
+
