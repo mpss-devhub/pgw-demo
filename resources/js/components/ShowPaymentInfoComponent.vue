@@ -3,7 +3,7 @@
         <div class="px-6 py-1 text-red-500 rounded-md border border-red-300" v-if="errorMessage">
             <i class="fa fa-circle-exclamation"></i> {{errorMessage}}
         </div>
-        <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md">
+        <div class="dark:bg-gray-800 bg-gray-200 p-1 mt-3 mb-20 rounded-md">
             <div class="p-2 px-5">
                 <form>
                     <div class="p-2 false space-y-6">

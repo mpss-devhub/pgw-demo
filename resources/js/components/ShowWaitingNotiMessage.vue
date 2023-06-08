@@ -3,9 +3,9 @@
         <div>
             <div class="p-1 rounded-md px-20">
                 <div>
-                    <div class="p-8 flex gap-3 flex-col justify-center items-center">
+                    <div class="p-8 flex gap-3 flex-col justify-center items-center dark:text-gray-200">
                         <div class="font-bold text-xl">Confirm payment</div>
-                        <span class="p-5 bg-gray-300 rounded-md text-black">{{message}}</span>
+                        <span class="p-5 bg-gray-300 dark:bg-gray-800  dark:text-gray-200 rounded-md text-black">{{message}}</span>
                     </div>
                 </div>
             </div>
