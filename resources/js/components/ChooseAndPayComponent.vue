@@ -108,7 +108,7 @@ async  function pollIfPaymentSuccess(){
         }
     })
 
-    const responseData = await response.json();
+    const responseData = response.data;
 
     const elapsedTime = Date.now() - startTime;
     if (elapsedTime < totalDuration && !isWaitingDone.value) {
