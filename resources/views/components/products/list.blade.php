@@ -4,32 +4,23 @@
     class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
     @foreach ($products as $product)
         <div
-            class="max-w-xs flex flex-col justify-between overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 dark:hover:bg-green-800 transition-colors duration-300">
-            <div class="h-2/6 py-1 flex flex-col items-start justify-start">
+            class="max-w-xs flex flex-col justify-between overflow-hidden bg-gray-300 rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 dark:hover:bg-green-800 transition-colors duration-300">
+            <div class="py-2 min-h-[60px] flex flex-col items-start justify-center">
                 <h1 class="px-2 text-sm font-bold text-gray-800 uppercase dark:text-white">
                     {{ $product->name }}
                 </h1>
-                <a class="dark:hover:text-blue-700 hover:text-blue-700 dark:text-white px-2 text-sm" href="{{route('home').'?brands='.$product->brand->name}}">{{$product->brand->name}}</a>
             </div>
 
-            <img class="object-cover w-full h-30 lg:h-48" src="{{ $product->image_url }}"
-                 alt="{{ $product->name }}">
-            <div class="h-2/6">
-                <div class="flex flex-wrap gap-1 py-1 text-white px-1">
-                    @foreach($product->categories as $category)
-                        <p class="text-xs whitespace-nowrap  rounded-sm">
-                            @if(!$loop->first)
-                               |
-                            @endif
-                            <a  class="hover:bg-blue-500 dark:hover:bg-blue-950 text-blue-500 hover:text-blue-100 px-1" href="{{route('home').'?categories='.$category->name}}">
-                            {{$category->name}}
-                            </a>
-                        </p>
-                    @endforeach
-                </div>
+
+                <img class="object-cover w-full  h-[200px]" src="{{ $product->image_url }}"
+                     alt="{{ $product->name }}">
+
+            <div>
+                <a class="dark:hover:text-blue-300 hover:text-blue-700 dark:text-white px-2 text-sm" href="{{route('home').'?brands='.$product->brand->name}}">{{$product->brand->name}}</a>
+
                 <div
-                    class="flex  items-center flex-col lg:flex-row justify-between px-4 py-1 bg-gray-600 dark:bg-gray-900">
-                    <h1 class="text-lg font-bold text-white mb-1 lg:mb-0">{{ $product->price }} MMK</h1>
+                    class="flex py-2 items-center  flex-col lg:flex-row justify-between px-4 bg-gray-600 dark:bg-gray-900">
+                    <h1 class="text-sm font-bold text-white">{{ $product->price }} MMK</h1>
                     <form method="post" action="{{route('cart.add')}}">
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
