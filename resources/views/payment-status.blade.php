@@ -11,7 +11,7 @@
             </div>
                 <choose-and-pay-component
                     class="lg:w-1/2"
-                    :payment="{{$payment}}"
+                    :payment="{{json_encode($payment)}}"
                 ></choose-and-pay-component>
         </div>
 
