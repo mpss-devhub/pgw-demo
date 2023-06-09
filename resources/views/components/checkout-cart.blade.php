@@ -31,7 +31,7 @@
                 </li>
             @endforelse
         </ul>
-        <div class="p-2 flex justify-between mt-2 rounded-md bg-gray-300 dark:bg-gray-800 text-white">
+        <div class="p-2 flex justify-between mt-2 rounded-md bg-gray-300 dark:bg-gray-800 text-black dark:text-white">
             <div class="font-bold">Total</div>
             <div>{{$cartTotalPrice}} MMK</div>
         </div>
