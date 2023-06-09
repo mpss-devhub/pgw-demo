@@ -20,6 +20,10 @@ class PaymentController extends Controller
 
         $cartTotalPrice = Auth::user()->cart->sum('price');
 
+        if(Auth::user()->cart->count()<=0){
+            return redirect()->route('home');
+        }
+
 
        $paymentAndCategories = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
 
