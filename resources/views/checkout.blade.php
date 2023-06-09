@@ -9,19 +9,11 @@
                >
                </x-checkout-cart>
            </div>
-           @if(isset($payment))
-               <choose-and-pay-component
-                   class="lg:w-1/2"
-                   :payment="{{$payment}}"
-               ></choose-and-pay-component>
-           @else
-               <choose-and-pay-component
-                   class="lg:w-1/2"
-                   :payment-id="{{$paymentId}}"
-                   :payment-categories-with-payments="{{json_encode($paymentCategoriesWithPayments)}}"
-               ></choose-and-pay-component>
-           @endif
-
+           <choose-and-pay-component
+               class="lg:w-1/2"
+               :payment-id="{{$paymentId}}"
+               :payment-categories-with-payments="{{json_encode($paymentCategoriesWithPayments)}}"
+           ></choose-and-pay-component>
        </div>
 
    </div>

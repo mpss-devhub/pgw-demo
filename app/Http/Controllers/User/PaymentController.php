@@ -82,15 +82,17 @@ class PaymentController extends Controller
         $cartTotalPrice = Auth::user()->cart->sum('price');
 
         if(!isset($request->respCode) || !isset($request->invoiceNo)){
-            return view('payment-status',compact('payment'));
+            return redirect()->route('home');
         }
 
-        $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
+        if($request->respCode==='0000'){
+            $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
+        }
 
         $paymentCategoriesWithPayments = null;
 
         return view(
-            'checkout',
+            'payment-status',
             compact(
                 'paymentCategoriesWithPayments',
                 'cartTotalPrice',
