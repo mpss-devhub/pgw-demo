@@ -32,7 +32,7 @@
                     <span class="text-xl font-bold dark:text-gray-100">Payment fail</span>
                 </div>
 
-                <div class="mt-5 flex justify-center bg-red-200 rounded-md px-3 py-10 dark:text-gray-100">
+                <div class="mt-5 flex justify-center bg-gray-500 dark:bg-gray-800 rounded-md px-3 py-10 text-red-200 dark:text-red-300">
                     <span>
                         Something went wrong with payment transaction.
                     </span>
