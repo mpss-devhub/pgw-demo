@@ -5,7 +5,7 @@
     @foreach ($products as $product)
         <div
             class="max-w-xs flex flex-col justify-between overflow-hidden bg-gray-300 rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 dark:hover:bg-green-800 transition-colors duration-300">
-            <div class="py-2 min-h-[70px] lg:min-h-[60px  flex flex-col items-start justify-center">
+            <div class="py-1 min-h-[50px] lg:min-h-[50px]  flex flex-col items-start justify-center">
                 <h1 class="px-2 text-sm font-bold text-gray-800 uppercase dark:text-white">
                     {{ $product->name }}
                 </h1>
