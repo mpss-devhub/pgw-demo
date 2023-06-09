@@ -10,7 +10,7 @@
                 </x-checkout-cart>
             </div>
                 <choose-and-pay-component
-                    class="lg:w-1/2"
+                    class="lg:w-1/2 w-full"
                     :payment="{{json_encode($payment)}}"
                 ></choose-and-pay-component>
         </div>
