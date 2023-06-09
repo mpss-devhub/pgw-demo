@@ -5,7 +5,7 @@
                     <div :class="{'bg-blue-500 text-white':currentStep===1,'bg-gray-300 text-gray-500':currentStep!==1}" class="w-5 h-5 flex items-center justify-center rounded-full">
                         1
                     </div>
-                    <div class="text-center ml-2 text-sm font-medium text-gray-800  dark:text-gray-100">Choose Payment</div>
+                    <div class="text-center ml-2 text-sm font-medium text-gray-800  dark:text-gray-100">Payment</div>
                 </div>
                 <div class="flex items-center flex-col gap-2 h-full">
                     <div :class="{'bg-blue-500 text-white':currentStep===2,'bg-gray-300 text-gray-500':currentStep!==2}" class="w-5 h-5 flex items-center justify-center rounded-full">
@@ -18,7 +18,7 @@
                     <div :class="{'text-white bg-blue-500':currentStep===3,'bg-gray-300 text-gray-500':currentStep!==3}" class="w-5 h-5 flex items-center justify-center rounded-full">
                         3
                     </div>
-                    <div class="text-center ml-2 text-sm font-medium text-gray-500  dark:text-gray-100">Confirm Payment</div>
+                    <div class="text-center ml-2 text-sm font-medium text-gray-500  dark:text-gray-100">Confirm</div>
                 </div>
 
                 <div class="flex items-center flex-col gap-2 h-full">
