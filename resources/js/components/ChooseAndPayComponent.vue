@@ -34,8 +34,7 @@
 
             <payment-status-message-component
                 v-if="currentStep===4"
-                :payment="payment"
-                :is-success="isPaymentSuccess"
+                :successful-payment="payment"
                 :payment-id="paymentId">
             </payment-status-message-component>
 
@@ -140,9 +139,6 @@ onMounted(()=>{
     if(!props.paymentId || !props.paymentCategoriesWithPayments){
         currentStep.value = 4
         payment.value = props.payment
-    }
-    if(props.isSuccess!==null){
-        isPaymentSuccess.value = props.isSuccess
     }
 })
 
