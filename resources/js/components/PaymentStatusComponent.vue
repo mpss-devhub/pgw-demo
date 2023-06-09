@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-2 flex gap-8  flex-col justify-center items-center" v-if="successfulPayment">
+        <div class="p-2 flex gap-8  flex-col justify-center items-center" v-if="payment && payment.status==='SUCCESS'">
             <div class="font-bold text-green-500">
                 <div class="flex flex-col gap-2 w-full items-center">
                     <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 flex gap-8 flex-col justify-center items-center" v-if="!successfulPayment">
+        <div class="p-2 flex gap-8 flex-col justify-center items-center"  v-else>
             <div class="flex flex-col gap-2 w-full items-center">
                 <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
                     <span class="flex justify-center items-center w-10 h-10 bg-red-800 rounded-full text-white"><i class="fa fa-exclamation-circle fa-lg"></i></span>
@@ -43,7 +43,7 @@
             <a href="/home"  class="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 cursor-pointer">
                 Continue Shopping
             </a>
-            <a  v-if="!successfulPayment" href="/payment/direct-checkout"  class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+            <a  v-if="!payment || payment.status!=='SUCCESS'" href="/payment/direct-checkout"  class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
                 Retry
             </a>
         </div>
@@ -51,7 +51,7 @@
 </template>
 <script setup>
 const props = defineProps({
-    successfulPayment:{
+    payment:{
         type:Object,
         required:true,
         default:null

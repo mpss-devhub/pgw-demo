@@ -34,7 +34,7 @@
 
             <payment-status-message-component
                 v-if="currentStep===4"
-                :successful-payment="successfulPayment"
+                :successful-payment="payment"
                 :payment-id="paymentId">
             </payment-status-message-component>
 
@@ -55,7 +55,7 @@ const pollingInterval = 1000; // 1 second
 const totalDuration = 3 * 60 * 1000; // 3 minutes in milliseconds
 const startTime = Date.now();
 const isWaitingDone = ref(false)
-const successfulPayment = ref(null)
+const payment = ref(null)
 
 const qrImage = ref("")
 const inAppPayMessage = ref("")
@@ -71,7 +71,7 @@ const props = defineProps({
         required:false,
         default:null
     },
-    successfulPayment:{
+    payment:{
         type:Object,
         required:false,
         default:null
@@ -121,7 +121,7 @@ async  function pollIfPaymentSuccess(){
     if(responseData.status==="success"){
         isPaymentSuccess.value = true
         isWaitingDone.value = true
-        successfulPayment.value = responseData.data
+        payment.value = responseData.data
         currentStep.value = 4
     }else if(responseData.status==="failed"){
         isPaymentSuccess.value = false
@@ -133,7 +133,7 @@ async  function pollIfPaymentSuccess(){
 onMounted(()=>{
     if(!props.paymentId || !props.paymentCategoriesWithPayments){
         currentStep.value = 4
-        successfulPayment.value = props.successfulPayment
+        payment.value = props.payment
     }
 })
 

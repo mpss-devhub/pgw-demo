@@ -77,7 +77,7 @@ class PaymentController extends Controller
 
         $cartTotalPrice = Auth::user()->cart->sum('price');
 
-        if(!isset($request->respCode) || !isset($request->invoiceNo) || (isset($request->respCode) && $request->respCode!=="0000")){
+        if(!isset($request->respCode) || !isset($request->invoiceNo)){
             return view('payment-status',compact('payment'));
         }
 

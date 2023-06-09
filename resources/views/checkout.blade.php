@@ -12,7 +12,7 @@
            @if(isset($payment))
                <choose-and-pay-component
                    class="lg:w-1/2"
-                   :successful-payment="{{$payment}}"
+                   :payment="{{$payment}}"
                ></choose-and-pay-component>
            @else
                <choose-and-pay-component
