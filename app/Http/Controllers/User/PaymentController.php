@@ -87,9 +87,10 @@ class PaymentController extends Controller
 
         $payment = null;
 
-        if($request->respCode==='0000')
-            $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
-
+        if($request->respCode==='0000') {
+            $payment = Payment::where('invoice_id', $request->invoiceNo)->get()->first();
+            $payment?->user->cart()->detach();
+        }
 
         $paymentCategoriesWithPayments = null;
 
