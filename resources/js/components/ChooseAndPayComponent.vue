@@ -34,7 +34,7 @@
 
             <payment-status-message-component
                 v-if="currentStep===4"
-                :successful-payment="payment"
+                :payment="payment"
                 :payment-id="paymentId">
             </payment-status-message-component>
 
