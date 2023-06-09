@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="p-2 flex gap-8  flex-col justify-center items-center" v-if="payment">
+        <div class="p-2 flex gap-8  flex-col justify-center items-center" v-if="payment && isSuccess">
             <div class="font-bold text-green-500">
                 <div class="flex flex-col gap-2 w-full items-center">
                     <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
@@ -55,6 +55,11 @@ const props = defineProps({
         type:Object,
         required:true,
         default:null
+    },
+    isSuccess:{
+        type:Boolean,
+        required:false,
+        default:false
     }
 })
 </script>

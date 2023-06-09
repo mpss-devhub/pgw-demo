@@ -90,13 +90,20 @@ class PaymentController extends Controller
 
         $paymentCategoriesWithPayments = null;
 
+        $isSuccess = false;
+
+        if($request->respCode==="0000"){
+            $isSuccess = true;
+        }
+
         return view(
             'payment-status',
             compact(
                 'paymentCategoriesWithPayments',
                 'cartTotalPrice',
                 'cartProducts',
-                'payment'
+                'payment',
+                'isSuccess'
             ));
     }
 

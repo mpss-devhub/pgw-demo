@@ -12,6 +12,7 @@
                 <choose-and-pay-component
                     class="lg:w-1/2"
                     :payment="{{$payment}}"
+                    :is-success="{{$isSuccess}}"
                 ></choose-and-pay-component>
         </div>
 

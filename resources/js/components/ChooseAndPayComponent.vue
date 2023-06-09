@@ -35,6 +35,7 @@
             <payment-status-message-component
                 v-if="currentStep===4"
                 :payment="payment"
+                :is-success="isPaymentSuccess"
                 :payment-id="paymentId">
             </payment-status-message-component>
 
@@ -49,7 +50,7 @@ const selectedPayment = ref(null);
 const selectedPaymentCategory = ref(null)
 
 
-const isPaymentSuccess = ref(null)
+const isPaymentSuccess = ref(false)
 
 const pollingInterval = 1000; // 1 second
 const totalDuration = 10 * 60 * 1000; // 3 minutes in milliseconds
@@ -61,6 +62,11 @@ const qrImage = ref("")
 const inAppPayMessage = ref("")
 
 const props = defineProps({
+    isSuccess:{
+        type:Boolean,
+        required:false,
+        default:null
+    },
     paymentCategoriesWithPayments:{
         type:Array,
         required:false,
@@ -134,6 +140,9 @@ onMounted(()=>{
     if(!props.paymentId || !props.paymentCategoriesWithPayments){
         currentStep.value = 4
         payment.value = props.payment
+    }
+    if(props.isSuccess!==null){
+        isPaymentSuccess.value = props.isSuccess
     }
 })
 
