@@ -85,9 +85,8 @@ class PaymentController extends Controller
             return redirect()->route('home');
         }
 
-        if($request->respCode==='0000'){
-            $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
-        }
+        $payment = Payment::where('invoice_id',$request->invoiceNo)->get()->first();
+
 
         $paymentCategoriesWithPayments = null;
 
