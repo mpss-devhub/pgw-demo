@@ -1,6 +1,19 @@
 <template>
     <div>
-        <div class="px-6 py-1 text-red-500 rounded-md border border-red-300" v-if="errorMessage">
+        <div class="font-bold dark:text-gray-200 text-gray-800">
+            Pay with
+        </div>
+        <div class="mt-2 px-6 py-3 bg-blue-400 dark:bg-blue-500 text-white flex items-center rounded-md justify-start gap-2">
+            <div class="flex items-center justify-center gap-2">
+                <img class="rounded-md  w-10 h-10 object-cover"  :src="selectedPayment.logo"/>
+                <span>{{selectedPayment.paymentName}}</span>
+            </div>
+                 <i class="fa fa-check-circle text-white"></i>
+        </div>
+        <div class="mt-8 font-bold dark:text-gray-200 text-gray-800">
+            Fill in required information
+        </div>
+        <div class="px-6 py-1 mt-2 text-red-500 rounded-md border border-red-300" v-if="errorMessage">
             <i class="fa fa-circle-exclamation"></i> {{errorMessage}}
         </div>
         <div class="dark:bg-gray-800 bg-gray-200 p-1 mt-3 mb-20 rounded-md">
