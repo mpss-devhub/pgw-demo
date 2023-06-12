@@ -8,10 +8,10 @@
                     </a>
                 </div>
                 <!-- Mobile menu button -->
-                <div class="flex lg:hidden" x-cloak>
+                <div class="flex lg:hidden items-center" x-cloak>
                     @if (Auth::user())
                         @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
-                            <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="mx-1 relative">
+                            <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="flex items-center relative">
                                 <i class="fa fa-cart-shopping text-white"></i>
                                 <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
                                     {{Auth::user()->cart->count()}}
@@ -26,7 +26,7 @@
                     @endif
 
                     <button x-show="!isMobileMenuOpen"
-                        class="lg:hidden rounded-md mx-2 lg:mx-5 focus:outline-none focus:shadow-outline-purple"
+                        class="rounded-md  focus:outline-none focus:shadow-outline-purple ms-4 me-1"
                         @click="toggleTheme" aria-label="Toggle color mode">
                         <template x-if="!dark">
                             <svg class="w-5 h-5" aria-hidden="true" fill="gray" viewBox="0 0 20 20">
