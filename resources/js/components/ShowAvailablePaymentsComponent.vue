@@ -1,5 +1,8 @@
 <template>
-    <div class="bg-gray-200 p-1 rounded-md dark:bg-gray-800">
+    <div class="font-bold dark:text-gray-200 text-gray-800">
+        Select your payment method
+    </div>
+    <div class="bg-gray-200 mt-2 p-1 rounded-md dark:bg-gray-800">
         <div v-for="category in paymentCategoriesWithPayments" class="p-1 mx-1 lg:px-2 lg:mx-3">
             <p class="text-sm font-bold dark:text-gray-200">{{category.paymentType}}</p>
             <div class="grid grid-cols-2 lg:grid-cols-3 px-1 gap-2 rounded-md p-1">
