@@ -59,7 +59,7 @@ const selectedPaymentCategory = ref(null)
 const isPaymentSuccess = ref(false)
 
 const pollingInterval = 1000; // 1 second
-const totalDuration = 10 * 60 * 1000; // 3 minutes in milliseconds
+const totalDuration = 5 * 60 * 1000; // 3 minutes in milliseconds
 const startTime = Date.now();
 const isWaitingDone = ref(false)
 const payment = ref(null)
@@ -131,7 +131,7 @@ async  function pollIfPaymentSuccess(){
         // Continue polling after a certain delay
         setTimeout(async () => await pollIfPaymentSuccess(), pollingInterval);
     } else {
-        console.log('Polling completed.');
+       onPaymentError()
     }
 
     if(responseData.status==="success"){
@@ -140,9 +140,7 @@ async  function pollIfPaymentSuccess(){
         payment.value = responseData.data
         currentStep.value = 4
     }else if(responseData.status==="failed"){
-        isPaymentSuccess.value = false
-        isWaitingDone.value = true
-        currentStep.value = 4
+       onPaymentError()
     }
 }
 
@@ -153,4 +151,9 @@ onMounted(()=>{
     }
 })
 
+function onPaymentError(){
+    isPaymentSuccess.value = false
+    isWaitingDone.value = true
+    currentStep.value = 4
+}
 </script>
