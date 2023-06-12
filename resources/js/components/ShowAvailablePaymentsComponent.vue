@@ -42,6 +42,9 @@ const selectedCategory = ref(null)
 const emit = defineEmits(['onPaymentChosen'])
 
 function onPaymentClicked(payment,category){
+    if(!selectedPayment.value && !payment && !category && !selectedCategory.value){
+        window.location.href = "/home"
+    }
     selectedPayment.value = payment
     selectedCategory.value = category
 }
