@@ -26,7 +26,6 @@ class PaymentController extends Controller
 
 
        $paymentAndCategories = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
-
        if(!$paymentAndCategories){
            return redirect()->back();
        }
@@ -59,12 +58,24 @@ class PaymentController extends Controller
     }
     function doOtherPay(Request $request){
         $response = $this->payWithSelectedPayment($request->paymentId,$request->paymentCode,["phoneNo"=>$request->phoneNo]);
-        if($response["respCode"]==="0000"){
+        if($response["respCode"]==="0000" && isset($response["data"])){
+            if(isset($response["data"]["qrImg"])){
+                $type="QR";
+                $data =  $response["data"]["qrImg"];
+            }else if(isset($response["data"]["deeplink"])){
+                $type="DEEP_LINK";
+                $data =  $response["data"]["deeplink"];
+            }else{
+                $type="MESSAGE";
+                $data = $response["data"];
+            }
             return $this->respondWithSuccess(
                 [
                     "status"=>$response["respCode"],
-                    "data"=> $response["data"]["qrImg"] ?? $response["data"]
-                ]
+                    "data"=> [
+                        "type"=>$type,
+                        "data"=>$data
+                    ]              ]
             );
         }
         return $this->respondWithSuccess([

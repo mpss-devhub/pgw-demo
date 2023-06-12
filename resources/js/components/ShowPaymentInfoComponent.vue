@@ -97,19 +97,21 @@ async function onContinueClicked() {
     if (props.selectedPaymentCategory.paymentType === "Web Pay" || props.selectedPaymentCategory.paymentType === "Local Card") {
         submitWebPayRequest(enteredFormValues)
     } else if (props.selectedPaymentCategory.paymentType === "QR Scan") {
-        type.value = "QR"
+
         const response = await submitQRPayRequest(formData)
-        if(response.status==="0000")
-            responseData.value = response.data;
-        else{
-            errorMessage.value = response.message
+        if(response.status==="0000") {
+            responseData.value = response.data.data;
+            type.value = response.data.type;
+        }else{
+            errorMessage.value = response.message;
         }
     } else {
-        type.value = "NOTI"
+
         const response = await submitInAppPayRequest(formData)
-        if(response.status==="0000")
-            responseData.value = response.data;
-        else{
+        if(response.status==="0000") {
+            responseData.value = response.data.data;
+            type.value = response.data.type;
+        } else{
             errorMessage.value = response.message
         }
     }

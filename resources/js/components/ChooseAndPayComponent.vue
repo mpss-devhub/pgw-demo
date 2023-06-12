@@ -31,6 +31,12 @@
                 :message="inAppPayMessage"
             >
             </show-waiting-message-component>
+            <deep-link-message
+                v-if="currentStep===3 && deepLink  && paymentCategoriesWithPayments && paymentId"
+                :payment-id="paymentId"
+                :deep-link="deepLink"
+            >
+            </deep-link-message>
 
             <payment-status-message-component
                 v-if="currentStep===4"
@@ -43,6 +49,7 @@
 </template>
 <script setup>
 import {onMounted, ref} from "vue"
+import DeepLinkMessage from "./DeepLinkMessage.vue";
 
 const currentStep  =  ref(1)
 const selectedPayment = ref(null);
@@ -59,6 +66,7 @@ const payment = ref(null)
 
 const qrImage = ref("")
 const inAppPayMessage = ref("")
+const deepLink = ref("")
 
 const props = defineProps({
     isSuccess:{
@@ -98,8 +106,11 @@ async function onPayRequestDone({type,data}){
     if(type==="QR"){
         qrImage.value = data
     }
-    if(type==="NOTI"){
+    if(type==="MESSAGE"){
         inAppPayMessage.value = data
+    }
+    if(type==="DEEP_LINK"){
+        deepLink.value = data
     }
     await pollIfPaymentSuccess()
 }
