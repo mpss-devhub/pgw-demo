@@ -18,6 +18,11 @@
                                 </span>
                             </button>
                         @endif
+                        @if(Route::is('payment.direct-checkout'))
+                            <a  x-show="!isMobileMenuOpen" href="{{route('home')}}">
+                                <i class="fa fa-home text-white"></i>
+                            </a>
+                        @endif
                     @endif
 
                     <button x-show="!isMobileMenuOpen"
@@ -64,6 +69,11 @@
                                 {{Auth::user()->cart->count()}}
                             </span>
                         </button>
+                    @endif
+                    @if(Route::is('payment.direct-checkout'))
+                        <a x-show="!isMobileMenuOpen" href="{{route('home')}}">
+                            <i class="fa fa-home text-white"></i>
+                        </a>
                     @endif
                     <div class="flex items-center lg:mt-0">
                         <div x-data="{ isProfileMenuOpen: false }" class="relative w-full">
