@@ -1,48 +1,61 @@
 <template>
     <div>
         <div>
+
             <payment-steps-component :current-step="currentStep"></payment-steps-component>
 
-            <show-available-payments-component
-                v-if="currentStep===1 && !selectedPayment && paymentCategoriesWithPayments && paymentId"
-                :payment-categories-with-payments="paymentCategoriesWithPayments"
-                @on-payment-chosen="onPaymentClicked"
-            ></show-available-payments-component>
+            <transition name="fade">
+                <show-available-payments-component
+                    v-if="currentStep===1 && !selectedPayment && paymentCategoriesWithPayments && paymentId"
+                    :payment-categories-with-payments="paymentCategoriesWithPayments"
+                    @on-payment-chosen="onPaymentClicked"
+                ></show-available-payments-component>
+            </transition>
 
-            <show-payment-info-component
-                v-if="currentStep===2 && selectedPayment  && paymentCategoriesWithPayments && paymentId"
-                :payment-id="paymentId"
-                :selected-payment="selectedPayment"
-                :selected-payment-category="selectedPaymentCategory"
-                @on-back-clicked="onInfoFormBackClicked"
-                @on-pay-request-done="onPayRequestDone"
-            />
 
-            <show-qr-component
-                v-if="currentStep===3 && qrImage  && paymentCategoriesWithPayments && paymentId"
-                :qr-image-url="qrImage"
-                :payment-id="paymentId"
-            >
-            </show-qr-component>
+            <transition name="fade">
+                <show-payment-info-component
+                    v-if="currentStep===2 && selectedPayment  && paymentCategoriesWithPayments && paymentId"
+                    :payment-id="paymentId"
+                    :selected-payment="selectedPayment"
+                    :selected-payment-category="selectedPaymentCategory"
+                    @on-back-clicked="onInfoFormBackClicked"
+                    @on-pay-request-done="onPayRequestDone"
+                />
+            </transition>
 
-            <show-waiting-message-component
-                v-if="currentStep===3 && inAppPayMessage  && paymentCategoriesWithPayments && paymentId"
-                :payment-id="paymentId"
-                :message="inAppPayMessage"
-            >
-            </show-waiting-message-component>
-            <deep-link-message
-                v-if="currentStep===3 && deepLink  && paymentCategoriesWithPayments && paymentId"
-                :payment-id="paymentId"
-                :deep-link="deepLink"
-            >
-            </deep-link-message>
+            <transition name="fade">
+                <show-qr-component
+                    v-if="currentStep===3 && qrImage  && paymentCategoriesWithPayments && paymentId"
+                    :qr-image-url="qrImage"
+                    :payment-id="paymentId"
+                >
+                </show-qr-component>
+            </transition>
 
-            <payment-status-message-component
-                v-if="currentStep===4"
-                :successful-payment="payment"
-                :payment-id="paymentId">
-            </payment-status-message-component>
+            <transition name="fade">
+                <show-waiting-message-component
+                    v-if="currentStep===3 && inAppPayMessage  && paymentCategoriesWithPayments && paymentId"
+                    :payment-id="paymentId"
+                    :message="inAppPayMessage"
+                >
+                </show-waiting-message-component>
+            </transition>
+            <transition name="fade">
+                <deep-link-message
+                    v-if="currentStep===3 && deepLink  && paymentCategoriesWithPayments && paymentId"
+                    :payment-id="paymentId"
+                    :deep-link="deepLink"
+                >
+                </deep-link-message>
+            </transition>>
+            <transition name="fade">
+                <payment-status-message-component
+                    v-if="currentStep===4"
+                    :successful-payment="payment"
+                    :payment-id="paymentId">
+                </payment-status-message-component>
+            </transition>
 
         </div>
     </div>
@@ -157,3 +170,14 @@ function onPaymentError(){
     currentStep.value = 4
 }
 </script>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>
