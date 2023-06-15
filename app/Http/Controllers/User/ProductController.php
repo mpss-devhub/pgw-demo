@@ -55,11 +55,13 @@ class ProductController extends Controller
         $categories = Category::all();
         $brands = Brand::all();
 
+        session()->flash('success', 'Operation successful!');
+
         return view('home', compact(
                 'products', 'categories',
                 'brands','categoriesParam','brandsParam',
                 'openedFilterTabs','cartProducts', 'cartTotalPrice',
-        ));
+        ))->with('success','hi');
     }
 
     public function addToCart(AddToCartRequest $request)
