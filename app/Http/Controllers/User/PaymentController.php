@@ -29,7 +29,7 @@ class PaymentController extends Controller
        if(!$paymentAndCategories){
            return redirect()->back();
        }
-       $paymentId= $paymentAndCategories->payment->id;
+       $paymentId= $paymentAndCategories->payment->unique_id;
        $paymentCategoriesWithPayments = $paymentAndCategories->categories;
 
        return view(

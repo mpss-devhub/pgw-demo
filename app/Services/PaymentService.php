@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 use Firebase\JWT\Key;
+use Illuminate\Support\Str;
 
 trait PaymentService{
     function getPaymentFromApi($payData){
@@ -114,6 +115,7 @@ trait PaymentService{
     public function createPayment($totalAmount,array $productIds){
         $payment=Payment::create([
             "amount"=>$totalAmount,
+            "unique_id"=>Str::uuid(),
             "invoice_id"=>$this->getUniqueInvoiceId(),
             "currency_code"=>"MMK",
             "user_id"=>auth()->user()->id
@@ -128,7 +130,7 @@ trait PaymentService{
         $resourceUrl = 'dopay';
         $url = $baseUrl.$resourceUrl;
 
-        $payment = Payment::find($paymentId);
+        $payment = Payment::where("unique_id",$paymentId)->get()->first();
 
 
         $jwtPayload = $this->encryptAES(
