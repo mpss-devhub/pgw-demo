@@ -65,7 +65,7 @@
             </button>
         </div>
         <div
-            class="min-h-screen flex flex-col content-center justify-center pt-6 sm:pt-0 p-3">
+            class="min-h-screen flex flex-col content-center justify-start lg:justify-center pt-6 sm:pt-0 p-3">
             <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
                 {{ $slot }}
             </div>

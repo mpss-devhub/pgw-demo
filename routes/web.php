@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home',[ProductController::class,'index'])->name('home');
     Route::post('/cart',[ProductController::class,'addToCart'])->name('cart.add');
     Route::delete('/cart',[ProductController::class,'removeFromCart'])->name('cart.remove');
+
+    Route::get('/payment/direct-checkout',[PaymentController::class,'directCheckout'])->name('payment.direct-checkout');
+    Route::get('/payment/redirect-checkout',[PaymentController::class,'redirectCheckout'])->name('payment.redirect-checkout');
+
+    Route::post('/payment/webpay',[PaymentController::class,'doWebPay'])->name('payment.webpay');
+    Route::get('/payment-status',[PaymentController::class,'showPaymentStatus'])->name('payment.showstatus');
+
 });
 
 Route::middleware('auth')->group(function () {
