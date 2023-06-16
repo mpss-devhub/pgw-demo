@@ -116,8 +116,8 @@ class PaymentController extends Controller
             ));
     }
 
-    function checkPaymentStatus(Payment $payment){
-             $payment = Payment::find($payment->id);
+    function checkPaymentStatus($paymentUniqueId){
+             $payment = Payment::where('unique_id',$paymentUniqueId)->get()->first();
 
              if ($payment->status === "SUCCESS") {
                     return response()->json([
