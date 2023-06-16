@@ -18,10 +18,6 @@ const props = defineProps({
     qrImageUrl:{
         type:String,
         required:true
-    },
-    paymentId:{
-        type:String,
-        required:true
     }
 })
 </script>
