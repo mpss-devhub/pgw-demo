@@ -18,10 +18,6 @@ const props = defineProps({
     message:{
         type:String,
         required:true
-    },
-    paymentId:{
-        type:String,
-        required:true
     }
 })
 

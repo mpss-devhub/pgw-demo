@@ -20,10 +20,6 @@ const props = defineProps({
     deepLink:{
         type:String,
         required:true
-    },
-    paymentId:{
-        type:String,
-        required:true
     }
 })
 onMounted(()=>{

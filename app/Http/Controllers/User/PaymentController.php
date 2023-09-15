@@ -25,25 +25,22 @@ class PaymentController extends Controller
             return redirect()->route('home');
         }
 
+       $paymentAndCategories = $this->createPaymentAndGetPaymentList($cartTotalPrice,Auth::user()->cart->pluck('id')->all());
+       if(!$paymentAndCategories){
+           return redirect()->back();
+       }
+       $paymentId= $paymentAndCategories->payment->unique_id;
+       $paymentCategoriesWithPayments = $paymentAndCategories->categories;
 
-        $paymentAndCategories = $this->createPaymentAndGetPaymentList($cartTotalPrice, Auth::user()->cart->pluck('id')->all());
+       return view(
+           'checkout',
+           compact(
+               'paymentCategoriesWithPayments',
+               'cartTotalPrice',
+               'cartProducts',
+               'paymentId'
+           ));
 
-        if (!$paymentAndCategories) {
-            return redirect()->back();
-        }
-
-        $paymentId = $paymentAndCategories->payment->id;
-        $paymentCategoriesWithPayments = $paymentAndCategories->categories;
-
-        return view(
-            'checkout',
-            compact(
-                'paymentCategoriesWithPayments',
-                'cartTotalPrice',
-                'cartProducts',
-                'paymentId'
-            )
-        );
     }
     function redirectCheckout()
     {
@@ -135,27 +132,25 @@ class PaymentController extends Controller
         );
     }
 
-    /**
+     /**
      * used in direct payment
      * get pending payment status API
      * eg. usage app is waiting for payment confirmation to complete and want to show if payment is done or not
      */
-    function checkPaymentStatus(Payment $payment)
-    {
-        $payment = Payment::find($payment->id);
+    function checkPaymentStatus($paymentUniqueId){
+             $payment = Payment::where('unique_id',$paymentUniqueId)->get()->first();
 
-        if ($payment->status === "SUCCESS") {
-            return response()->json([
-                'status' => 'success',
-                'data' => $payment
-            ]);
-        }
-        if ($payment->status === "FAIL") {
-            return response()->json(['status' => 'failed']);
-        }
-
-        return response()->json(['status' => 'waiting']);
+             if ($payment->status === "SUCCESS") {
+                    return response()->json([
+                        'status' => 'success',
+                        'data'=>$payment
+                    ]);
+             }
+            if ($payment->status === "FAIL") {
+                return response()->json(['status' => 'failed']);
+            }
     }
+
 
 
     /**

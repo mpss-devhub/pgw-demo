@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\Payment;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Support\Str;
 
 trait PaymentService
 {
@@ -141,19 +142,20 @@ trait PaymentService
         }
     }
 
-    /**
+   /**
      * create new payment object for storing payment status and details
      * this will also be used when successful backend callback were called from octoverse
      * eg. usages store payment information, payment status,tokens products related with the payment , callback responses from octoverse etc
      */
-    public function createPayment($totalAmount, array $productIds)
-    {
-        $payment = Payment::create([
-            "amount" => $totalAmount,
-            "invoice_id" => $this->getUniqueInvoiceId(),
-            "currency_code" => "MMK",
-            "user_id" => auth()->user()->id
+    public function createPayment($totalAmount,array $productIds){
+        $payment=Payment::create([
+            "amount"=>$totalAmount,
+            "unique_id"=>Str::uuid(),
+            "invoice_id"=>$this->getUniqueInvoiceId(),
+            "currency_code"=>"MMK",
+            "user_id"=>auth()->user()->id
         ]);
+  
         $payment->products()->attach($productIds);
 
         return $payment;
@@ -168,7 +170,7 @@ trait PaymentService
         $resourceUrl = 'dopay';
         $url = $baseUrl . $resourceUrl;
 
-        $payment = Payment::find($paymentId);
+        $payment = Payment::where("unique_id",$paymentId)->get()->first();
 
 
         $jwtPayload = $this->encryptAES(

@@ -22,20 +22,17 @@
                 <show-qr-component
                     v-if="currentStep===3 && qrImage  && paymentCategoriesWithPayments && paymentId"
                     :qr-image-url="qrImage"
-                    :payment-id="paymentId"
                 >
                 </show-qr-component>
 
                 <show-waiting-message-component
                     v-if="currentStep===3 && inAppPayMessage  && paymentCategoriesWithPayments && paymentId"
-                    :payment-id="paymentId"
                     :message="inAppPayMessage"
                 >
                 </show-waiting-message-component>
 
                 <deep-link-message
                     v-if="currentStep===3 && deepLink  && paymentCategoriesWithPayments && paymentId"
-                    :payment-id="paymentId"
                     :deep-link="deepLink"
                 >
                 </deep-link-message>
@@ -43,7 +40,7 @@
                 <payment-status-message-component
                     v-if="currentStep===4"
                     :successful-payment="payment"
-                    :payment-id="paymentId">
+                >
                 </payment-status-message-component>
 
         </div>

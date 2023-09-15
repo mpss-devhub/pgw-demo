@@ -26,7 +26,7 @@
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <input type="submit"
                                value="Add Cart"
-                               class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-gray-700 text-white rounded hover:bg-gray-800 focus:bg-gray-400 focus:outline-none"/>
+                               class="mb-1 lg:mb-0 px-2 py-1 text-xs font-semibold text-gray-900 uppercase bg-gray-700 text-white rounded hover:bg-gray-800 focus:bg-gray-400 focus:outline-none"/>
                     </form>
                 </div>
             </div>
