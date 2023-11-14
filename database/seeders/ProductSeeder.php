@@ -25,6 +25,28 @@ class ProductSeeder extends Seeder
                 'brand_id' => 1, // Brand ID for Nike
             ],
             [
+                'name' => 'Sunshine Red',
+                'price' => 69.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => asset('images/sunshine/red.jpg'),
+                'brand_id' => 13, // Brand ID for Converse
+            ],
+            [
+                'name' => 'The North Face Ridgewall Soft Shell Jacket',
+                'price' => 300,
+                'description' => 'Classic design with superior cushioning.',
+                'image_url' =>  asset('images/softshell/heather_jacket.jpg'),
+                'brand_id' => 1, // Brand ID for Nike
+            ],
+
+            [
+                'name' => 'Sunshine Wood',
+                'price' =>900.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => asset('images/sunshine/wood.jpg'),
+                'brand_id' => 13, // Brand ID for Converse
+            ],
+            [
                 'name' => 'Adidas Ultraboost',
                 'price' => 179.99,
                 'description' => 'High-performance running shoes with responsive cushioning.',
@@ -37,6 +59,13 @@ class ProductSeeder extends Seeder
                 'description' => 'Retro-inspired sneakers with modern cushioning technology.',
                 'image_url' => "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/393393/01/sv01/fnd/PNA/fmt/png/PUMA-NYC-RS-X-Park-Flagship-Men's-Sneakers",
                 'brand_id' => 3, // Brand ID for Puma
+            ],
+            [
+                'name' => 'Softshell Micro Fleece',
+                'price' => 69.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => asset('images/softshell/micro_fleece_jacket.jpg'),
+                'brand_id' => 12, // Brand ID for Converse
             ],
             [
                 'name' => 'Reebok Classic Leather',
@@ -53,6 +82,13 @@ class ProductSeeder extends Seeder
                 'brand_id' => 5, // Brand ID for New Balance
             ],
             [
+                'name' => 'Softshell Sky Line Jacket',
+                'price' => 80.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/softshell/sky_line_jacket.jpg',
+                'brand_id' => 12, // Brand ID for Converse
+            ],
+            [
                 'name' => 'Vans Old Skool',
                 'price' => 59.99,
                 'description' => 'Iconic skate shoes with a durable canvas upper.',
@@ -66,13 +102,84 @@ class ProductSeeder extends Seeder
                 'image_url' => 'https://www.converse.com/dw/image/v2/BCZC_PRD/on/demandware.static/-/Sites-cnv-master-catalog/default/dwc70b9350/images/e_08/A03423C_E_08X1.jpg?sw=406',
                 'brand_id' => 7, // Brand ID for Converse
             ],
+
             [
-                'name' => 'Under Armour HOVR Phantom',
-                'price' => 139.99,
-                'description' => 'Running shoes with cushioning and energy return.',
-                'image_url' => 'https://underarmour.scene7.com/is/image/Underarmour/3025516-101_A?rp=standard-30pad|pdpMainDesktop&scl=1&fmt=jpg&qlt=85&resMode=sharp2&cache=on,on&bgc=f0f0f0&wid=566&hei=708&size=536,688',
-                'brand_id' => 8, // Brand ID for Under Armour
-            ]
+                'name' => 'Cover Me Blue Umbrella',
+                'price' => 100,
+                'description' => 'Iconic skate shoes with a durable canvas upper.',
+                'image_url' => '/images/coverme/blue.jpg',
+                'brand_id' => 11, // Brand ID for Vans
+            ],
+            [
+                'name' => 'Cover Me Blue Strips Umbrella',
+                'price' => 500,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/coverme/blue_strips.jpg',
+                'brand_id' => 11, // Brand ID for Converse
+            ],
+            [
+                'name' => 'Cover Me Light Green Umbrella',
+                'price' => 69.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/coverme/light_green.jpg',
+                'brand_id' => 11, // Brand ID for Converse
+            ],
+            [
+                'name' => 'Softshell Heather Jacket',
+                'price' => 300.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/softshell/heather_jacket.jpg',
+                'brand_id' => 12, // Brand ID for Converse
+            ],
+            [
+                'name' => 'Cover Me Red Umbrella',
+                'price' => 69.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/coverme/red.jpg',
+                'brand_id' => 11, // Brand ID for Converse
+            ],
+            [
+                'name' => 'Cover Me Yellow Umbrella',
+                'price' => 69.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => asset('images/coverme/yellow.jpg'),
+                'brand_id' => 11, // Brand ID for Converse
+            ],
+
+            //softshell
+
+            [
+                'name' => 'Softshell Lined Soft',
+                'price' => 80.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/softshell/lined_soft_shell_jacket.jpg',
+                'brand_id' => 12, // Brand ID for Converse
+            ],
+
+            [
+                'name' => 'Softshell Vest Jacket',
+                'price' => 69.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => asset('images/softshell/vest_jacket.jpg'),
+                'brand_id' => 12, // Brand ID for Converse
+            ],
+            //sunshine
+            [
+                'name' => 'Sunshine Cool Green',
+                'price' => 300.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/sunshine/cool_green.jpg',
+                'brand_id' => 13, // Brand ID for Converse
+            ],
+            [
+                'name' => 'Sunshine Moon',
+                'price' => 80.99,
+                'description' => 'Timeless high-top sneakers with a rubber toe cap.',
+                'image_url' => '/images/sunshine/moon_shine.jpg',
+                'brand_id' => 13, // Brand ID for Converse
+            ],
+
+
         ];
 
         foreach ($shoes as $shoeData) {

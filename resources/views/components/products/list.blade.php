@@ -1,7 +1,7 @@
 @props(['products'])
 
 <div
-    class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-4">
+    class="overflow-hidden shadow-sm sm:rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-10">
     @foreach ($products as $product)
         <div
             class="max-w-xs flex flex-col justify-between overflow-hidden bg-gray-300 rounded-lg shadow-lg dark:bg-gray-800 hover:bg-green-400 dark:hover:bg-green-800 transition-colors duration-300">
