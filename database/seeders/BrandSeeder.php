@@ -25,6 +25,9 @@ class BrandSeeder extends Seeder
             'Under Armour',
             'Salomon',
             'ASICS',
+            'Cover Me',
+            'Soft Shell',
+            'Sunshine'
         ];
 
         foreach ($brands as $brand) {
