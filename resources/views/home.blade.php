@@ -21,6 +21,11 @@
                 <div class="py-4 lg:py-12">
                     <div class="max-w-7xl sm:pl-6 lg:pl-8">
                         <x-products.list :products="$products"/>
+                        <div class="mt-10 w-100 flex justify-start">
+                            <div>
+                                {{$products->withQueryString()->links()}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endif
