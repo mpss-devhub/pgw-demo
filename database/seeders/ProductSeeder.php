@@ -97,7 +97,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'Converse Chuck Taylor All Star',
-                'price' => 69.99,
+                'price' => 400,
                 'description' => 'Timeless high-top sneakers with a rubber toe cap.',
                 'image_url' => 'https://www.converse.com/dw/image/v2/BCZC_PRD/on/demandware.static/-/Sites-cnv-master-catalog/default/dwc70b9350/images/e_08/A03423C_E_08X1.jpg?sw=406',
                 'brand_id' => 7, // Brand ID for Converse
@@ -119,7 +119,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'Cover Me Light Green Umbrella',
-                'price' => 69.99,
+                'price' => 350,
                 'description' => 'Timeless high-top sneakers with a rubber toe cap.',
                 'image_url' => '/images/coverme/light_green.jpg',
                 'brand_id' => 11, // Brand ID for Converse
@@ -133,7 +133,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name' => 'Cover Me Red Umbrella',
-                'price' => 69.99,
+                'price' => 200,
                 'description' => 'Timeless high-top sneakers with a rubber toe cap.',
                 'image_url' => '/images/coverme/red.jpg',
                 'brand_id' => 11, // Brand ID for Converse
