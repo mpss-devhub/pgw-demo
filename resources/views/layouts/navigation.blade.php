@@ -13,7 +13,7 @@
                         @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
                             <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="flex items-center relative">
                                 <i class="fa fa-cart-shopping text-purple-500"></i>
-                                <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
+                                <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-white rounded-full text-xs px-1 py-0">
                                     {{Auth::user()->cart->count()}}
                                 </span>
                             </button>
@@ -49,7 +49,7 @@
                     @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
                         <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="flex items-center relative">
                             <i class="fa fa-cart-shopping text-purple-800"></i>
-                            <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full text-xs px-1 py-0">
+                            <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-white rounded-full text-xs px-1 py-0">
                                 {{Auth::user()->cart->count()}}
                             </span>
                         </button>
@@ -92,7 +92,7 @@
                                     @csrf
 
                                     <input type="submit"
-                                           class="cursor-pointer block w-full text-start px-4 py-2 text-sm dark:text-red-500 font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
+                                           class="cursor-pointer block w-full text-start px-4 py-2 text-sm  font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
                                            value="{{ __('Log Out') }}">
                                 </form>
                             </div>
