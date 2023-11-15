@@ -44,7 +44,7 @@
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                 class="absolute gap-2 inset-x-0 w-full px-6 py-4 bg-purple-500 dark:bg-purple-700 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
+                 class="z-10 absolute gap-2 inset-x-0 w-full px-6 py-4 bg-gray-200 dark:bg-purple-700 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                 @if (Auth::user())
                     @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
                         <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="flex items-center relative">
@@ -72,30 +72,27 @@
                                              class="object-cover w-full h-full" alt="avatar">
                                     </div>
 
-                                    <h3 class="ms-4 text-white dark:text-gray-200 lg:hidden">
-                                        {{ Auth::user()->name }}
-                                    </h3>
+                                    <span
+                                        class="block px-1 text-sm text-gray-800 transition-colors duration-300 transform border-b">
+                                     <span class="text-gray-600 text-lg font-bold">{{ Auth::user()->name }}</span></span>
+
                                 </button>
                                 <form class="md:hidden" method="POST" action="{{ route('logout') }}">
                                     @csrf
 
                                     <input type="submit"
-                                           class="cursor-pointer block mt-8 px-4 bg-red-500 py-2 text-sm text-white text-center rounded-md w-full font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-red-700"
+                                           class="cursor-pointer block mt-8 px-4 bg-gray-300 py-2 text-sm  text-center rounded-sm w-full font-bold transition-colors duration-300 transform"
                                            value="{{ __('Log Out') }}">
                                 </form>
                             </div>
                             <div x-show="isProfileMenuOpen" x-cloak @click.away="isProfileMenuOpen = false"
-                                 class="absolute right-0 w-48 mt-3 overflow-hidden rounded-lg shadow-xl  bg-purple-600 hidden lg:block">
-
-                                <span
-                                    class="block px-4 py-3 text-sm text-gray-800 transition-colors duration-300 transform border-b dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                    <span class="text-gray-600">{{ Auth::user()->name }}</span></span>
+                                 class="absolute right-0 w-48 mt-3 overflow-hidden rounded-lg shadow-xl z-50  bg-gray-300 hidden lg:block">
 
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
                                     <input type="submit"
-                                           class="block w-full text-start px-4 py-2 text-sm dark:text-red-500 font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
+                                           class="cursor-pointer block w-full text-start px-4 py-2 text-sm dark:text-red-500 font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
                                            value="{{ __('Log Out') }}">
                                 </form>
                             </div>

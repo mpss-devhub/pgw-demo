@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="relative" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
         <div  x-show="isCartShown" class="fixed inset-0  transition-opacity">
 
         </div>
