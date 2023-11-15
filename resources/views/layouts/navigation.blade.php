@@ -49,7 +49,7 @@
                     @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
                         <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="flex items-center relative">
                             <i class="fa fa-cart-shopping text-purple-800"></i>
-                            <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-white rounded-full text-xs px-1 py-0">
+                            <span class="cart-count absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-red-500 rounded-full text-xs px-1 py-0">
                                 {{Auth::user()->cart->count()}}
                             </span>
                         </button>
