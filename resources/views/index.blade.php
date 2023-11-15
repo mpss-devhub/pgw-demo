@@ -1,11 +1,5 @@
-<x-app-layout>
-    <div class="py-12">
-        <div>
-            <div class="bg-gray-500 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-100">
-                    Welcome from MPSS Payment DEMO.
-                </div>
-            </div>
-        </div>
+<x-guest-header-layout>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <span class="text-4xl text-white font-bold tracking-wide shadow-lg px-8">Welcome to Octoverse!</span>
     </div>
-</x-app-layout>
+</x-guest-header-layout>

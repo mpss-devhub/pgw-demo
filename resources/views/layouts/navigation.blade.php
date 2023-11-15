@@ -3,8 +3,8 @@
         <div class="lg:flex lg:items-center lg:justify-between">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <a class="text-gray-100 font-bold dark:text-white" href="{{ route('home') }}">
-                        {{ config('app.name', 'Demo') }}
+                    <a  href="{{ route('home') }}">
+                        <img src="/images/logo.png" class="w-28 h-auto my-2"/>
                     </a>
                 </div>
                 <!-- Mobile menu button -->
@@ -100,8 +100,8 @@
                                 <button type="button" @click="isProfileMenuOpen = !isProfileMenuOpen"
                                     class="flex items-center focus:outline-none relative p-0 md:p-2 transition-colors duration-300 transform rounded-lg"
                                     aria-label="toggle profile dropdown">
-                                    <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                                    <div class="w-8 h-8 overflow-hidden border border-white rounded-full">
+                                        <img src="/images/mascot.png"
                                             class="object-cover w-full h-full" alt="avatar">
                                     </div>
 
