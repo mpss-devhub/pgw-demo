@@ -42,7 +42,7 @@
                                                         @method('DELETE')
                                                         @csrf
                                                         <input type="hidden" name="product_id" value="{{$product->first()->id}}">
-                                                        <input type="submit" class="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer" value="Remove"/>
+                                                        <input type="submit" class="font-medium text-purple-600 hover:text-purple-500 cursor-pointer" value="Remove"/>
                                                     </form>
                                                 </div>
                                             </div>
@@ -69,10 +69,10 @@
 
                     @if(count($cartProducts)>0)
                         <div class="mt-6">
-                            <a  href="{{route('payment.direct-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Direct Checkout</a>
+                            <a  href="{{route('payment.direct-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-purple-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-purple-700">Direct Checkout</a>
                         </div>
                         <div class="mt-6">
-                            <a href="{{route('payment.redirect-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Redirect Checkout</a>
+                            <a href="{{route('payment.redirect-checkout')}}" class="flex items-center justify-center rounded-md border border-transparent bg-purple-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-purple-700">Redirect Checkout</a>
                         </div>
                     @else
                         <div class="mt-6">
@@ -86,7 +86,7 @@
                     <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
                             or
-                            <button @click="isCartShown=false" type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                            <button @click="isCartShown=false" type="button" class="font-medium text-purple-600 hover:text-purple-500">
                                 Continue Shopping
                                 <span aria-hidden="true"> &rarr;</span>
                             </button>

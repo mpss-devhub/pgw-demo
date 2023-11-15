@@ -8,7 +8,7 @@
         method="GET" action="{{route('home')}}" class="w-full"  x-cloak>
         <!-- Accordion Container -->
         <div class="space-y-1">
-            <div class="bg-gray-300 hover:bg-gray-400 rounded-sm">
+            <div class="bg-gray-300 hover:bg-gray-400 rounded-sm py-1">
                 <!-- Accordion Header 1 -->
                 <div @click="openedTabs.has('categories')?openedTabs.delete('categories'):openedTabs.add('categories');if(selectedBrands.size===0 && openedTabs.has('brands')){openedTabs.delete('brands')}" class="p-1 px-2 cursor-pointer">
                     <div class="flex items-center justify-between">
@@ -41,7 +41,7 @@
         </div>
         <div class="space-y-1 mt-2">
             <!-- Accordion Item 1 -->
-            <div class="bg-gray-300 hover:bg-gray-400 rounded-sm">
+            <div class="bg-gray-300 hover:bg-gray-400 rounded-sm py-1">
                 <!-- Accordion Header 1 -->
                 <div  @click="openedTabs.has('brands')?openedTabs.delete('brands'):openedTabs.add('brands');if(selectedCategories.size===0 && openedTabs.has('categories')){openedTabs.delete('categories')}" class="p-1 px-2 cursor-pointer">
                     <div class="flex items-center justify-between">

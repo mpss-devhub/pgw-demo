@@ -66,7 +66,7 @@
 </head>
 
 <body class="font-sans antialiased"  x-data="{ dark: setDarkModePreference(), toggleTheme: function() { this.dark = !this.dark; localStorage.setItem('dark', this.dark);document.documentElement.classList.toggle('dark', this.dark)},isCartShown:'{{@session('isCartShown')==1}}'}" x-init="setDarkMode(dark)">
-            <div class="min-h-screen bg-indigo-100">
+            <div class="min-h-screen">
                 @include('layouts.navigation')
                 <main class="px-2 lg:px-12">
                     {{ $slot }}

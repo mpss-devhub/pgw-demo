@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="relative" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-        <div  x-show="isCartShown" class="fixed inset-0 bg-black bg-opacity-60 transition-opacity">
+        <div  x-show="isCartShown" class="fixed inset-0  transition-opacity">
 
         </div>
         <div class="flex flex-col lg:flex-row"  @click="isCartShown=false">
