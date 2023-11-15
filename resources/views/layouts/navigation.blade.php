@@ -44,7 +44,7 @@
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
             <div x-cloak :class="[isMobileMenuOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
-                 class="z-10 absolute gap-2 inset-x-0 w-full px-6 py-4 bg-gray-200 dark:bg-purple-700 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
+                 class="z-10 absolute gap-2 inset-x-0 w-full px-6 py-4 bg-gray-200 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center">
                 @if (Auth::user())
                     @if(!Route::is('payment.direct-checkout') && !Route::is('payment.showstatus'))
                         <button @click="isCartShown=true" x-show="!isMobileMenuOpen" class="flex items-center relative">
