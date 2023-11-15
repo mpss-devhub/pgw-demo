@@ -8,9 +8,9 @@
                 <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="">
             </div> --}}
 
-            <h3 class="mt-3 text-xl font-medium text-center text-gray-600 dark:text-gray-200">Welcome Back </h3>
+            <h3 class="mt-3 text-xl font-medium text-center text-gray-600">Welcome Back </h3>
 
-            <p class="mt-1 text-center text-gray-500 dark:text-gray-400">Login or create account</p>
+            <p class="mt-1 text-center text-gray-500">Login or create account</p>
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -36,13 +36,13 @@
                     <label for="remember_me" class="inline-flex items-center">
                         <input id="remember_me" type="checkbox"
                             class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                        <span class="ml-2 text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500">{{ __('Remember me') }}</span>
+                        <span class="ml-2 text-sm text-gray-600  hover:text-gray-500">{{ __('Remember me') }}</span>
                     </label>
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
                     @if (Route::has('password.request'))
-                        <a class="text-sm text-gray-600 dark:text-gray-200 hover:text-gray-500"
+                        <a class="text-sm text-gray-600  hover:text-gray-500"
                             href="{{ route('password.request') }}">
                             {{ __('Forgot your password?') }}
                         </a>
@@ -54,10 +54,10 @@
                 </div>
             </form>
         </div>
-        <div class="flex items-center justify-center py-4 text-center bg-gray-50 dark:bg-gray-700">
-            <span class="text-sm text-gray-600 dark:text-gray-200">Don't have an account? </span>
+        <div class="flex items-center justify-center py-4 text-center bg-gray-50">
+            <span class="text-sm text-gray-600">Don't have an account? </span>
 
-            <a href="{{route('register')}}" class="mx-2 text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">Register</a>
+            <a href="{{route('register')}}" class="mx-2 text-sm font-bold text-blue-500  hover:underline">Register</a>
         </div>
     </div>
 

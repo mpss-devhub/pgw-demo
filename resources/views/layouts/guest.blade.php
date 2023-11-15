@@ -66,10 +66,11 @@
 {{--        </div>--}}
         <div class="min-h-screen flex flex-col content-center justify-start lg:justify-center pt-6 sm:pt-0 p-3"
              style="background-image: url('{{ asset('images/demo_bg.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="flex justify-center mb-3">
-                <img src="/images/logo.png" class="w-20 h-20"/>
-            </div>
-            <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+
+            <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-200">
+                <div class="flex justify-center mt-5 mb-2">
+                    <img src="/images/logo.png" class="w-32 h-auto"/>
+                </div>
                 <div>
                     {{ $slot }}
                 </div>

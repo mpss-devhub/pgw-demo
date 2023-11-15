@@ -55,11 +55,11 @@
                 </div>
             </form>
         </div>
-        <div class="flex items-center justify-center py-4 text-center bg-gray-50 dark:bg-gray-700">
-            <span class="text-sm text-gray-600 dark:text-gray-200">Already have an account? </span>
+        <div class="flex items-center justify-center py-4 text-center bg-gray-50">
+            <span class="text-sm text-gray-600">Already have an account? </span>
 
             <a href="{{ route('login') }}"
-                class="mx-2 text-sm font-bold text-blue-500 dark:text-blue-400 hover:underline">Login</a>
+                class="mx-2 text-sm font-bold text-blue-500 hover:underline">Login</a>
         </div>
     </div>
 </x-guest-layout>
