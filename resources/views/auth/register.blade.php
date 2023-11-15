@@ -20,13 +20,13 @@
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
-                <!-- Address -->
-                <div class="mt-4">
-                    <x-input-label for="address" :value="'Address'" />
-                    <x-text-area id="address" class="block mt-1 w-full" type="text" name="address"
-                        :value="old('address')" required autofocus autocomplete="address" />
-                    <x-input-error :messages="$errors->get('address')" class="mt-2" />
-                </div>
+{{--                <!-- Address -->--}}
+{{--                <div class="mt-4">--}}
+{{--                    <x-input-label for="address" :value="'Address'" />--}}
+{{--                    <x-text-area id="address" class="block mt-1 w-full" type="text" name="address"--}}
+{{--                        :value="old('address')" required autofocus autocomplete="address" />--}}
+{{--                    <x-input-error :messages="$errors->get('address')" class="mt-2" />--}}
+{{--                </div>--}}
 
                 <!-- Password -->
                 <div class="mt-4">
