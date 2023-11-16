@@ -4,7 +4,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <a  href="{{ route('home') }}">
-                    <img src="/images/logo.png" class="w-28 h-auto my-2"/>
+                    <img src="/images/logo_white.png" class="w-28 h-auto my-2"/>
                     </a>
                 </div>
                 <!-- Mobile menu button -->
