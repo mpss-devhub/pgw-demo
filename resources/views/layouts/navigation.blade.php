@@ -92,7 +92,7 @@
                                     @csrf
 
                                     <input type="submit"
-                                           class="cursor-pointer block w-full text-start px-4 py-2 text-sm  font-bold transition-colors duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700"
+                                           class="cursor-pointer block w-full text-start px-4 py-2 text-sm  font-bold transition-colors duration-300 transform hover:bg-gray-100"
                                            value="{{ __('Log Out') }}">
                                 </form>
                             </div>
