@@ -57,8 +57,8 @@ const selectedPaymentCategory = ref(null)
 
 const isPaymentSuccess = ref(false)
 
-const pollingInterval = 1000; // 1 second
-const totalDuration = 5 * 60 * 1000; // 3 minutes in milliseconds
+const pollingInterval = 1000; //
+const totalDuration = 15 * 60 * 1000; //
 const startTime = Date.now();
 const isWaitingDone = ref(false)
 const payment = ref(null)
