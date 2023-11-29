@@ -5,7 +5,7 @@
                 <div class="flex flex-col gap-2 w-full items-center">
                     <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
                         <span class="flex justify-center items-center w-10 h-10 bg-green-800 rounded-full text-white"><i class="fa fa-check fa-lg"></i></span>
-                        <span class="text-xl font-bold dark:text-gray-100">Payment successful</span>
+                        <span class="text-xl font-bold ">Payment successful</span>
                     </div>
 
                     <div class="mt-5 text-sm  w-full">
@@ -29,10 +29,10 @@
             <div class="flex flex-col gap-2 w-full items-center">
                 <div class="flex flex-col text-gray-900 gap-2 justify-center items-center p-5">
                     <span class="flex justify-center items-center w-10 h-10 bg-red-800 rounded-full text-white"><i class="fa fa-exclamation-circle fa-lg"></i></span>
-                    <span class="text-xl font-bold dark:text-gray-100">Payment fail</span>
+                    <span class="text-xl font-bold ">Payment fail</span>
                 </div>
 
-                <div class="mt-5 flex justify-center bg-gray-200 dark:bg-gray-800 rounded-md px-3 py-10 text-red-800 dark:text-red-300">
+                <div class="mt-5 flex justify-center bg-gray-200  rounded-md px-3 py-10 text-red-800 ">
                     <span>
                         Something went wrong with payment transaction.
                     </span>

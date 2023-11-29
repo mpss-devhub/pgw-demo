@@ -1,8 +1,8 @@
 @props(['cartProducts','cartTotalPrice'])
 <div class="mt-5">
-        <p class="text-lg font-bold text-gray-800 mb-3 dark:text-gray-100">Your order</p>
+        <p class="text-lg font-bold text-gray-800 mb-3 ">Your order</p>
 
-        <ul role="list" class="divide-y divide-gray-200 rounded-md bg-gray-300 p-2 dark:bg-gray-800">
+        <ul role="list" class="divide-y divide-gray-200 rounded-md bg-gray-300 p-2 ">
             @forelse($cartProducts as $product)
                 <li class="flex py-2">
                     <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -11,7 +11,7 @@
 
                     <div class="ml-4 flex flex-1 flex-col">
                         <div>
-                            <div class="flex justify-between text-base font-medium text-gray-900 dark:text-gray-300">
+                            <div class="flex justify-between text-base font-medium text-gray-900 ">
                                 <h3>
                                     <a href="#">{{$product->first()->name}}</a>
                                 </h3>
@@ -31,7 +31,7 @@
                 </li>
             @endforelse
         </ul>
-        <div class="p-2 flex justify-between mt-2 rounded-md bg-gray-300 dark:bg-gray-800 text-black dark:text-white">
+        <div class="p-2 flex justify-between mt-2 rounded-md bg-gray-300  text-black ">
             <div class="font-bold">Total</div>
             <div>{{$cartTotalPrice}} MMK</div>
         </div>

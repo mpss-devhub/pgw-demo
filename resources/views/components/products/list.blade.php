@@ -10,7 +10,7 @@
 
             <div>
                 <div class="py-1 min-h-[50px] lg:min-h-[50px]  flex flex-col items-start justify-center">
-                    <h1 class="px-2 text-sm font-bold text-white uppercase dark:text-white">
+                    <h1 class="px-2 text-sm font-bold text-white uppercase ">
                         {{ $product->name }}
                     </h1>
                 </div>

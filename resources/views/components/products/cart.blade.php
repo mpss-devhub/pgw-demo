@@ -2,10 +2,10 @@
 <div class="absolute inset-0 overflow-hidden">
     <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
         <div class="pointer-events-auto w-screen max-w-md">
-            <div @click.away="isCartShown=false" class="flex h-full flex-col overflow-y-scroll dark:bg-gray-800 bg-gray-300 shadow-xl">
+            <div @click.away="isCartShown=false" class="flex h-full flex-col overflow-y-scroll  bg-gray-300 shadow-xl">
                 <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                     <div class="flex items-start justify-between">
-                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-300" id="slide-over-title">Shopping cart</h2>
+                        <h2 class="text-lg font-medium text-gray-900 " id="slide-over-title">Shopping cart</h2>
                         <div class="ml-3 flex h-7 items-center">
                             <button type="button" @click="isCartShown=false" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
                                 <span class="sr-only">Close panel</span>
@@ -27,7 +27,7 @@
 
                                         <div class="ml-4 flex flex-1 flex-col">
                                             <div>
-                                                <div class="flex justify-between text-base font-medium text-gray-900 dark:text-gray-300">
+                                                <div class="flex justify-between text-base font-medium text-gray-900 ">
                                                     <h3>
                                                         <a href="#">{{$product->first()->name}}</a>
                                                     </h3>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                    <div class="flex justify-between text-base font-medium text-gray-900 dark:text-gray-300">
+                    <div class="flex justify-between text-base font-medium text-gray-900 ">
                         <p>Subtotal</p>
                         <p>{{$total}} MMK</p>
                     </div>

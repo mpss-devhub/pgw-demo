@@ -1,22 +1,22 @@
 <template>
     <div>
-        <div class="font-bold dark:text-gray-200 text-gray-800">
+        <div class="font-bold  text-gray-800">
             Pay with
         </div>
-        <div class="mt-2 px-6 py-3 bg-purple-400 dark:bg-purple-500 text-white flex items-center rounded-md justify-start gap-2">
+        <div class="mt-2 px-6 py-3 bg-purple-400  text-white flex items-center rounded-md justify-start gap-2">
             <div class="flex items-center justify-center gap-2">
                 <img class="rounded-md  w-10 h-10 object-cover"  :src="selectedPayment.logo"/>
                 <span>{{selectedPayment.paymentName}}</span>
             </div>
                  <i class="fa fa-check-circle text-white"></i>
         </div>
-        <div class="mt-8 font-bold dark:text-gray-200 text-gray-800">
+        <div class="mt-8 font-bold  text-gray-800">
             Fill in required information
         </div>
         <div class="px-6 py-1 mt-2 text-red-500 rounded-md border border-red-300" v-if="errorMessage">
             <i class="fa fa-circle-exclamation"></i> {{errorMessage}}
         </div>
-        <div class="dark:bg-gray-800 bg-gray-200 p-1 mt-3 mb-20 rounded-md">
+        <div class=" bg-gray-200 p-1 mt-3 mb-20 rounded-md">
             <div class="p-2 px-5">
                 <form>
                     <div class="p-2 false space-y-6">
@@ -39,15 +39,15 @@
                     </div>
                 </form>
             </div>
-            <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button  @click="onBackClick" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+            <div class="flex justify-end items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+                <button  @click="onBackClick" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-purple-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10      dark:focus:ring-gray-600">Cancel</button>
 
                 <button
 
                         @click="onContinueClicked"
                         :disabled="isContinueButtonDisabled"
-                        :class="{'bg-gray-600 dark:bg-gray-600  hover:bg-gray-600 dark:hover:bg-gray-600 cursor-not-allowed':isContinueButtonDisabled,'cursor-pointer':!isContinueButtonDisabled}"
-                        class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                        :class="{'bg-gray-600   hover:bg-gray-600  cursor-not-allowed':isContinueButtonDisabled,'cursor-pointer':!isContinueButtonDisabled}"
+                        class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center   dark:focus:ring-purple-800">
                     {{isPaymentRequesting?"Processing..":"Continue"}}
                 </button>
             </div>

@@ -37,7 +37,7 @@
     </script>
 </head>
 
-<body class="font-sans text-gray-900 antialiased  bg-gray-100 dark:bg-gray-700" :class="{ 'dark': dark }" x-data="{
+<body class="font-sans text-gray-900 antialiased  bg-gray-100 " :class="{ 'dark': dark }" x-data="{
     dark: setDarkModePreference(),
     toggleTheme: function() {
         this.dark = !this.dark;
@@ -67,7 +67,7 @@
         <div class="min-h-screen flex flex-col content-center justify-start lg:justify-center pt-6 sm:pt-0 p-3"
              style="background-image: url('{{ asset('images/demo_bg.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
-            <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-200">
+            <div class="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md ">
                 <div class="flex justify-center mt-5 mb-2">
                     <img src="/images/logo.png" class="w-32 h-auto"/>
                 </div>

@@ -10,7 +10,7 @@
                 <!-- Mobile menu button -->
                 <div class="flex lg:hidden items-center" x-cloak>
                     <button @click="isMobileMenuOpen = !isMobileMenuOpen" type="button"
-                        class="text-gray-500 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400 focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
+                        class="text-gray-500  hover:text-gray-600  focus:outline-none focus:text-gray-600 dark:focus:text-gray-400"
                         aria-label="toggle menu">
                         <svg x-show="!isMobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
                             fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
