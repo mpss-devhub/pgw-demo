@@ -29,7 +29,7 @@ class PaymentController extends Controller
        if(!$paymentAndCategories){
            return redirect()->back();
        }
-       $paymentId= $paymentAndCategories->payment->unique_id;
+       $payment= $paymentAndCategories->payment;
        $paymentCategoriesWithPayments = $paymentAndCategories->categories;
 
        return view(
@@ -38,7 +38,7 @@ class PaymentController extends Controller
                'paymentCategoriesWithPayments',
                'cartTotalPrice',
                'cartProducts',
-               'paymentId'
+               'payment'
            ));
 
     }

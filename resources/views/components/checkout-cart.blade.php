@@ -1,4 +1,4 @@
-@props(['cartProducts','cartTotalPrice'])
+@props(['cartProducts','cartTotalPrice','invoiceNo'])
 <div class="mt-5">
         <p class="text-lg font-bold text-gray-800 mb-3 ">Your order</p>
 
@@ -31,8 +31,12 @@
                 </li>
             @endforelse
         </ul>
-        <div class="p-2 flex justify-between mt-2 rounded-md bg-gray-300  text-black ">
-            <div class="font-bold">Total</div>
-            <div>{{$cartTotalPrice}} MMK</div>
+    <div class="p-2 grid grid-cols-3 mt-2 rounded-md bg-gray-300  text-black ">
+        <div>Invoice No</div>
+        <div class="font-bold uppercase">{{$invoiceNo}}</div>
+    </div>
+        <div class="p-2 grid grid-cols-3 mt-2 rounded-md bg-gray-300  text-black ">
+            <div>Total</div>
+            <div class="font-bold">{{$cartTotalPrice}} MMK</div>
         </div>
 </div>
