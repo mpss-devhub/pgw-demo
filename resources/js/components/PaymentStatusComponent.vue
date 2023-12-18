@@ -11,7 +11,7 @@
                     <div class="mt-5 text-sm  w-full">
                         <div class="flex justify-between gap-10">
                             <div>Invoice Number</div>
-                            <div>{{successfulPayment.invoice_id}}</div>
+                            <div class="uppercase">{{successfulPayment.invoice_id}}</div>
                         </div>
                         <div class="flex justify-between gap-10">
                             <div>Amount</div>
