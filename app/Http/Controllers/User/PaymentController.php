@@ -112,6 +112,7 @@ class PaymentController extends Controller
         }
 
         $payment = null;
+        $invoiceNo = $request->invoiceNo;
 
         if ($request->respCode === '0000') {
             $payment = Payment::where('invoice_id', $request->invoiceNo)->get()->first();
@@ -127,7 +128,8 @@ class PaymentController extends Controller
                 'paymentCategoriesWithPayments',
                 'cartTotalPrice',
                 'cartProducts',
-                'payment'
+                'payment',
+                'invoiceNo'
             )
         );
     }
