@@ -12,7 +12,7 @@
            </div>
            <choose-and-pay-component
                class="lg:w-4/5 w-full"
-               payment-id="{{$payment->id}}"
+               payment-id="{{$payment->unique_id}}"
                :payment-categories-with-payments="{{json_encode($paymentCategoriesWithPayments)}}"
            ></choose-and-pay-component>
        </div>
